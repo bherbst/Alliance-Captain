@@ -1,0 +1,8 @@
+cron:
+- description: Weekly team update
+  url: /publish/update-teams
+  schedule: every sunday 03:00
+
+- description: Weekly events update
+  url: /publish/update-events
+  schedule: every sunday 04:00

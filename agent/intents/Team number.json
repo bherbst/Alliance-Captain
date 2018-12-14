@@ -1,0 +1,57 @@
+{
+  "id": "52d0b835-2972-4441-8353-713c3425eb67",
+  "name": "Team number",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [
+        {
+          "name": "team",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "19603687-5b13-4400-84a0-c8808b2bd29f",
+          "required": true,
+          "dataType": "@team",
+          "name": "team",
+          "value": "$team",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "For what team?"
+            },
+            {
+              "lang": "en",
+              "value": "Which team?"
+            }
+          ],
+          "defaultValue": "#team.team",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": [
+            "$team.original\u0027s number is $team.",
+            "$team.original is FRC $team."
+          ]
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1533066117,
+  "fallbackIntent": false,
+  "events": []
+}

@@ -1,0 +1,103 @@
+[
+  {
+    "id": "72d27e61-f13d-4b05-a8c3-d0c398574c47",
+    "data": [
+      {
+        "text": "How long have they been competing?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1533054294
+  },
+  {
+    "id": "8ccd5bcf-d850-4539-b594-6c6a0b71aed9",
+    "data": [
+      {
+        "text": "How old is ",
+        "userDefined": false
+      },
+      {
+        "text": "that team",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1533054294
+  },
+  {
+    "id": "a55438ad-71b8-4ad6-9de4-22861d3c0693",
+    "data": [
+      {
+        "text": "How old are ",
+        "userDefined": false
+      },
+      {
+        "text": "The Cheesy Poofs",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1533054294
+  },
+  {
+    "id": "f2e3d068-f9fa-4cd9-8f6b-7dbfb8ce3161",
+    "data": [
+      {
+        "text": "How long have they been around?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1533054294
+  },
+  {
+    "id": "8ad0504b-b16d-4660-aeaf-066864a101a0",
+    "data": [
+      {
+        "text": "How old are they?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1533054294
+  },
+  {
+    "id": "74950ee2-5320-4571-b785-14e67f85d361",
+    "data": [
+      {
+        "text": "How old is ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1533054294
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "name": "alliancecaptain_cron",
+  "version": "1.0.0",
+  "description": "Alliance Captain cron jobs",
+  "main": "app.js",
+  "engines": {
+    "node": "8.x.x"
+  },
+  "scripts": {
+    "deploy": "gcloud app deploy --quiet app.yaml cron.yaml",
+    "start": "node app.js"
+  },
+  "author": "Bryan Herbst",
+  "dependencies": {
+    "@google-cloud/pubsub": "^0.20.1",
+    "express": "^4.16.3"
+  }
+}

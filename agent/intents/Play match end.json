@@ -1,0 +1,29 @@
+{
+  "id": "20345042-6d5c-40e2-9ade-83336e6469c8",
+  "name": "Play match end",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "play_match_end",
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1496023533,
+  "fallbackIntent": false,
+  "events": []
+}

@@ -1,0 +1,46 @@
+{
+  "id": "0901c828-7caf-43f6-962d-f4bffd88655a",
+  "name": "Team location",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "get_team_location",
+      "affectedContexts": [
+        {
+          "name": "team",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "6f0fda91-beeb-4050-ae25-1f42cb834acd",
+          "required": true,
+          "dataType": "@team",
+          "name": "team",
+          "value": "$team",
+          "prompts": [],
+          "defaultValue": "#team.team",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1533065942,
+  "fallbackIntent": false,
+  "events": []
+}

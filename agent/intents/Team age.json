@@ -1,0 +1,46 @@
+{
+  "id": "0b6356a6-ba72-489a-8ef3-4c8d730d285e",
+  "name": "Team age",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "get_team_age",
+      "affectedContexts": [
+        {
+          "name": "team",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "f699f482-d524-45b0-b9e4-669ceac60e66",
+          "required": true,
+          "dataType": "@team",
+          "name": "team",
+          "value": "$team",
+          "prompts": [],
+          "defaultValue": "#team.team",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1533065767,
+  "fallbackIntent": false,
+  "events": []
+}

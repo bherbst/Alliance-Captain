@@ -1,0 +1,3 @@
+# Event and team entries should be populated through the data update functions
+entities/event_entries_en.json
+entities/team_entries_en.json

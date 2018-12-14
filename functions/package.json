@@ -1,0 +1,30 @@
+{
+  "name": "functions",
+  "description": "Alliance Captain DialogFlow fulfillment and data updates",
+  "version": "0.0.2",
+  "private": true,
+  "license": "Apache Version 2.0",
+  "author": "Google Inc.",
+  "engines": {
+    "node": "6"
+  },
+  "scripts": {
+    "start": "firebase serve --only functions",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log",
+    "lint": "eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase experimental:functions:shell"
+  },
+  "dependencies": {
+    "actions-on-google": "^2.2.0",
+    "dialogflow": "^0.6.0",
+    "firebase-admin": "~6.2.0",
+    "firebase-functions": "^2.1.0",
+    "lodash.groupby": "^4.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.12.0",
+    "eslint-plugin-promise": "^3.6.0"
+  }
+}

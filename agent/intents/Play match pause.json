@@ -1,0 +1,29 @@
+{
+  "id": "0be6db65-2ce3-4581-8f67-70ab8f6590d1",
+  "name": "Play match pause",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "play_match_pause",
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1496023606248,
+  "fallbackIntent": false,
+  "events": []
+}

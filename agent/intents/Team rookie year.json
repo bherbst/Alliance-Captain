@@ -1,0 +1,55 @@
+{
+  "id": "c8e043f6-0f45-43a3-ae2f-4466f2ba19b7",
+  "name": "Team rookie year",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "get_rookie_year",
+      "affectedContexts": [
+        {
+          "name": "team",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "d52d89c4-15dc-47f2-9453-776011071ac9",
+          "required": true,
+          "dataType": "@team",
+          "name": "team",
+          "value": "$team",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "What team?"
+            },
+            {
+              "lang": "en",
+              "value": "For which team?"
+            }
+          ],
+          "defaultValue": "#team.team",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1533066300,
+  "fallbackIntent": false,
+  "events": []
+}

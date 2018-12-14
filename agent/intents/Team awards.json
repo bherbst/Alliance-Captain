@@ -1,0 +1,66 @@
+{
+  "id": "09bc5887-1a67-43b2-beba-db057fcc6d6a",
+  "name": "Team awards",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "get_team_awards",
+      "affectedContexts": [
+        {
+          "name": "team",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "9575142d-5ee1-4672-93fe-f6e9325ca03a",
+          "required": true,
+          "dataType": "@team",
+          "name": "team",
+          "value": "$team",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Which team?"
+            }
+          ],
+          "defaultValue": "#team.team",
+          "isList": false
+        },
+        {
+          "id": "97f07c68-617d-4ea7-a4fb-bfd7d12970f0",
+          "required": false,
+          "dataType": "@season",
+          "name": "season",
+          "value": "$season",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "What year?"
+            }
+          ],
+          "defaultValue": "#season.year",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1540930293,
+  "fallbackIntent": false,
+  "events": []
+}
