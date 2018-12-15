@@ -35,15 +35,15 @@ module.exports.EventActions = class EventActions {
     return Promise.all([eventName, eventWinners])
           .catch((err) => {
             console.warn(err);
-            return conv.ask("I couldn't find information on that event.");
+            return conv.close("I couldn't find information on that event.");
           })
           .then(([eventName, winners]) => {
             if (winners.length < 1) {
-              return conv.ask("I couldn't find a winner for that event.");
+              return conv.close("I couldn't find a winner for that event.");
             }
 
             const teams = frcUtil.joinToOxfordList(winners);
-            return conv.ask(`Teams ${teams} won the ${year} ${eventName}`);
+            return conv.close(`Teams ${teams} won the ${year} ${eventName}`);
           });
   }
 
@@ -60,11 +60,11 @@ module.exports.EventActions = class EventActions {
     return Promise.all([eventName, eventWinners])
           .catch((err) => {
             console.warn(err);
-            return conv.ask("I couldn't find information on that event.");
+            return conv.close("I couldn't find information on that event.");
           })
           .then(([eventName, winners]) => {
             if (winners.length < 1) {
-              return conv.ask("I couldn't find that information.");
+              return conv.close("I couldn't find that information.");
             }
 
             if (winners.length === 1) {
@@ -73,7 +73,7 @@ module.exports.EventActions = class EventActions {
             conv.contexts.set("award", 5, { "award": 0 });
 
             const response = awards.getAwardWinnerText(winners, awardType, year, eventName, isCmp);
-            return conv.ask(response);
+            return conv.close(response);
           });
   }
 

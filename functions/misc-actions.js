@@ -40,7 +40,7 @@ module.exports.MiscActions = class MiscActions {
 
   _playAudio(conv, filename, altText) {
     const url = `https://${projectId}.firebaseapp.com/audio/${filename}`;
-    return conv.ask(`<speak><audio src="${url}">${altText}</audio></speak>`);
+    return conv.close(`<speak><audio src="${url}">${altText}</audio></speak>`);
   }
 
 }

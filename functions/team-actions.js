@@ -30,12 +30,12 @@ module.exports.TeamActions = class TeamActions {
     return this.tba.getTeam(team_number)
         .catch((err) => {
           console.warn(err);
-          return conv.ask("I couldn't find " + team_number + "'s rookie year.");
+          return conv.close("I couldn't find " + team_number + "'s rookie year.");
         })
         .then((data) => {
           const name = frcUtil.nicknameOrNumber(data);
           conv.contexts.set("season", 5, { "season": data.rookie_year });
-          return conv.ask(`${name}'s rookie year was ${data.rookie_year}.`);
+          return conv.close(`${name}'s rookie year was ${data.rookie_year}.`);
         });
   }
 
@@ -45,10 +45,10 @@ module.exports.TeamActions = class TeamActions {
     return this.tba.getTeam(team_number)
         .catch((err) => {
           console.warn(err);
-          return conv.ask(`I couldn't find ${team_number}'s name.`);
+          return conv.close(`I couldn't find ${team_number}'s name.`);
         })
         .then((data) => {
-          return conv.ask(`FRC team ${team_number}'s name is ${data.name}.`);
+          return conv.close(`FRC team ${team_number}'s name is ${data.name}.`);
         });
   }
 
@@ -58,10 +58,10 @@ module.exports.TeamActions = class TeamActions {
     return this.tba.getTeam(team_number)
         .catch((err) => {
           console.warn(err);
-          return conv.ask(`I couldn't find ${team_number}'s nickname.`);
+          return conv.close(`I couldn't find ${team_number}'s nickname.`);
         })
         .then((data) => {
-          return conv.ask(`FRC team ${team_number}'s nickname is ${data.nickname}.`);
+          return conv.close(`FRC team ${team_number}'s nickname is ${data.nickname}.`);
         });
   }
 
@@ -71,12 +71,12 @@ module.exports.TeamActions = class TeamActions {
     return this.tba.getTeam(team_number)
         .catch((err) => {
           console.warn(err);
-          return conv.ask(`I couldn't find ${team_number}'s location.`);
+          return conv.close(`I couldn't find ${team_number}'s location.`);
         })
         .then((data) => {
           const name = frcUtil.nicknameOrNumber(data);
           const location = frcUtil.getLocationString(data);
-          return conv.ask(`${name} is from ${location}.`);
+          return conv.close(`${name} is from ${location}.`);
         });
   }
 
@@ -86,13 +86,13 @@ module.exports.TeamActions = class TeamActions {
     return this.tba.getTeam(team_number)
         .catch((err) => {
           console.warn(err);
-          return conv.ask(`I couldn't find ${team_number}'s age.`);
+          return conv.close(`I couldn't find ${team_number}'s age.`);
         })
         .then((data) => {
           const name = frcUtil.nicknameOrNumber(data);
           const thisYear = new Date().getFullYear();
           const age = thisYear - data.rookie_year;
-          return conv.ask(`${name} is ${age} years old.`);
+          return conv.close(`${name} is ${age} years old.`);
         });
   }
 
@@ -102,14 +102,14 @@ module.exports.TeamActions = class TeamActions {
     return this.tba.getTeam(team_number)
         .catch((err) => {
           console.warn(err);
-          return conv.ask(`I couldn't find information on ${team_number}.`);
+          return conv.close(`I couldn't find information on ${team_number}.`);
         })
         .then((data) => {
           const name = `${data.nickname} (FRC team ${team_number})`;
           const thisYear = new Date().getFullYear();
           const age = thisYear - data.rookie_year;
           const location = frcUtil.getLocationString(data);
-          return conv.ask(`${name} is a ${age}  year old team from ${location}.`);
+          return conv.close(`${name} is a ${age}  year old team from ${location}.`);
         });
   }
 
@@ -133,16 +133,16 @@ module.exports.TeamActions = class TeamActions {
     return this.tba.getTeam(team_number)
         .catch((err) => {
           console.warn(err);
-          conv.ask(`I couldn't find ${team_number}'s robot name for ${year}.`);
+          conv.close(`I couldn't find ${team_number}'s robot name for ${year}.`);
         })
         .then((data) => {
           if (data[year] === undefined) {
             console.warn(err);
-            return conv.ask(`I couldn't find ${team_number}'s robot name for ${year}.`);
+            return conv.close(`I couldn't find ${team_number}'s robot name for ${year}.`);
           } else {
             const join = year === currentYear ? "is" : "was";
             const robotName = data[year].name;
-            return conv.ask(`FRC team ${team_number}'s ${year} robot ${join} ${robotName}`);
+            return conv.close(`FRC team ${team_number}'s ${year} robot ${join} ${robotName}`);
           }
         })
   }
@@ -156,7 +156,7 @@ module.exports.TeamActions = class TeamActions {
     return this.tba.getTeamEvents(team_number, year)
         .catch((err) => {
           console.warn(err);
-          return conv.ask(`I couldn't find event information for ${team_number} during ${year}.`);
+          return conv.close(`I couldn't find event information for ${team_number} during ${year}.`);
         })
         .then((data) => {
           const pastEvents = [];
@@ -198,7 +198,7 @@ module.exports.TeamActions = class TeamActions {
             conv.contexts.set("event", 5, { "event": data[0].key });
           }
 
-          return conv.ask(response);
+          return conv.close(response);
         })
   }
 
@@ -220,7 +220,7 @@ module.exports.TeamActions = class TeamActions {
           } else {
             response += ".";
           }
-          return conv.ask(response);
+          return conv.close(response);
         })
         .then((data) => {
           let response
@@ -230,7 +230,7 @@ module.exports.TeamActions = class TeamActions {
             } else {
               response = `${team_number} has not won an award yet.`;
             }
-            return conv.ask(response);
+            return conv.close(response);
           }
 
           const allAwards = groupBy(data, 'year');
@@ -309,7 +309,7 @@ module.exports.TeamActions = class TeamActions {
           response += frcUtil.joinToOxfordList(awardStrings);
           response += ".";
 
-          return conv.ask(response);
+          return conv.close(response);
         })
   }
 
