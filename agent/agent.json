@@ -1,13 +1,81 @@
 {
-  "description": "",
+  "description": "Provides FIRST Robotics Competition team and event information",
   "language": "en",
-  "activeAssistantAgents": [],
   "disableInteractionLogs": false,
-  "disableStackdriverLogs": true,
+  "disableStackdriverLogs": false,
   "googleAssistant": {
     "googleAssistantCompatible": true,
     "welcomeIntentSignInRequired": false,
-    "startIntents": [],
+    "startIntents": [
+      {
+        "intentId": "0901c828-7caf-43f6-962d-f4bffd88655a",
+        "signInRequired": false
+      },
+      {
+        "intentId": "09bc5887-1a67-43b2-beba-db057fcc6d6a",
+        "signInRequired": false
+      },
+      {
+        "intentId": "0b6356a6-ba72-489a-8ef3-4c8d730d285e",
+        "signInRequired": false
+      },
+      {
+        "intentId": "0be6db65-2ce3-4581-8f67-70ab8f6590d1",
+        "signInRequired": false
+      },
+      {
+        "intentId": "0ceb8fc2-0846-4e43-b037-c4f787fbf2cb",
+        "signInRequired": false
+      },
+      {
+        "intentId": "20345042-6d5c-40e2-9ade-83336e6469c8",
+        "signInRequired": false
+      },
+      {
+        "intentId": "64a6d2df-e865-472a-8430-b18f98f73de4",
+        "signInRequired": false
+      },
+      {
+        "intentId": "52d0b835-2972-4441-8353-713c3425eb67",
+        "signInRequired": false
+      },
+      {
+        "intentId": "45bd9740-dbb2-4c39-962e-854a552044f9",
+        "signInRequired": false
+      },
+      {
+        "intentId": "2ee82431-09c3-4ca7-8d4a-64da43459bcd",
+        "signInRequired": false
+      },
+      {
+        "intentId": "6b1c637a-ca03-4954-87e0-7b2eef4e801f",
+        "signInRequired": false
+      },
+      {
+        "intentId": "ac93bb02-3136-42e6-b28b-7425544710c7",
+        "signInRequired": false
+      },
+      {
+        "intentId": "a51989ae-8aad-4dc7-a9d0-d517feb45121",
+        "signInRequired": false
+      },
+      {
+        "intentId": "881a5f1b-aa28-47b9-8216-ee827100ca84",
+        "signInRequired": false
+      },
+      {
+        "intentId": "c8e043f6-0f45-43a3-ae2f-4466f2ba19b7",
+        "signInRequired": false
+      },
+      {
+        "intentId": "d7451d3c-5cd9-4b49-ac78-e98e4731a311",
+        "signInRequired": false
+      },
+      {
+        "intentId": "e9d41dd0-c459-485c-a2af-5c2cb1294673",
+        "signInRequired": false
+      }
+    ],
     "systemIntents": [],
     "endIntentIds": [],
     "oAuthLinking": {
