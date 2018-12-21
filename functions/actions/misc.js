@@ -16,31 +16,39 @@
 
 const projectId = process.env.GCLOUD_PROJECT
 
-module.exports.MiscActions = class MiscActions {
+const startMatch = (conv) => {
+  return playAudio(conv, "start_auto.wav", "match start sound");
+}
 
-  startMatch (conv) {
-    return this._playAudio(conv, "start_auto.wav", "match start sound");
-  }
+const startTeleop = (conv) => {
+  return playAudio(conv, "start_teleop.wav", "teleop start sound");
+}
 
-  startTeleop (conv) {
-    return this._playAudio(conv, "start_teleop.wav", "teleop start sound");
-  }
+const endGame = (conv) => {
+  return playAudio(conv, "end_game.wav", "end game sound");
+}
 
-  endGame (conv) {
-    return this._playAudio(conv, "end_game.wav", "end game sound");
-  }
+const matchEnd = (conv) => {
+  return playAudio(conv, "match_end.wav", "match end sound");
+}
 
-  matchEnd (conv) {
-    return this._playAudio(conv, "match_end.wav", "match end sound");
-  }
+const matchPause = (conv) => {
+  return playAudio(conv, "match_pause.wav", "match pause sound");
+}
 
-  matchPause (conv) {
-    return this._playAudio(conv, "match_pause.wav", "match pause sound");
-  }
+const playAudio = (conv, filename, altText) => {
+  const url = `https://${projectId}.firebaseapp.com/audio/${filename}`;
+  return conv.close(`<speak><audio src="${url}">${altText}</audio></speak>`);
+}
 
-  _playAudio(conv, filename, altText) {
-    const url = `https://${projectId}.firebaseapp.com/audio/${filename}`;
-    return conv.close(`<speak><audio src="${url}">${altText}</audio></speak>`);
-  }
+const intents = {
+  'play-end-game': endGame,
+  'play-match-end': matchEnd,
+  'play-match-pause': matchPause,
+  'play-start-match': startMatch,
+  'play-start-teleop': startTeleop
+}
 
+module.exports.team = (conv, params) => {
+  return intents[conv.intent](conv, params)
 }

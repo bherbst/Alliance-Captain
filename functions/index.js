@@ -24,11 +24,10 @@ const app = dialogflow({debug: true});
 const DataUpdates = require('./data-updates').DataUpdates;
 const {team} = require('./actions/team');
 const {event} = require('./actions/event');
-const MiscActions = require('./actions/misc').MiscActions;
+const {misc} = require('./actions/misc');
 
 const tba = require('./api/tba-client').tbaClient;
 const dataUpdates = new DataUpdates(tba);
-const misc = new MiscActions();
 
 app.intent([
   'event-award-winner',
@@ -47,25 +46,13 @@ app.intent([
   'team-awards'
 ], team)
 
-app.intent('Play end game', (conv, _) => {
-  return miscActions.endGame(conv);
-})
-
-app.intent('Play match end', (conv, _) => {
-  return miscActions.matchEnd(conv);
-})
-
-app.intent('Play match pause', (conv, _) => {
-  return miscActions.matchPause(conv);
-})
-
-app.intent('Play start match', (conv, _) => {
-  return miscActions.startMatch(conv);
-})
-
-app.intent('Play start teleop', (conv, _) => {
-  return miscActions.startTeleop(conv);
-})
+app.intent([
+  'play-end-game',
+  'play-match-end',
+  'play-match-pause',
+  'play-start-match',
+  'play-start-teleop'
+], misc)
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest(app)
 
