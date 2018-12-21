@@ -22,13 +22,12 @@ const {dialogflow} = require('actions-on-google');
 const app = dialogflow({debug: true});
 
 const DataUpdates = require('./data-updates').DataUpdates;
-const TeamActions = require('./actions/team').TeamActions;
+const {team} = require('./actions/team');
 const {event} = require('./actions/event');
 const MiscActions = require('./actions/misc').MiscActions;
 
-const tba = require('./api/tba-client')
+const tba = require('./api/tba-client').tbaClient;
 const dataUpdates = new DataUpdates(tba);
-const teamActions = new TeamActions(tba);
 const misc = new MiscActions();
 
 app.intent([
@@ -36,41 +35,17 @@ app.intent([
   'event-winner'
 ], event)
 
-app.intent('Team rookie year', (conv, params) => {
-  return teamActions.getRookieYear(conv, params);
-})
-
-app.intent('Team info', (conv, params) => {
-  return teamActions.getteamActions(conv, params);
-})
-
-app.intent('Team location', (conv, params) => {
-  return teamActions.getTeamLocation(conv, params);
-})
-
-app.intent('Team age', (conv, params) => {
-  return teamActions.getTeamAge(conv, params);
-})
-
-app.intent('Team nickname', (conv, params) => {
-  return teamActions.getTeamNickName(conv, params);
-})
-
-app.intent('Team robot name', (conv, params) => {
-  return teamActions.getRobotName(conv, params);
-})
-
-app.intent('Team name', (conv, params) => {
-  return teamActions.getTeamName(conv, params);
-})
-
-app.intent('Team events', (conv, params) => {
-  return teamActions.getTeamEvents(conv, params);
-})
-
-app.intent('Team awards', (conv, params) => {
-  return teamActions.getTeamAwards(conv, params);
-})
+app.intent([
+  'team-rookie-year',
+  'team-info',
+  'team-location',
+  'team-age',
+  'team-nickname',
+  'team-robot-name',
+  'team-name',
+  'team-events',
+  'team-awards'
+], team)
 
 app.intent('Play end game', (conv, _) => {
   return miscActions.endGame(conv);

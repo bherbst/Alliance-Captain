@@ -14,10 +14,10 @@
  */
 'use strict';
 
-const frcUtil = require('../frc-util.js');
-const awards = require('../awards.js');
-const events = require('../events.js');
-const tba = require('../api/tba-client.js').tbaClient;
+const frcUtil = require('../frc-util');
+const awards = require('../awards');
+const events = require('../events');
+const tba = require('../api/tba-client').tbaClient;
 
 const getEventWinner = (conv, params) => {
   const eventCode = params["event"];

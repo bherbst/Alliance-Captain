@@ -15,302 +15,311 @@
  */
 'use strict';
 
-const frcUtil = require('../frc-util.js');
 const groupBy = require('lodash.groupby');
+const frcUtil = require('../frc-util');
+const tba = require('../api/tba-client').tbaClient;
 
-module.exports.TeamActions = class TeamActions {
+const getRookieYear = (conv, params) => {
+  const team_number = params["team"];
 
-  constructor (tbaClient) {
-	  this.tba = tbaClient;
+  return tba.getTeam(team_number)
+      .catch((err) => {
+        console.warn(err);
+        return conv.close("I couldn't find " + team_number + "'s rookie year.");
+      })
+      .then((data) => {
+        const name = frcUtil.nicknameOrNumber(data);
+        conv.contexts.set("season", 5, { "season": data.rookie_year });
+        return conv.close(`${name}'s rookie year was ${data.rookie_year}.`);
+      });
+}
+
+const getTeamName = (conv, params) => {
+  const team_number = params["team"];
+
+  return tba.getTeam(team_number)
+      .catch((err) => {
+        console.warn(err);
+        return conv.close(`I couldn't find ${team_number}'s name.`);
+      })
+      .then((data) => {
+        return conv.close(`FRC team ${team_number}'s name is ${data.name}.`);
+      });
+}
+
+const getTeamNickName = (conv, params) => {
+  const team_number = params["team"];
+
+  return tba.getTeam(team_number)
+      .catch((err) => {
+        console.warn(err);
+        return conv.close(`I couldn't find ${team_number}'s nickname.`);
+      })
+      .then((data) => {
+        return conv.close(`FRC team ${team_number}'s nickname is ${data.nickname}.`);
+      });
+}
+
+const getTeamLocation = (conv, params) => {
+  const team_number = params["team"];
+
+  return tba.getTeam(team_number)
+      .catch((err) => {
+        console.warn(err);
+        return conv.close(`I couldn't find ${team_number}'s location.`);
+      })
+      .then((data) => {
+        const name = frcUtil.nicknameOrNumber(data);
+        const location = frcUtil.getLocationString(data);
+        return conv.close(`${name} is from ${location}.`);
+      });
+}
+
+const getTeamAge = (conv, params) => {
+  const team_number = params["team"];
+
+  return tba.getTeam(team_number)
+      .catch((err) => {
+        console.warn(err);
+        return conv.close(`I couldn't find ${team_number}'s age.`);
+      })
+      .then((data) => {
+        const name = frcUtil.nicknameOrNumber(data);
+        const thisYear = new Date().getFullYear();
+        const age = thisYear - data.rookie_year;
+        return conv.close(`${name} is ${age} years old.`);
+      });
+}
+
+const getTeamInfo = (conv, params) => {
+  const team_number = params["team"];
+
+  return tba.getTeam(team_number)
+      .catch((err) => {
+        console.warn(err);
+        return conv.close(`I couldn't find information on ${team_number}.`);
+      })
+      .then((data) => {
+        const name = `${data.nickname} (FRC team ${team_number})`;
+        const thisYear = new Date().getFullYear();
+        const age = thisYear - data.rookie_year;
+        const location = frcUtil.getLocationString(data);
+        return conv.close(`${name} is a ${age}  year old team from ${location}.`);
+      });
+}
+
+const getRobotName = (conv, params) => {
+  const team_number = params["team"];
+  const date = params["date"];
+  const season = params["season"];
+  let year;
+
+  const currentYear = new Date().getFullYear();
+  if (date) {
+    year = new Date(date).getFullYear();
+  } else if (season) {
+    year = season;
+  } else {
+    year = currentYear;
   }
-	
-  getRookieYear (conv, params) {
-    const team_number = params["team"];
 
-    return this.tba.getTeam(team_number)
-        .catch((err) => {
+  conv.contexts.set("season", 5, { "season": year });
+
+  return tba.getTeam(team_number)
+      .catch((err) => {
+        console.warn(err);
+        conv.close(`I couldn't find ${team_number}'s robot name for ${year}.`);
+      })
+      .then((data) => {
+        if (data[year] === undefined) {
           console.warn(err);
-          return conv.close("I couldn't find " + team_number + "'s rookie year.");
-        })
-        .then((data) => {
-          const name = frcUtil.nicknameOrNumber(data);
-          conv.contexts.set("season", 5, { "season": data.rookie_year });
-          return conv.close(`${name}'s rookie year was ${data.rookie_year}.`);
-        });
-  }
+          return conv.close(`I couldn't find ${team_number}'s robot name for ${year}.`);
+        } else {
+          const join = year === currentYear ? "is" : "was";
+          const robotName = data[year].name;
+          return conv.close(`FRC team ${team_number}'s ${year} robot ${join} ${robotName}`);
+        }
+      })
+}
 
-  getTeamName (conv, params) {
-    const team_number = params["team"];
+const getTeamEvents = (conv, params) => {
+  const team_number = params["team"];
+  const year = frcUtil.getYearOrThisYear(params);
 
-    return this.tba.getTeam(team_number)
-        .catch((err) => {
-          console.warn(err);
-          return conv.close(`I couldn't find ${team_number}'s name.`);
-        })
-        .then((data) => {
-          return conv.close(`FRC team ${team_number}'s name is ${data.name}.`);
-        });
-  }
+  conv.contexts.set("season", 5, { "season": year });
 
-  getTeamNickName (conv, params) {
-    const team_number = params["team"];
-
-    return this.tba.getTeam(team_number)
-        .catch((err) => {
-          console.warn(err);
-          return conv.close(`I couldn't find ${team_number}'s nickname.`);
-        })
-        .then((data) => {
-          return conv.close(`FRC team ${team_number}'s nickname is ${data.nickname}.`);
-        });
-  }
-
-  getTeamLocation (conv, params) {
-    const team_number = params["team"];
-
-    return this.tba.getTeam(team_number)
-        .catch((err) => {
-          console.warn(err);
-          return conv.close(`I couldn't find ${team_number}'s location.`);
-        })
-        .then((data) => {
-          const name = frcUtil.nicknameOrNumber(data);
-          const location = frcUtil.getLocationString(data);
-          return conv.close(`${name} is from ${location}.`);
-        });
-  }
-
-  getTeamAge (conv, params) {
-    const team_number = params["team"];
-
-    return this.tba.getTeam(team_number)
-        .catch((err) => {
-          console.warn(err);
-          return conv.close(`I couldn't find ${team_number}'s age.`);
-        })
-        .then((data) => {
-          const name = frcUtil.nicknameOrNumber(data);
-          const thisYear = new Date().getFullYear();
-          const age = thisYear - data.rookie_year;
-          return conv.close(`${name} is ${age} years old.`);
-        });
-  }
-
-  getTeamInfo (conv, params) {
-    const team_number = params["team"];
-
-    return this.tba.getTeam(team_number)
-        .catch((err) => {
-          console.warn(err);
-          return conv.close(`I couldn't find information on ${team_number}.`);
-        })
-        .then((data) => {
-          const name = `${data.nickname} (FRC team ${team_number})`;
-          const thisYear = new Date().getFullYear();
-          const age = thisYear - data.rookie_year;
-          const location = frcUtil.getLocationString(data);
-          return conv.close(`${name} is a ${age}  year old team from ${location}.`);
-        });
-  }
-
-  getRobotName (conv, params) {
-    const team_number = params["team"];
-    const date = params["date"];
-    const season = params["season"];
-    let year;
-
-    const currentYear = new Date().getFullYear();
-    if (date) {
-      year = new Date(date).getFullYear();
-    } else if (season) {
-      year = season;
-    } else {
-      year = currentYear;
-    }
-
-    conv.contexts.set("season", 5, { "season": year });
-
-    return this.tba.getTeam(team_number)
-        .catch((err) => {
-          console.warn(err);
-          conv.close(`I couldn't find ${team_number}'s robot name for ${year}.`);
-        })
-        .then((data) => {
-          if (data[year] === undefined) {
-            console.warn(err);
-            return conv.close(`I couldn't find ${team_number}'s robot name for ${year}.`);
+  return tba.getTeamEvents(team_number, year)
+      .catch((err) => {
+        console.warn(err);
+        return conv.close(`I couldn't find event information for ${team_number} during ${year}.`);
+      })
+      .then((data) => {
+        const pastEvents = [];
+        const upcomingEvents = [];
+        data.forEach((event) => {
+          if (new Date(event.end_date) < now) {
+            pastEvents.push(event);
           } else {
-            const join = year === currentYear ? "is" : "was";
-            const robotName = data[year].name;
-            return conv.close(`FRC team ${team_number}'s ${year} robot ${join} ${robotName}`);
+            upcomingEvents.push(event);
           }
         })
-  }
 
-  getTeamEvents (conv, params) {
-    const team_number = params["team"];
-    const year = frcUtil.getYearOrThisYear(params);
+        let response;
+        const hasPastEvents = pastEvents.length > 0;
+        const hasUpcomingEvents = upcomingEvents.length > 0;
+        if (hasPastEvents) {
+          response = `${team_number} was registered for `;
 
-    conv.contexts.set("season", 5, { "season": year });
+          response += frcUtil.joinToOxfordList(pastEvents, (event) => event.name);
+          response += ".";
+        }
 
-    return this.tba.getTeamEvents(team_number, year)
-        .catch((err) => {
-          console.warn(err);
-          return conv.close(`I couldn't find event information for ${team_number} during ${year}.`);
-        })
-        .then((data) => {
-          const pastEvents = [];
-          const upcomingEvents = [];
-          data.forEach((event) => {
-            if (new Date(event.end_date) < now) {
-              pastEvents.push(event);
-            } else {
-              upcomingEvents.push(event);
-            }
-          })
-
-          let response;
-          const hasPastEvents = pastEvents.length > 0;
-          const hasUpcomingEvents = upcomingEvents.length > 0;
+        if (hasUpcomingEvents) {
           if (hasPastEvents) {
-            response = `${team_number} was registered for `;
-
-            response += frcUtil.joinToOxfordList(pastEvents, (event) => event.name);
-            response += ".";
+            response += "They will also be competing at ";
+          } else {
+            response = `${team_number} is registered for `;
           }
 
-          if (hasUpcomingEvents) {
-            if (hasPastEvents) {
-              response += "They will also be competing at ";
-            } else {
-              response = `${team_number} is registered for `;
-            }
+          response += frcUtil.joinToOxfordList(upcomingEvents, (event) => event.name);
+          response += ".";
+        }
 
-            response += frcUtil.joinToOxfordList(upcomingEvents, (event) => event.name);
-            response += ".";
-          }
+        if (!hasPastEvents && !hasUpcomingEvents) {
+          response = `${team_number} is not registered for any ${year} events.`;
+        }
 
-          if (!hasPastEvents && !hasUpcomingEvents) {
-            response = `${team_number} is not registered for any ${year} events.`;
-          }
+        if (data.size === 1) {
+          conv.contexts.set("event", 5, { "event": data[0].key });
+        }
 
-          if (data.size === 1) {
-            conv.contexts.set("event", 5, { "event": data[0].key });
-          }
+        return conv.close(response);
+      })
+}
 
-          return conv.close(response);
-        })
+// TODO use awards.js
+const getTeamAwards = (conv, params) => {
+  const team_number = params["team"];
+  const season = params["season"];
+
+  if (season) {
+    conv.contexts.set("season", 5, { "year": season });
   }
 
-  // TODO use awards.js
-  getTeamAwards (conv, params) {
-    const team_number = params["team"];
-    const season = params["season"];
-
-    if (season) {
-      conv.contexts.set("season", 5, { "year": season });
-    }
-
-    return this.tba.getTeamAwards(team_number, season)
-        .catch((err) => {
-          console.warn(err);
-          let response = `I couldn't find award information for ${team_number}`;
+  return tba.getTeamAwards(team_number, season)
+      .catch((err) => {
+        console.warn(err);
+        let response = `I couldn't find award information for ${team_number}`;
+        if (season) {
+          response += ` during ${season}.`;
+        } else {
+          response += ".";
+        }
+        return conv.close(response);
+      })
+      .then((data) => {
+        let response
+        if (data.length === 0) {
           if (season) {
-            response += ` during ${season}.`;
+            response = `${team_number} did not win any awards in ${season}.`;
           } else {
-            response += ".";
+            response = `${team_number} has not won an award yet.`;
           }
           return conv.close(response);
-        })
-        .then((data) => {
-          let response
-          if (data.length === 0) {
-            if (season) {
-              response = `${team_number} did not win any awards in ${season}.`;
-            } else {
-              response = `${team_number} has not won an award yet.`;
-            }
-            return conv.close(response);
-          }
+        }
 
-          const allAwards = groupBy(data, 'year');
-          const years = [];
-          var year;
-          for (year in allAwards) {
-            years.push(year);
-          }
-          const latestYear = Math.max.apply(null, years);
-          const awards = allAwards[latestYear];
+        const allAwards = groupBy(data, 'year');
+        const years = [];
+        var year;
+        for (year in allAwards) {
+          years.push(year);
+        }
+        const latestYear = Math.max.apply(null, years);
+        const awards = allAwards[latestYear];
 
-          response = `In ${latestYear}, team ${team_number} won `;
+        response = `In ${latestYear}, team ${team_number} won `;
 
-          const awardsByType = groupBy(awards, 'award_type');
-          const awardStrings = [];
-          Object.keys(awardsByType).forEach((type) => {
-              const instances = awardsByType[type];
-              let awardName = instances[0].name;
-              const count = instances.length;
+        const awardsByType = groupBy(awards, 'award_type');
+        const awardStrings = [];
+        Object.keys(awardsByType).forEach((type) => {
+            const instances = awardsByType[type];
+            let awardName = instances[0].name;
+            const count = instances.length;
 
-              let suffix = "";
-              switch (type) {
-                case "1": {
-                  // Event winner
-                  // TODO group by award name
-                  if (count === 1) {
-                    awardStrings.unshift("1 event");
-                  } else {
-                    awardStrings.unshift(`${count} events`);
-                  }
-                  break;
+            let suffix = "";
+            switch (type) {
+              case "1": {
+                // Event winner
+                // TODO group by award name
+                if (count === 1) {
+                  awardStrings.unshift("1 event");
+                } else {
+                  awardStrings.unshift(`${count} events`);
                 }
+                break;
+              }
 
-                case "2": {
-                  // Event finalist
-                  // TODO group by award name
-                  if (count === 1) {
-                    awardStrings.push("1 event finalist award");
-                  } else {
-                    awardStrings.push(`${count} event finalist awards`);
-                  }
-                  break;
+              case "2": {
+                // Event finalist
+                // TODO group by award name
+                if (count === 1) {
+                  awardStrings.push("1 event finalist award");
+                } else {
+                  awardStrings.push(`${count} event finalist awards`);
                 }
+                break;
+              }
 
-                case "5": {
-                  // Volunteer of the year
-                  if (count === 1) {
-                    awardStrings.push("one Volunteer of the Year award");
-                  } else {
-                    awardStrings.push(`${count} Volunteer of the Year awards`);
-                  }
-                  break;
+              case "5": {
+                // Volunteer of the year
+                if (count === 1) {
+                  awardStrings.push("one Volunteer of the Year award");
+                } else {
+                  awardStrings.push(`${count} Volunteer of the Year awards`);
                 }
+                break;
+              }
 
-                case "68": {
-                  // Wildcard
-                  if (count === 1) {
-                    awardStrings.push("1 wildcard");
-                  } else {
-                    awardStrings.push(`${count} wildcards`);
-                  }
-                  break;
+              case "68": {
+                // Wildcard
+                if (count === 1) {
+                  awardStrings.push("1 wildcard");
+                } else {
+                  awardStrings.push(`${count} wildcards`);
                 }
+                break;
+              }
 
-                default: {
-                  if (count === 1) {
-                    awardStrings.push(`the  ${awardName}${suffix}`);
-                  } else {
-                    awardName = awardName.replace(/award /ig, "Awards ");
-                    awardStrings.push(`${count} ${awardName}${suffix}`);
-                  }
+              default: {
+                if (count === 1) {
+                  awardStrings.push(`the  ${awardName}${suffix}`);
+                } else {
+                  awardName = awardName.replace(/award /ig, "Awards ");
+                  awardStrings.push(`${count} ${awardName}${suffix}`);
                 }
               }
-          })
-
-          response += frcUtil.joinToOxfordList(awardStrings);
-          response += ".";
-
-          return conv.close(response);
+            }
         })
-  }
 
+        response += frcUtil.joinToOxfordList(awardStrings);
+        response += ".";
+
+        return conv.close(response);
+      })
+}
+
+const intents = {
+  'team-rookie-year': getRookieYear,
+  'team-info': getTeamInfo,
+  'team-location': getTeamLocation,
+  'team-age': getTeamAge,
+  'team-nickname': getTeamNickName,
+  'team-robot-name': getRobotName,
+  'team-name': getTeamName,
+  'team-events': getTeamEvents,
+  'team-awards': getTeamAwards
+}
+
+module.exports.team = (conv, params) => {
+  return intents[conv.intent](conv, params)
 }
