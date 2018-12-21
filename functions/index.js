@@ -21,17 +21,20 @@ admin.initializeApp(functions.config().firebase);
 const {dialogflow} = require('actions-on-google');
 const app = dialogflow({debug: true});
 
-const DataUpdates = require('./data-updates.js').DataUpdates;
-const TeamActions = require('./team-actions.js').TeamActions;
-const EventActions = require('./event-actions.js').EventActions;
-const MiscActions = require('./misc-actions.js').MiscActions;
-const TbaApi = require('./api/tba.js').TbaApi;
+const DataUpdates = require('./data-updates').DataUpdates;
+const TeamActions = require('./actions/team').TeamActions;
+const {event} = require('./actions/event');
+const MiscActions = require('./actions/misc').MiscActions;
 
-const tba = new TbaApi(functions.config().tba.key);
+const tba = require('./api/tba-client')
 const dataUpdates = new DataUpdates(tba);
 const teamActions = new TeamActions(tba);
-const eventActions = new EventActions(tba);
 const misc = new MiscActions();
+
+app.intent([
+  'event-award-winner',
+  'event-winner'
+], event)
 
 app.intent('Team rookie year', (conv, params) => {
   return teamActions.getRookieYear(conv, params);
@@ -67,14 +70,6 @@ app.intent('Team events', (conv, params) => {
 
 app.intent('Team awards', (conv, params) => {
   return teamActions.getTeamAwards(conv, params);
-})
-
-app.intent('Event winner', (conv, params) => {
-  return eventActions.getEventWinner(conv, params);
-})
-
-app.intent('Event award winner', (conv, params) => {
-  return eventActions.getEventAwardWinner(conv, params);
 })
 
 app.intent('Play end game', (conv, _) => {

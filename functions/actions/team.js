@@ -15,7 +15,7 @@
  */
 'use strict';
 
-const frcUtil = require('./frc-util.js');
+const frcUtil = require('../frc-util.js');
 const groupBy = require('lodash.groupby');
 
 module.exports.TeamActions = class TeamActions {
