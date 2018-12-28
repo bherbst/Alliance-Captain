@@ -18,16 +18,35 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
-const {dialogflow} = require('actions-on-google');
-const app = dialogflow({debug: true});
-
-const DataUpdates = require('./data-updates').DataUpdates;
+const {DataUpdates} = require('./data-updates');
 const {team} = require('./actions/team');
 const {event} = require('./actions/event');
 const {misc} = require('./actions/misc');
+const {
+  fallback,
+  noInput
+} = require('./actions/common/prompts');
 
 const tba = require('./api/tba-client').tbaClient;
 const dataUpdates = new DataUpdates(tba);
+
+const {dialogflow} = require('actions-on-google');
+const app = dialogflow({
+  debug: true,
+  init: () => ({
+    data: {
+      fallbackCount: 0,
+      noInputCount: 0
+    }
+  })
+});
+
+app.middleware((conv) => {
+  if (!(conv.intent === 'fallback' || conv.intent === 'no-input')) {
+    conv.data.fallbackCount = 0;
+    conv.data.noInputCount = 0;
+  }
+})
 
 app.intent([
   'event-award-winner',
@@ -53,6 +72,9 @@ app.intent([
   'play-start-match',
   'play-start-teleop'
 ], misc)
+
+app.intent('no-input', noInput);
+app.intent('fallback', fallback);
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest(app)
 
