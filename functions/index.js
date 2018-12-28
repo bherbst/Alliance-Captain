@@ -15,66 +15,11 @@
 'use strict';
 
 const functions = require('firebase-functions');
-const admin = require('firebase-admin');
-admin.initializeApp(functions.config().firebase);
-
-const {DataUpdates} = require('./data-updates');
-const {team} = require('./actions/team');
-const {event} = require('./actions/event');
-const {misc} = require('./actions/misc');
-const {
-  fallback,
-  noInput
-} = require('./actions/common/prompts');
+const {app} = require('./app')
 
 const tba = require('./api/tba-client').tbaClient;
+const {DataUpdates} = require('./data-updates');
 const dataUpdates = new DataUpdates(tba);
-
-const {dialogflow} = require('actions-on-google');
-const app = dialogflow({
-  debug: true,
-  init: () => ({
-    data: {
-      fallbackCount: 0,
-      noInputCount: 0
-    }
-  })
-});
-
-app.middleware((conv) => {
-  if (!(conv.intent === 'fallback' || conv.intent === 'no-input')) {
-    conv.data.fallbackCount = 0;
-    conv.data.noInputCount = 0;
-  }
-})
-
-app.intent([
-  'event-award-winner',
-  'event-winner'
-], event)
-
-app.intent([
-  'team-rookie-year',
-  'team-info',
-  'team-location',
-  'team-age',
-  'team-nickname',
-  'team-robot-name',
-  'team-name',
-  'team-events',
-  'team-awards'
-], team)
-
-app.intent([
-  'play-end-game',
-  'play-match-end',
-  'play-match-pause',
-  'play-start-match',
-  'play-start-teleop'
-], misc)
-
-app.intent('no-input', noInput);
-app.intent('fallback', fallback);
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest(app)
 

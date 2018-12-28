@@ -26,20 +26,7 @@ const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)]
  */
 exports.fallback = (conv) => {
     const prompts = require(`./prompts`);
-    const countSum = conv.data.fallbackCount + conv.data.noInputCount;
-
-    if (countSum < MAX_RETRY) {
-      const prompt = prompts.defaultFallbackPrompts[countSum];
-      conv.ask(...prompt.responses);
-
-      if (prompt.suggestions) {
-        conv.ask(getSuggestions(prompt.suggestions));
-      }
-    } else {
-      const prompt = prompts.fallbackFinal
-      conv.close(...prompt.responses);
-    }
-    conv.data.fallbackCount++;
+    exports.prompt(conv, prompts.defaultFallbackPrompts)
   };
   
   /**
@@ -47,18 +34,35 @@ exports.fallback = (conv) => {
    */
   exports.noInput = (conv) => {
     const prompts = require(`./prompts`);
-    const countSum = conv.data.fallbackCount + conv.data.noInputCount;
-    
-    if (countSum < MAX_RETRY) {
-      const prompt = prompts.noInputPrompts[countSum];
-      conv.ask(...prompt.responses);
-
-      if (prompt.suggestions) {
-        conv.ask(getSuggestions(prompt.suggestions));
-      }
-    } else {
-      const prompt = prompts.noInputFinal
-      conv.close(...prompt.responses);
-    }
-    conv.data.noInputCount++;
+    exports.prompt(conv, prompts.noInputPrompts)
   };
+
+  /**
+   * Send a prompt to the user.
+   * 
+   * Randomly picks a prompt from the list of suitable responses based on the interaction
+   * surface.
+   */
+exports.prompt = (conv, prompts) => {
+  try {
+    let variations;
+    // Get the correct prompts for the curent surface (e.g. screen, speaker)
+    if (prompts.screen && conv.screen) {
+      variations = prompts.screen;
+    } else if (prompts.speaker) {
+      variations = prompts.speaker;
+    } else if (prompts['screen/speaker']) {
+      variations = prompts['screen/speaker'];
+    }
+
+    // Choose a random variant within the dimensions
+    const variant = getRandomElement(variations);
+    for (const response of variant.responses) {
+      conv.ask(getRandomElement(response));
+    }
+  } catch (error) {
+    console.error(`Error parsing prompt: ${error}`);
+    exports.fallback(conv);
+    return;
+  }
+};
