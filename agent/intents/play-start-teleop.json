@@ -1,0 +1,29 @@
+{
+  "id": "881a5f1b-aa28-47b9-8216-ee827100ca84",
+  "name": "play-start-teleop",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "play_start_teleop",
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1545425687,
+  "fallbackIntent": false,
+  "events": []
+}

@@ -21,81 +21,38 @@ admin.initializeApp(functions.config().firebase);
 const {dialogflow} = require('actions-on-google');
 const app = dialogflow({debug: true});
 
-const DataUpdates = require('./data-updates.js').DataUpdates;
-const TeamActions = require('./team-actions.js').TeamActions;
-const EventActions = require('./event-actions.js').EventActions;
-const MiscActions = require('./misc-actions.js').MiscActions;
-const TbaApi = require('./api/tba.js').TbaApi;
+const DataUpdates = require('./data-updates').DataUpdates;
+const {team} = require('./actions/team');
+const {event} = require('./actions/event');
+const {misc} = require('./actions/misc');
 
-const tba = new TbaApi(functions.config().tba.key);
+const tba = require('./api/tba-client').tbaClient;
 const dataUpdates = new DataUpdates(tba);
-const teamActions = new TeamActions(tba);
-const eventActions = new EventActions(tba);
-const misc = new MiscActions();
 
-app.intent('Team rookie year', (conv, params) => {
-  return teamActions.getRookieYear(conv, params);
-})
+app.intent([
+  'event-award-winner',
+  'event-winner'
+], event)
 
-app.intent('Team info', (conv, params) => {
-  return teamActions.getteamActions(conv, params);
-})
+app.intent([
+  'team-rookie-year',
+  'team-info',
+  'team-location',
+  'team-age',
+  'team-nickname',
+  'team-robot-name',
+  'team-name',
+  'team-events',
+  'team-awards'
+], team)
 
-app.intent('Team location', (conv, params) => {
-  return teamActions.getTeamLocation(conv, params);
-})
-
-app.intent('Team age', (conv, params) => {
-  return teamActions.getTeamAge(conv, params);
-})
-
-app.intent('Team nickname', (conv, params) => {
-  return teamActions.getTeamNickName(conv, params);
-})
-
-app.intent('Team robot name', (conv, params) => {
-  return teamActions.getRobotName(conv, params);
-})
-
-app.intent('Team name', (conv, params) => {
-  return teamActions.getTeamName(conv, params);
-})
-
-app.intent('Team events', (conv, params) => {
-  return teamActions.getTeamEvents(conv, params);
-})
-
-app.intent('Team awards', (conv, params) => {
-  return teamActions.getTeamAwards(conv, params);
-})
-
-app.intent('Event winner', (conv, params) => {
-  return eventActions.getEventWinner(conv, params);
-})
-
-app.intent('Event award winner', (conv, params) => {
-  return eventActions.getEventAwardWinner(conv, params);
-})
-
-app.intent('Play end game', (conv, _) => {
-  return miscActions.endGame(conv);
-})
-
-app.intent('Play match end', (conv, _) => {
-  return miscActions.matchEnd(conv);
-})
-
-app.intent('Play match pause', (conv, _) => {
-  return miscActions.matchPause(conv);
-})
-
-app.intent('Play start match', (conv, _) => {
-  return miscActions.startMatch(conv);
-})
-
-app.intent('Play start teleop', (conv, _) => {
-  return miscActions.startTeleop(conv);
-})
+app.intent([
+  'play-end-game',
+  'play-match-end',
+  'play-match-pause',
+  'play-start-match',
+  'play-start-teleop'
+], misc)
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest(app)
 

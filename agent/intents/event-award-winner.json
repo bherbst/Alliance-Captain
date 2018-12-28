@@ -1,0 +1,91 @@
+{
+  "id": "2ee82431-09c3-4ca7-8d4a-64da43459bcd",
+  "name": "event-award-winner",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "get_event_award",
+      "affectedContexts": [
+        {
+          "name": "event",
+          "parameters": {},
+          "lifespan": 5
+        },
+        {
+          "name": "award",
+          "parameters": {},
+          "lifespan": 5
+        },
+        {
+          "name": "season",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "22b59123-692f-41a0-8798-8c55b9830a8e",
+          "required": true,
+          "dataType": "@award",
+          "name": "award",
+          "value": "$award",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Which award?"
+            }
+          ],
+          "defaultValue": "#award.award",
+          "isList": false
+        },
+        {
+          "id": "3d57fcc8-4c28-48f0-9fad-18bf55249d28",
+          "required": true,
+          "dataType": "@season",
+          "name": "season",
+          "value": "$season",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "What year?"
+            }
+          ],
+          "defaultValue": "#season.season",
+          "isList": false
+        },
+        {
+          "id": "b9b5313a-9d0b-4e94-a8be-2b31f6e06378",
+          "required": true,
+          "dataType": "@event",
+          "name": "event",
+          "value": "$event",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "What event?"
+            }
+          ],
+          "defaultValue": "#event.event",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1545254737,
+  "fallbackIntent": false,
+  "events": []
+}

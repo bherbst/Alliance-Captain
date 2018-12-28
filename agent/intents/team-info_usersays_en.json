@@ -1,0 +1,118 @@
+[
+  {
+    "id": "46b0b34f-6b2b-4872-bee2-33dd108925ef",
+    "data": [
+      {
+        "text": "Give me more information about them",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1533065844
+  },
+  {
+    "id": "97bf544f-25b1-45d4-b900-ec1458f42530",
+    "data": [
+      {
+        "text": "Tell me more about them",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1533065844
+  },
+  {
+    "id": "65761584-6540-4398-849a-da3b447e6436",
+    "data": [
+      {
+        "text": "Give me information about ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "2eb46161-4840-4cab-aeb0-a5e1978b0064",
+    "data": [
+      {
+        "text": "Who are ",
+        "userDefined": false
+      },
+      {
+        "text": "The Cheesy Poofs",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1495901655
+  },
+  {
+    "id": "afdc1321-b140-424d-88d9-12f53f23a317",
+    "data": [
+      {
+        "text": "Who is ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "4a6325fe-ca9a-47ef-9761-a88a0afb8b07",
+    "data": [
+      {
+        "text": "Tell me about ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "c232e5be-1c36-4915-89a3-39c2b8c139a0",
+    "data": [
+      {
+        "text": "Who are they?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1533065844
+  }
+]
