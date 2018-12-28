@@ -1,8 +1,9 @@
 {
   "description": "Provides FIRST Robotics Competition team and event information",
   "language": "en",
+  "activeAssistantAgents": [],
   "disableInteractionLogs": false,
-  "disableStackdriverLogs": false,
+  "disableStackdriverLogs": true,
   "googleAssistant": {
     "googleAssistantCompatible": true,
     "welcomeIntentSignInRequired": false,
@@ -89,6 +90,16 @@
     "isDeviceAgent": false
   },
   "defaultTimezone": "America/Chicago",
+  "webhook": {
+    "url": "https://us-central1-tbabot-b6094.cloudfunctions.net/dialogflowFirebaseFulfillment",
+    "headers": {
+      "": ""
+    },
+    "available": true,
+    "useForDomains": true,
+    "cloudFunctionsEnabled": false,
+    "cloudFunctionsInitialized": false
+  },
   "isPrivate": true,
   "customClassifierMode": "use.after",
   "mlMinConfidence": 0.3,

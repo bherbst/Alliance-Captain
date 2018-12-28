@@ -14,23 +14,15 @@
  */
 'use strict';
 
-const functions = require('firebase-functions');
-const {app} = require('./app')
+const {SimpleResponse} = require('actions-on-google');
 
-const tba = require('./api/tba-client').tbaClient;
-const {DataUpdates} = require('./data-updates');
-const dataUpdates = new DataUpdates(tba);
-
-exports.dialogflowFirebaseFulfillment = functions.https.onRequest(app)
-
-exports.updateTeams = functions.pubsub
-  .topic('update-teams')
-  .onPublish((_) => {
-    return dataUpdates.updateTeams();
-  });
-
-exports.updateEvents = functions.pubsub
-  .topic('update-events')
-  .onPublish((_) => {
-    return dataUpdates.updateEvents();
-  });
+exports.basicPrompt = (speech, text) => {
+    return {
+        'responses': [
+            new SimpleResponse({
+                speech: speech,
+                text: text ? text : speech
+            })
+        ]
+    }
+}
