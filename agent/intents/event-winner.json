@@ -1,0 +1,61 @@
+{
+  "id": "ac93bb02-3136-42e6-b28b-7425544710c7",
+  "name": "event-winner",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "get_event_winner",
+      "affectedContexts": [
+        {
+          "name": "season",
+          "parameters": {},
+          "lifespan": 5
+        },
+        {
+          "name": "event",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "a53fdae6-8fc1-4079-a298-fa804714dc18",
+          "required": true,
+          "dataType": "@event",
+          "name": "event",
+          "value": "$event",
+          "prompts": [],
+          "defaultValue": "#event.event",
+          "isList": false
+        },
+        {
+          "id": "4bedd020-b9c3-4b9e-80ad-2ae080a799ee",
+          "required": false,
+          "dataType": "@season",
+          "name": "season",
+          "value": "$season",
+          "prompts": [],
+          "defaultValue": "#season.season",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1545255214,
+  "fallbackIntent": false,
+  "events": []
+}

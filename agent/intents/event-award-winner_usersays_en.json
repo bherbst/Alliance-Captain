@@ -1,0 +1,929 @@
+[
+  {
+    "id": "0c4d14c5-8ba7-480d-958a-0f15de6d32c2",
+    "data": [
+      {
+        "text": "Which ",
+        "userDefined": false
+      },
+      {
+        "text": "team",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " won during ",
+        "userDefined": false
+      },
+      {
+        "text": "Steamworks",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  },
+  {
+    "id": "21427410-a1fa-45c9-a1f3-d6ef118b6ccf",
+    "data": [
+      {
+        "text": "Which ",
+        "userDefined": false
+      },
+      {
+        "text": "team",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " won in ",
+        "userDefined": false
+      },
+      {
+        "text": "2018",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  },
+  {
+    "id": "e696a6cd-a252-4f36-b312-80c86057cada",
+    "data": [
+      {
+        "text": "Who",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " won during ",
+        "userDefined": false
+      },
+      {
+        "text": "Steamworks",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  },
+  {
+    "id": "e54a00db-22d7-4535-b299-58f09770019c",
+    "data": [
+      {
+        "text": "Who",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " won in ",
+        "userDefined": false
+      },
+      {
+        "text": "2018",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  },
+  {
+    "id": "b6597a28-06d5-445a-a1c5-7900e43ce73f",
+    "data": [
+      {
+        "text": "Which ",
+        "userDefined": false
+      },
+      {
+        "text": "team",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " the ",
+        "userDefined": false
+      },
+      {
+        "text": "winner",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " of the ",
+        "userDefined": false
+      },
+      {
+        "text": "Chairman\u0027s",
+        "alias": "award",
+        "meta": "@award",
+        "userDefined": false
+      },
+      {
+        "text": " Award in ",
+        "userDefined": false
+      },
+      {
+        "text": "2018",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  },
+  {
+    "id": "ea669c63-3232-496f-a1fe-8da2961ef661",
+    "data": [
+      {
+        "text": "Who",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " the ",
+        "userDefined": false
+      },
+      {
+        "text": "winner",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " of the ",
+        "userDefined": false
+      },
+      {
+        "text": "Chairman\u0027s",
+        "alias": "award",
+        "meta": "@award",
+        "userDefined": false
+      },
+      {
+        "text": " Award in ",
+        "userDefined": false
+      },
+      {
+        "text": "2018",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  },
+  {
+    "id": "acda7eb9-9b2f-4592-a9f9-d13cc9db07cf",
+    "data": [
+      {
+        "text": "Which ",
+        "userDefined": false
+      },
+      {
+        "text": "team",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " the ",
+        "userDefined": false
+      },
+      {
+        "text": "winner",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " of the ",
+        "userDefined": false
+      },
+      {
+        "text": "Chairman\u0027s",
+        "alias": "award",
+        "meta": "@award",
+        "userDefined": false
+      },
+      {
+        "text": " Award?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  },
+  {
+    "id": "7dcc45c3-eba1-47cd-b4f8-7541a0f63a6d",
+    "data": [
+      {
+        "text": "Who",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " the ",
+        "userDefined": false
+      },
+      {
+        "text": "winner",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " of the ",
+        "userDefined": false
+      },
+      {
+        "text": "Chairman\u0027s",
+        "alias": "award",
+        "meta": "@award",
+        "userDefined": false
+      },
+      {
+        "text": " Award?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  },
+  {
+    "id": "1e6046f5-0bd9-46aa-b610-01e3697ce9fa",
+    "data": [
+      {
+        "text": "Which ",
+        "userDefined": false
+      },
+      {
+        "text": "team",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " won the ",
+        "userDefined": false
+      },
+      {
+        "text": "Chairman\u0027s",
+        "alias": "award",
+        "meta": "@award",
+        "userDefined": false
+      },
+      {
+        "text": " Award in ",
+        "userDefined": false
+      },
+      {
+        "text": "2018",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  },
+  {
+    "id": "d0dbce94-0683-4f95-af65-88e01ebb6022",
+    "data": [
+      {
+        "text": "Who",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " won the ",
+        "userDefined": false
+      },
+      {
+        "text": "Chairman\u0027s",
+        "alias": "award",
+        "meta": "@award",
+        "userDefined": false
+      },
+      {
+        "text": " Award in ",
+        "userDefined": false
+      },
+      {
+        "text": "2018?",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  },
+  {
+    "id": "d4cfab07-7823-4338-98f6-b458b1805254",
+    "data": [
+      {
+        "text": "Which ",
+        "userDefined": false
+      },
+      {
+        "text": "team",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " won the ",
+        "userDefined": false
+      },
+      {
+        "text": "Chairman\u0027s",
+        "alias": "award",
+        "meta": "@award",
+        "userDefined": false
+      },
+      {
+        "text": " Award?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  },
+  {
+    "id": "7810b79d-5d63-4922-8f6d-8eb050c13e0d",
+    "data": [
+      {
+        "text": "Which ",
+        "userDefined": false
+      },
+      {
+        "text": "team",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " won ",
+        "userDefined": false
+      },
+      {
+        "text": "Chairman\u0027s",
+        "alias": "award",
+        "meta": "@award",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  },
+  {
+    "id": "dc3e12b7-afb1-464c-a958-341ba9e44ebb",
+    "data": [
+      {
+        "text": "Who",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " won the ",
+        "userDefined": false
+      },
+      {
+        "text": "Chairman\u0027s",
+        "alias": "award",
+        "meta": "@award",
+        "userDefined": false
+      },
+      {
+        "text": " Award?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  },
+  {
+    "id": "4118e614-2130-4c39-8b3d-4da9e08fb01e",
+    "data": [
+      {
+        "text": "Who",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " won ",
+        "userDefined": false
+      },
+      {
+        "text": "Chairman\u0027s",
+        "alias": "award",
+        "meta": "@award",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  },
+  {
+    "id": "46fd477e-614d-4388-a2f7-09f22b0ac978",
+    "data": [
+      {
+        "text": "Which ",
+        "userDefined": false
+      },
+      {
+        "text": "team",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " the ",
+        "userDefined": false
+      },
+      {
+        "text": "winner",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " of the ",
+        "userDefined": false
+      },
+      {
+        "text": "Chairman\u0027s",
+        "alias": "award",
+        "meta": "@award",
+        "userDefined": false
+      },
+      {
+        "text": " Award at the ",
+        "userDefined": false
+      },
+      {
+        "text": "Dallas Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": " in ",
+        "userDefined": false
+      },
+      {
+        "text": "2018",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  },
+  {
+    "id": "ea8e7c51-82e4-44ed-b3e6-7f0945880d8c",
+    "data": [
+      {
+        "text": "Which ",
+        "userDefined": false
+      },
+      {
+        "text": "team",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " the ",
+        "userDefined": false
+      },
+      {
+        "text": "2018",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Chairman\u0027s",
+        "alias": "award",
+        "meta": "@award",
+        "userDefined": false
+      },
+      {
+        "text": " Award ",
+        "userDefined": false
+      },
+      {
+        "text": "winner",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " at the ",
+        "userDefined": false
+      },
+      {
+        "text": "Dallas Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  },
+  {
+    "id": "a7461c02-0c1c-4e29-ac54-f9512d091196",
+    "data": [
+      {
+        "text": "Which ",
+        "userDefined": false
+      },
+      {
+        "text": "team",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " won the ",
+        "userDefined": false
+      },
+      {
+        "text": "Chairman\u0027s",
+        "alias": "award",
+        "meta": "@award",
+        "userDefined": false
+      },
+      {
+        "text": " Award at the ",
+        "userDefined": false
+      },
+      {
+        "text": "Dallas Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": " in ",
+        "userDefined": false
+      },
+      {
+        "text": "2018",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  },
+  {
+    "id": "7b46a378-7308-45be-b8ae-4b89e1079a3d",
+    "data": [
+      {
+        "text": "Who",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " won ",
+        "userDefined": false
+      },
+      {
+        "text": "Chairman\u0027s",
+        "alias": "award",
+        "meta": "@award",
+        "userDefined": false
+      },
+      {
+        "text": " at the ",
+        "userDefined": false
+      },
+      {
+        "text": "Dallas Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": " in ",
+        "userDefined": false
+      },
+      {
+        "text": "2018",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  },
+  {
+    "id": "85ac932d-c1f8-463f-8d2c-e845310dd1c9",
+    "data": [
+      {
+        "text": "Who",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " the ",
+        "userDefined": false
+      },
+      {
+        "text": "2018",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Chairman\u0027s",
+        "alias": "award",
+        "meta": "@award",
+        "userDefined": false
+      },
+      {
+        "text": " Award ",
+        "userDefined": false
+      },
+      {
+        "text": "winner",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " at the ",
+        "userDefined": false
+      },
+      {
+        "text": "Dallas Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  },
+  {
+    "id": "726c1b36-d231-442f-973d-083d9eae15a0",
+    "data": [
+      {
+        "text": "Who",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " the ",
+        "userDefined": false
+      },
+      {
+        "text": "2018",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "winner",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " of the ",
+        "userDefined": false
+      },
+      {
+        "text": "Chairman\u0027s",
+        "alias": "award",
+        "meta": "@award",
+        "userDefined": false
+      },
+      {
+        "text": " Award at the ",
+        "userDefined": false
+      },
+      {
+        "text": "Dallas Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  },
+  {
+    "id": "eeed91af-00c4-4e6a-8d1c-edddda312b6a",
+    "data": [
+      {
+        "text": "Who",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " won the ",
+        "userDefined": false
+      },
+      {
+        "text": "Chairman\u0027s",
+        "alias": "award",
+        "meta": "@award",
+        "userDefined": false
+      },
+      {
+        "text": " Award at the ",
+        "userDefined": false
+      },
+      {
+        "text": "2018",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Dallas Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1542742122
+  }
+]
