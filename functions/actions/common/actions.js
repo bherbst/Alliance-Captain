@@ -14,8 +14,6 @@
  */
 'use strict';
 
-const MAX_RETRY = 2
-
 /**
  * Get a random element from an array
  */
@@ -44,6 +42,7 @@ exports.fallback = (conv) => {
    * surface.
    */
 exports.prompt = (conv, prompts) => {
+  console.log(`prompt: ${prompts}, ${conv}`)
   try {
     let variant = prompts;
     // Get the correct prompts for the curent surface (e.g. screen, speaker)
@@ -55,6 +54,7 @@ exports.prompt = (conv, prompts) => {
       variant = prompts['screen/speaker'];
     }
 
+    console.log(`variant: ${variant}`)
     conv.ask(getRandomElement(variant.responsePool));
     if (variant.followUpResponsePool) {
       conv.ask(getRandomElement(variant.followUpResponsePool));

@@ -25,6 +25,23 @@ exports.basicPrompt = (speech, text) => {
         ])
 };
 
+exports.reentryPool = [
+    new SimpleResponse({speech: `What else would you like to know?`}),
+    new SimpleResponse({speech: `What else can I help you with?`}),
+    new SimpleResponse({speech: `What other questions can I answer?`})
+];
+
+exports.basicPromptWithReentry = (speech, text) => {
+    return new exports.Prompt(
+        [
+            new SimpleResponse({
+                speech: speech,
+                text: text ? text : speech
+            })
+        ], exports.reentryPool
+    )
+};
+
 exports.Prompt = class Prompt {
     constructor(responsePool, followUpResponsePool) {
         this.responsePool = responsePool
