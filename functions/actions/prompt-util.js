@@ -43,8 +43,9 @@ exports.basicPromptWithReentry = (speech, text) => {
 };
 
 exports.Prompt = class Prompt {
-    constructor(responsePool, followUpResponsePool) {
+    constructor(responsePool, followUpResponsePool, screenContent) {
         this.responsePool = responsePool
         this.followUpResponsePool = followUpResponsePool
+        this.screenContent = screenContent
     }
 };
