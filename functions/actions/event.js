@@ -126,5 +126,9 @@ module.exports.event = (conv, params) => {
   const responsePromise = intents[conv.intent](conv, params);
   return responsePromise.then((response) => {
     return prompt(conv, response);
+  })
+  .catch((err) => {
+    console.warn(err);
+    return fallback();
   });
 }

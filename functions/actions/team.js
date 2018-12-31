@@ -17,7 +17,7 @@
 
 const groupBy = require('lodash.groupby');
 const frcUtil = require('../frc-util');
-const {prompt} = require('./common/actions')
+const {prompt, fallback} = require('./common/actions')
 const {basicPromptWithReentry} = require('./prompt-util')
 const tba = require('../api/tba-client').tbaClient;
 
@@ -327,5 +327,9 @@ module.exports.team = (conv, params) => {
   const responsePromise = intents[conv.intent](conv, params);
   return responsePromise.then((response) => {
     return prompt(conv, response);
+  })
+  .catch((err) => {
+    console.warn(err);
+    return fallback();
   });
 }
