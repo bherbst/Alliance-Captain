@@ -16,6 +16,12 @@
 'use strict';
 
 const groupBy = require('lodash.groupby');
+
+const {
+  BasicCard,
+  Button
+} = require('actions-on-google');
+
 const frcUtil = require('../frc-util');
 const {prompt, fallback} = require('./common/actions')
 const {basicPromptWithReentry} = require('./prompt-util')
@@ -106,7 +112,20 @@ const getTeamInfo = (conv, params) => {
         const thisYear = new Date().getFullYear();
         const age = thisYear - data.rookie_year;
         const location = frcUtil.getLocationString(data);
-        return basicPromptWithReentry(`${name} is a ${age}  year old team from ${location}.`);
+        
+        const response = basicPromptWithReentry(`${name} is a ${age}  year old team from ${location}.`);
+        response.responsePool.push(
+          new BasicCard({
+            text: `See event results and more on firstinspires.org`,
+            buttons: [
+                new Button({
+                  title: `View ${team_number}`,
+                  url: `https://frc-events.firstinspires.org/${thisYear}/team/${team_number}`
+                })
+            ]
+          })
+        );
+        return reponse;
       });
 }
 
@@ -330,6 +349,6 @@ module.exports.team = (conv, params) => {
   })
   .catch((err) => {
     console.warn(err);
-    return fallback();
+    return fallback(conv);
   });
 }
