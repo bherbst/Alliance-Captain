@@ -13,7 +13,7 @@
         {
           "type": 0,
           "lang": "en",
-          "speech": "Welcome to Alliance Captain! Ask me about FIRST Robotics Competition teams and events, like \"Tell me about Team 2052\" and \"Who won the 2018 Lake Superior Regional?\""
+          "speech": "Welcome to Alliance Captain! Ask me about FIRST Robotics Competition teams and events, like \"Tell me about team 2052\" and \"Who won the 2018 Lake Superior Regional?\""
         }
       ],
       "defaultResponsePlatforms": {},

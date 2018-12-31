@@ -129,6 +129,6 @@ module.exports.event = (conv, params) => {
   })
   .catch((err) => {
     console.warn(err);
-    return fallback();
+    return fallback(conv);
   });
 }

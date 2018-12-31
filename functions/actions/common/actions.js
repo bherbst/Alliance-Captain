@@ -41,23 +41,18 @@ exports.fallback = (conv) => {
    * Randomly picks a prompt from the list of suitable responses based on the interaction
    * surface.
    */
-exports.prompt = (conv, prompts) => {
-  console.log(`prompt: ${prompts}, ${conv}`)
+exports.prompt = (conv, prompt) => {
   try {
-    let variant = prompts;
-    // Get the correct prompts for the curent surface (e.g. screen, speaker)
-    if (prompts.screen && conv.screen) {
-      variant = prompts.screen;
-    } else if (prompts.speaker) {
-      variant = prompts.speaker;
-    } else if (prompts['screen/speaker']) {
-      variant = prompts['screen/speaker'];
+    const initialResponse = getRandomElement(prompt.responsePool);
+
+    if (prompt.screenContent && conv.screen) {
+      conv.ask(initialResponse, prompt.screenContent);
+    } else {
+      conv.ask(initialResponse)
     }
 
-    console.log(`variant: ${variant}`)
-    conv.ask(getRandomElement(variant.responsePool));
-    if (variant.followUpResponsePool) {
-      conv.ask(getRandomElement(variant.followUpResponsePool));
+    if (prompt.followUpResponsePool) {
+      conv.ask(getRandomElement(prompt.followUpResponsePool));
     }
   } catch (error) {
     console.error(`Error parsing prompt: ${error}`);
