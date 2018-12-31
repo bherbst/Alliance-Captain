@@ -13,12 +13,7 @@
         {
           "type": 0,
           "lang": "en",
-          "speech": [
-            "Hi!",
-            "Hello!",
-            "Good day!",
-            "Greetings!"
-          ]
+          "speech": "Welcome to Alliance Captain! Ask me about FIRST Robotics Competition teams and events, like \"Tell me about team 2052\" and \"Who won the 2018 Lake Superior Regional?\""
         }
       ],
       "defaultResponsePlatforms": {},
@@ -28,7 +23,7 @@
   "priority": 500000,
   "webhookUsed": false,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1541190393,
+  "lastUpdate": 1546014212,
   "fallbackIntent": false,
   "events": [
     {

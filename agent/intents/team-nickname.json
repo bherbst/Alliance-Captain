@@ -1,0 +1,46 @@
+{
+  "id": "0ceb8fc2-0846-4e43-b037-c4f787fbf2cb",
+  "name": "team-nickname",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "get_team_nickname",
+      "affectedContexts": [
+        {
+          "name": "team",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "4d4d5283-53bf-4fe8-956a-fce149b877ba",
+          "required": true,
+          "dataType": "@team",
+          "name": "team",
+          "value": "$team",
+          "prompts": [],
+          "defaultValue": "#team.team",
+          "isList": true
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1545419795,
+  "fallbackIntent": false,
+  "events": []
+}

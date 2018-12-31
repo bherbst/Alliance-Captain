@@ -15,22 +15,6 @@
 'use strict';
 
 const functions = require('firebase-functions');
-const {app} = require('./app')
+const {TbaApi} = require('./tba-api')
 
-const tba = require('./api/tba-client').tbaClient;
-const {DataUpdates} = require('./data-updates');
-const dataUpdates = new DataUpdates(tba);
-
-exports.dialogflowFirebaseFulfillment = functions.https.onRequest(app)
-
-exports.updateTeams = functions.pubsub
-  .topic('update-teams')
-  .onPublish((_) => {
-    return dataUpdates.updateTeams();
-  });
-
-exports.updateEvents = functions.pubsub
-  .topic('update-events')
-  .onPublish((_) => {
-    return dataUpdates.updateEvents();
-  });
+module.exports.tbaClient = new TbaApi(functions.config().tba.key);

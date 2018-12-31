@@ -1,0 +1,220 @@
+[
+  {
+    "id": "13657393-5e24-4795-989a-93c177ccfcb3",
+    "data": [
+      {
+        "text": "How did they do?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1536242794
+  },
+  {
+    "id": "808ee776-ee8e-4af2-bc9a-02b622ca2912",
+    "data": [
+      {
+        "text": "Did ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " win any awards during ",
+        "userDefined": false
+      },
+      {
+        "text": "Power Up",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1536242794
+  },
+  {
+    "id": "a204d741-8efd-4c38-a3dd-520f22fee648",
+    "data": [
+      {
+        "text": "What awards did they win?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1536242794
+  },
+  {
+    "id": "36278a73-4d49-4171-9793-fa5dc8b7b272",
+    "data": [
+      {
+        "text": "What award did ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " win during ",
+        "userDefined": false
+      },
+      {
+        "text": "Power Up",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1536242794
+  },
+  {
+    "id": "68670611-fe78-4f77-8e0b-0243943d6f62",
+    "data": [
+      {
+        "text": "What awards have they won?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1536243603
+  },
+  {
+    "id": "a39bd4bb-aa21-4830-bdb3-6bdc9f45305d",
+    "data": [
+      {
+        "text": "What awards did ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " win?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1536242794
+  },
+  {
+    "id": "eba5a3bc-5ccc-43f4-9df3-795e1457add4",
+    "data": [
+      {
+        "text": "What awards did ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " win in ",
+        "userDefined": false
+      },
+      {
+        "text": "2017",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1536242794
+  },
+  {
+    "id": "b8e4df7b-130a-4ace-9f8a-382f2c63b99d",
+    "data": [
+      {
+        "text": "How did ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " do during ",
+        "userDefined": false
+      },
+      {
+        "text": "Power Up",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1536242794
+  },
+  {
+    "id": "b7f63307-3463-407a-b73c-96aa1dc36c9d",
+    "data": [
+      {
+        "text": "What awards did ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " win during ",
+        "userDefined": false
+      },
+      {
+        "text": "Power Up",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1536242794
+  }
+]
