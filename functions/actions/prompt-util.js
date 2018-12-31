@@ -17,12 +17,17 @@
 const {SimpleResponse} = require('actions-on-google');
 
 exports.basicPrompt = (speech, text) => {
-    return {
-        'responses': [
+    return new exports.Prompt([
             new SimpleResponse({
                 speech: speech,
                 text: text ? text : speech
             })
-        ]
+        ])
+};
+
+exports.Prompt = class Prompt {
+    constructor(responsePool, followUpResponsePool) {
+        this.responsePool = responsePool
+        this.followUpResponsePool = followUpResponsePool
     }
-}
+};

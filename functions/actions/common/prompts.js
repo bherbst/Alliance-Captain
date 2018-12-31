@@ -14,17 +14,24 @@
  */
 'use strict';
 
-const {basicPrompt} = require('../prompt-util')
+const {SimpleResponse} = require('actions-on-google');
+const {basicPrompt, Prompt} = require('../prompt-util')
 
-exports.defaultFallbackPrompts = [
-    basicPrompt(`I'm not sure about that. Could you try again?`, `Could you try again?`),
-    basicPrompt(`Hmmm, I don't know how to answer that. What can I help with?`),
-    basicPrompt(`Looks like the code crashed. What do you want to know?`, `What do you want to know?`)
-]
+exports.defaultFallbackPrompts = new Prompt([
+    new SimpleResponse({
+        speech: `I'm not sure about that. Could you try again?`,
+        text: `Could you try again?`
+    }),
+    new SimpleResponse({speech: `Hmmm, I don't know how to answer that. What can I help with?`}),
+    new SimpleResponse({
+        speech: `Looks like the code crashed. What do you want to know?`,
+        text: `What do you want to know?`
+    })
+])
 exports.fallbackFinal = basicPrompt(`Looks like this robot needs help from the programming team. Come back later!`)
 
 exports.noInputPrompts = [
-    basicPrompt(`I can give you information on FRC teams and events. What would you like to know?`),
-    basicPrompt(`What can I tell you about FRC teams and events?`)
+    new SimpleResponse({speech: `I can give you information on FRC teams and events. What would you like to know?`}),
+    new SimpleResponse({speech: `What can I tell you about FRC teams and events?`})
 ]
 exports.noInputFinal = basicPrompt(`I'll have to respectfully decline your alliance invitation. Talk to you later!`)

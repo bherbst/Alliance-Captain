@@ -45,20 +45,19 @@ exports.fallback = (conv) => {
    */
 exports.prompt = (conv, prompts) => {
   try {
-    let variations;
+    let variant = prompts;
     // Get the correct prompts for the curent surface (e.g. screen, speaker)
     if (prompts.screen && conv.screen) {
-      variations = prompts.screen;
+      variant = prompts.screen;
     } else if (prompts.speaker) {
-      variations = prompts.speaker;
+      variant = prompts.speaker;
     } else if (prompts['screen/speaker']) {
-      variations = prompts['screen/speaker'];
+      variant = prompts['screen/speaker'];
     }
 
-    // Choose a random variant within the dimensions
-    const variant = getRandomElement(variations);
-    for (const response of variant.responses) {
-      conv.ask(getRandomElement(response));
+    conv.ask(getRandomElement(variant.responsePool));
+    if (variant.followUpResponsePool) {
+      conv.ask(getRandomElement(variant.followUpResponsePool));
     }
   } catch (error) {
     console.error(`Error parsing prompt: ${error}`);
