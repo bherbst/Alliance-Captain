@@ -14,6 +14,8 @@
  */
 'use strict';
 
+const {prompt} = require('./common/actions')
+const {basicPromptWithReentry} = require('./prompt-util')
 const frcUtil = require('../frc-util');
 const awards = require('../awards');
 const events = require('../events');
@@ -30,15 +32,15 @@ const getEventWinner = (conv, params) => {
   return Promise.all([eventName, eventWinners])
         .catch((err) => {
           console.warn(err);
-          return conv.close("I couldn't find information on that event.");
+          return basicPromptWithReentry("I couldn't find information on that event.");
         })
         .then(([eventName, winners]) => {
           if (winners.length < 1) {
-            return conv.close("I couldn't find a winner for that event.");
+            return basicPromptWithReentry("I couldn't find a winner for that event.");
           }
 
           const teams = frcUtil.joinToOxfordList(winners);
-          return conv.close(`Teams ${teams} won the ${year} ${eventName}`);
+          return basicPromptWithReentry(`Teams ${teams} won the ${year} ${eventName}`);
         });
 }
 
@@ -55,11 +57,11 @@ const getEventAwardWinner = (conv, params) => {
   return Promise.all([eventName, eventWinners])
         .catch((err) => {
           console.warn(err);
-          return conv.close("I couldn't find information on that event.");
+          return basicPromptWithReentry("I couldn't find information on that event.");
         })
         .then(([eventName, winners]) => {
           if (winners.length < 1) {
-            return conv.close("I couldn't find that information.");
+            return basicPromptWithReentry("I couldn't find that information.");
           }
 
           if (winners.length === 1) {
@@ -68,7 +70,7 @@ const getEventAwardWinner = (conv, params) => {
           conv.contexts.set("award", 5, { "award": 0 });
 
           const response = awards.getAwardWinnerText(winners, awardType, year, eventName, isCmp);
-          return conv.close(response);
+          return basicPromptWithReentry(response);
         });
 }
 
@@ -121,5 +123,12 @@ const intents = {
 }
 
 module.exports.event = (conv, params) => {
-  return intents[conv.intent](conv, params)
+  const responsePromise = intents[conv.intent](conv, params);
+  return responsePromise.then((response) => {
+    return prompt(conv, response);
+  })
+  .catch((err) => {
+    console.warn(err);
+    return fallback();
+  });
 }

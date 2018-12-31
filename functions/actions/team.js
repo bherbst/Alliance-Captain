@@ -17,6 +17,8 @@
 
 const groupBy = require('lodash.groupby');
 const frcUtil = require('../frc-util');
+const {prompt, fallback} = require('./common/actions')
+const {basicPromptWithReentry} = require('./prompt-util')
 const tba = require('../api/tba-client').tbaClient;
 
 const getRookieYear = (conv, params) => {
@@ -25,12 +27,12 @@ const getRookieYear = (conv, params) => {
   return tba.getTeam(team_number)
       .catch((err) => {
         console.warn(err);
-        return conv.close("I couldn't find " + team_number + "'s rookie year.");
+        return basicPromptWithReentry(`I couldn't find ${team_number}'s rookie year.`);
       })
       .then((data) => {
         const name = frcUtil.nicknameOrNumber(data);
         conv.contexts.set("season", 5, { "season": data.rookie_year });
-        return conv.close(`${name}'s rookie year was ${data.rookie_year}.`);
+        return basicPromptWithReentry(`${name}'s rookie year was ${data.rookie_year}.`);
       });
 }
 
@@ -40,10 +42,10 @@ const getTeamName = (conv, params) => {
   return tba.getTeam(team_number)
       .catch((err) => {
         console.warn(err);
-        return conv.close(`I couldn't find ${team_number}'s name.`);
+        return basicPromptWithReentry(`I couldn't find ${team_number}'s name.`);
       })
       .then((data) => {
-        return conv.close(`FRC team ${team_number}'s name is ${data.name}.`);
+        return basicPromptWithReentry(`FRC team ${team_number}'s name is ${data.name}.`);
       });
 }
 
@@ -53,10 +55,10 @@ const getTeamNickName = (conv, params) => {
   return tba.getTeam(team_number)
       .catch((err) => {
         console.warn(err);
-        return conv.close(`I couldn't find ${team_number}'s nickname.`);
+        return basicPromptWithReentry(`I couldn't find ${team_number}'s nickname.`);
       })
       .then((data) => {
-        return conv.close(`FRC team ${team_number}'s nickname is ${data.nickname}.`);
+        return basicPromptWithReentry(`FRC team ${team_number}'s nickname is ${data.nickname}.`);
       });
 }
 
@@ -66,12 +68,12 @@ const getTeamLocation = (conv, params) => {
   return tba.getTeam(team_number)
       .catch((err) => {
         console.warn(err);
-        return conv.close(`I couldn't find ${team_number}'s location.`);
+        return basicPromptWithReentry(`I couldn't find ${team_number}'s location.`);
       })
       .then((data) => {
         const name = frcUtil.nicknameOrNumber(data);
         const location = frcUtil.getLocationString(data);
-        return conv.close(`${name} is from ${location}.`);
+        return basicPromptWithReentry(`${name} is from ${location}.`);
       });
 }
 
@@ -81,13 +83,13 @@ const getTeamAge = (conv, params) => {
   return tba.getTeam(team_number)
       .catch((err) => {
         console.warn(err);
-        return conv.close(`I couldn't find ${team_number}'s age.`);
+        return basicPromptWithReentry(`I couldn't find ${team_number}'s age.`);
       })
       .then((data) => {
         const name = frcUtil.nicknameOrNumber(data);
         const thisYear = new Date().getFullYear();
         const age = thisYear - data.rookie_year;
-        return conv.close(`${name} is ${age} years old.`);
+        return basicPromptWithReentry(`${name} is ${age} years old.`);
       });
 }
 
@@ -97,14 +99,14 @@ const getTeamInfo = (conv, params) => {
   return tba.getTeam(team_number)
       .catch((err) => {
         console.warn(err);
-        return conv.close(`I couldn't find information on ${team_number}.`);
+        return basicPromptWithReentry(`I couldn't find information on ${team_number}.`);
       })
       .then((data) => {
         const name = `${data.nickname} (FRC team ${team_number})`;
         const thisYear = new Date().getFullYear();
         const age = thisYear - data.rookie_year;
         const location = frcUtil.getLocationString(data);
-        return conv.close(`${name} is a ${age}  year old team from ${location}.`);
+        return basicPromptWithReentry(`${name} is a ${age}  year old team from ${location}.`);
       });
 }
 
@@ -128,16 +130,16 @@ const getRobotName = (conv, params) => {
   return tba.getTeam(team_number)
       .catch((err) => {
         console.warn(err);
-        conv.close(`I couldn't find ${team_number}'s robot name for ${year}.`);
+        basicPromptWithReentry(`I couldn't find ${team_number}'s robot name for ${year}.`);
       })
       .then((data) => {
         if (data[year] === undefined) {
-          console.warn(err);
-          return conv.close(`I couldn't find ${team_number}'s robot name for ${year}.`);
+          console.warn(`No data for ${year}`);
+          return basicPromptWithReentry(`I couldn't find ${team_number}'s robot name for ${year}.`);
         } else {
           const join = year === currentYear ? "is" : "was";
           const robotName = data[year].name;
-          return conv.close(`FRC team ${team_number}'s ${year} robot ${join} ${robotName}`);
+          return basicPromptWithReentry(`FRC team ${team_number}'s ${year} robot ${join} ${robotName}`);
         }
       })
 }
@@ -151,11 +153,12 @@ const getTeamEvents = (conv, params) => {
   return tba.getTeamEvents(team_number, year)
       .catch((err) => {
         console.warn(err);
-        return conv.close(`I couldn't find event information for ${team_number} during ${year}.`);
+        return basicPromptWithReentry(`I couldn't find event information for ${team_number} during ${year}.`);
       })
       .then((data) => {
         const pastEvents = [];
         const upcomingEvents = [];
+        const now = new Date();
         data.forEach((event) => {
           if (new Date(event.end_date) < now) {
             pastEvents.push(event);
@@ -193,7 +196,7 @@ const getTeamEvents = (conv, params) => {
           conv.contexts.set("event", 5, { "event": data[0].key });
         }
 
-        return conv.close(response);
+        return basicPromptWithReentry(response);
       })
 }
 
@@ -215,7 +218,7 @@ const getTeamAwards = (conv, params) => {
         } else {
           response += ".";
         }
-        return conv.close(response);
+        return basicPromptWithReentry(response);
       })
       .then((data) => {
         let response
@@ -225,7 +228,7 @@ const getTeamAwards = (conv, params) => {
           } else {
             response = `${team_number} has not won an award yet.`;
           }
-          return conv.close(response);
+          return basicPromptWithReentry(response);
         }
 
         const allAwards = groupBy(data, 'year');
@@ -304,7 +307,7 @@ const getTeamAwards = (conv, params) => {
         response += frcUtil.joinToOxfordList(awardStrings);
         response += ".";
 
-        return conv.close(response);
+        return basicPromptWithReentry(response);
       })
 }
 
@@ -321,5 +324,12 @@ const intents = {
 }
 
 module.exports.team = (conv, params) => {
-  return intents[conv.intent](conv, params)
+  const responsePromise = intents[conv.intent](conv, params);
+  return responsePromise.then((response) => {
+    return prompt(conv, response);
+  })
+  .catch((err) => {
+    console.warn(err);
+    return fallback();
+  });
 }
