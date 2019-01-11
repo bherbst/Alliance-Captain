@@ -14,10 +14,10 @@
  */
 'use strict';
 
-const {prompt} = require('./common/actions')
+const {prompt, fallback} = require('./common/actions')
 const {basicPromptWithReentry} = require('./prompt-util')
 const frcUtil = require('../frc-util');
-const awards = require('../awards');
+const {AwardWinner, getAwardWinnerText} = require('../awards');
 const events = require('../events');
 const tba = require('../api/tba-client').tbaClient;
 
@@ -39,7 +39,7 @@ const getEventWinner = (conv, params) => {
             return basicPromptWithReentry("I couldn't find a winner for that event.");
           }
 
-          const teams = frcUtil.joinToOxfordList(winners);
+          const teams = frcUtil.joinToOxfordList(winners, (winner) => winner.text);
           return basicPromptWithReentry(`Teams ${teams} won the ${year} ${eventName}`);
         });
 }
@@ -69,7 +69,7 @@ const getEventAwardWinner = (conv, params) => {
           }
           conv.contexts.set("award", 5, { "award": 0 });
 
-          const response = awards.getAwardWinnerText(winners, awardType, year, eventName, isCmp);
+          const response = getAwardWinnerText(winners, awardType, year, eventName, isCmp);
           return basicPromptWithReentry(response);
         });
 }
@@ -88,13 +88,15 @@ const getEventAwardWinnersData = (eventKey, awardType) => {
       .then((winners) => {
         const winnerNamePromises = winners.map((winner) => {
           if (winner.awardee === null) { // No awardee, should have a team
-            return getTeamDescriptor(winner.team_key);
+            return getTeamAwardWinner(winner.team_key)
           } else if (winner.team_key === null) { // Awardee, no team
-            return Promise.resolve(winner.awardee);
+            return Promise.resolve(new AwardWinner(winner.awardee));
           } else { // Awardee with team
-            return getTeamDescriptor(winner.team_key)
-                .then((teamName) => {
-                  return `${winner.awardee} from team ${teamName}`;
+            return getTeamAwardWinner(winner.team_key)
+                .then((awardWinner) => {
+                  const teamName = awardWinner.text
+                  awardWinner.text = `${winner.awardee} from team ${teamName}`
+                  return awardWinner;
                 });
           }
         })
@@ -103,10 +105,10 @@ const getEventAwardWinnersData = (eventKey, awardType) => {
       });
 }
 
-const getTeamDescriptor = (teamKey) => {
+const getTeamAwardWinner = (teamKey) => {
   return tba.getTeamByKey(teamKey)
       .then((team) => {
-        return `${team.team_number} (${team.nickname})`;
+        return new AwardWinner(`${team.team_number} (${team.nickname})`, team.team_number);
       });
 }
 
