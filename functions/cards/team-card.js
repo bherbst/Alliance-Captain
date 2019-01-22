@@ -40,7 +40,7 @@ exports.createMultiTeamCard = function(teams) {
             new BrowseCarouselItem({
                 title: `Team ${team.team_number} - ${team.nickname}`,
                 url: `https://frc-events.firstinspires.org/2018/team/${team.team_number}`,
-                description: `See event results and more on firstinspires.org`,
+                description: `From ` + frcUtil.getLocationString(team),
             })
         )
     });
