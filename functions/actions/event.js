@@ -74,10 +74,14 @@ const getEventAwardWinner = (conv, params) => {
 
           let screenContent;
           if (winners.length === 1) {
-            conv.contexts.set("team", 5, { "team": winners[0].team.team_number });
-            screenContent = createTeamCard(winners[0].team);
+            if (winners[0].isTeam) {
+              conv.contexts.set("team", 5, { "team": winners[0].team.team_number });
+              screenContent = createTeamCard(winners[0].team);
+            }
           } else {
-            screenContent = createMultiTeamCard(winners.map((winner) => winner.team));
+            if (winners[0].isTeam) {
+              screenContent = createMultiTeamCard(winners.map((winner) => winner.team));
+            }
           }
           conv.contexts.set("award", 5, { "award": 0 });
 
@@ -103,11 +107,11 @@ const getEventAwardWinnersData = (eventKey, awardType) => {
       .then((winners) => {
         const winnerNamePromises = winners.map((winner) => {
           if (winner.awardee === null) { // No awardee, should have a team
-            return getTeamAwardWinner(winner.team_key)
+            return getTeamAwardWinner(winner.team_key, true)
           } else if (winner.team_key === null) { // Awardee, no team
-            return Promise.resolve(new AwardWinner(winner.awardee));
+            return Promise.resolve(new AwardWinner(false, winner.awardee));
           } else { // Awardee with team
-            return getTeamAwardWinner(winner.team_key)
+            return getTeamAwardWinner(winner.team_key, false)
                 .then((awardWinner) => {
                   const teamName = awardWinner.text
                   awardWinner.text = `${winner.awardee} from team ${teamName}`
@@ -120,10 +124,10 @@ const getEventAwardWinnersData = (eventKey, awardType) => {
       });
 }
 
-const getTeamAwardWinner = (teamKey) => {
+const getTeamAwardWinner = (teamKey, isTeamWinner) => {
   return tba.getTeamByKey(teamKey)
       .then((team) => {
-        return new AwardWinner(`${team.team_number} (${team.nickname})`, team);
+        return new AwardWinner(isTeamWinner, `${team.team_number} (${team.nickname})`, team);
       });
 }
 
