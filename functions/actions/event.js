@@ -14,12 +14,16 @@
  */
 'use strict';
 
-const {prompt} = require('./common/actions')
-const {basicPromptWithReentry} = require('./prompt-util')
+const {prompt, fallback} = require('./common/actions');
+const {basicPromptWithReentry} = require('./prompt-util');
 const frcUtil = require('../frc-util');
-const awards = require('../awards');
+const {AwardWinner, getAwardWinnerText} = require('../awards');
 const events = require('../events');
 const tba = require('../api/tba-client').tbaClient;
+const {
+  createTeamCard, 
+  createMultiTeamCard
+} = require('../cards/team-card');
 
 const getEventWinner = (conv, params) => {
   const eventCode = params["event"];
@@ -39,8 +43,12 @@ const getEventWinner = (conv, params) => {
             return basicPromptWithReentry("I couldn't find a winner for that event.");
           }
 
-          const teams = frcUtil.joinToOxfordList(winners);
-          return basicPromptWithReentry(`Teams ${teams} won the ${year} ${eventName}`);
+          const teams = frcUtil.joinToOxfordList(winners, (winner) => winner.text);
+          const screenContent = createMultiTeamCard(winners.map((winner) => winner.team));
+          const response = basicPromptWithReentry(`Teams ${teams} won the ${year} ${eventName}`);
+          response.screenContent = screenContent;
+
+          return response;
         });
 }
 
@@ -64,13 +72,20 @@ const getEventAwardWinner = (conv, params) => {
             return basicPromptWithReentry("I couldn't find that information.");
           }
 
+          let screenContent;
           if (winners.length === 1) {
-            conv.contexts.set("team", 5, { "team": winners[0].team_number });
+            conv.contexts.set("team", 5, { "team": winners[0].team.team_number });
+            screenContent = createTeamCard(winners[0].team);
+          } else {
+            screenContent = createMultiTeamCard(winners.map((winner) => winner.team));
           }
           conv.contexts.set("award", 5, { "award": 0 });
 
-          const response = awards.getAwardWinnerText(winners, awardType, year, eventName, isCmp);
-          return basicPromptWithReentry(response);
+          const winnerText = getAwardWinnerText(winners, awardType, year, eventName, isCmp);
+          const response = basicPromptWithReentry(winnerText);
+          response.screenContent = screenContent;
+
+          return response;
         });
 }
 
@@ -88,13 +103,15 @@ const getEventAwardWinnersData = (eventKey, awardType) => {
       .then((winners) => {
         const winnerNamePromises = winners.map((winner) => {
           if (winner.awardee === null) { // No awardee, should have a team
-            return getTeamDescriptor(winner.team_key);
+            return getTeamAwardWinner(winner.team_key)
           } else if (winner.team_key === null) { // Awardee, no team
-            return Promise.resolve(winner.awardee);
+            return Promise.resolve(new AwardWinner(winner.awardee));
           } else { // Awardee with team
-            return getTeamDescriptor(winner.team_key)
-                .then((teamName) => {
-                  return `${winner.awardee} from team ${teamName}`;
+            return getTeamAwardWinner(winner.team_key)
+                .then((awardWinner) => {
+                  const teamName = awardWinner.text
+                  awardWinner.text = `${winner.awardee} from team ${teamName}`
+                  return awardWinner;
                 });
           }
         })
@@ -103,10 +120,10 @@ const getEventAwardWinnersData = (eventKey, awardType) => {
       });
 }
 
-const getTeamDescriptor = (teamKey) => {
+const getTeamAwardWinner = (teamKey) => {
   return tba.getTeamByKey(teamKey)
       .then((team) => {
-        return `${team.team_number} (${team.nickname})`;
+        return new AwardWinner(`${team.team_number} (${team.nickname})`, team);
       });
 }
 
