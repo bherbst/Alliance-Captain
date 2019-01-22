@@ -16,22 +16,32 @@
 
 const frcUtil = require('../frc-util.js');
 const {
-    dialogflow,
     BasicCard,
-    Permission,
-    Suggestions,
-    Carousel,
-    Image,
-  } = require('actions-on-google');
+    Button,
+    BrowseCarousel,
+    BrowseCarouselItem
+} = require('actions-on-google');
 
 exports.createTeamCard = function(team) {
     return new BasicCard({
         title: `Team ${team.team_number} - ${team.nickname}`,
-        subtitle: frcUtil.getLocationString(data),
-        text: `Current year summary goes here. They are registered for ____. They competed at ____.`,
+        subtitle: frcUtil.getLocationString(team),
+        text: `See event results and more on firstinspires.org`,
         buttons: new Button({
             title: `View Team Details`,
             url: `https://frc-events.firstinspires.org/2018/team/${team.team_number}`
         })
-    })
+    });
+}
+
+exports.createMultiTeamCard = function(teams) {
+    return new BrowseCarousel({
+        items: teams.map((team) => 
+            new BrowseCarouselItem({
+                title: `Team ${team.team_number} - ${team.nickname}`,
+                url: `https://frc-events.firstinspires.org/2018/team/${team.team_number}`,
+                description: `See event results and more on firstinspires.org`,
+            })
+        )
+    });
 }

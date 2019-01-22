@@ -14,12 +14,16 @@
  */
 'use strict';
 
-const {prompt, fallback} = require('./common/actions')
-const {basicPromptWithReentry} = require('./prompt-util')
+const {prompt, fallback} = require('./common/actions');
+const {basicPromptWithReentry} = require('./prompt-util');
 const frcUtil = require('../frc-util');
 const {AwardWinner, getAwardWinnerText} = require('../awards');
 const events = require('../events');
 const tba = require('../api/tba-client').tbaClient;
+const {
+  createTeamCard, 
+  createMultiTeamCard
+} = require('../cards/team-card');
 
 const getEventWinner = (conv, params) => {
   const eventCode = params["event"];
@@ -40,7 +44,11 @@ const getEventWinner = (conv, params) => {
           }
 
           const teams = frcUtil.joinToOxfordList(winners, (winner) => winner.text);
-          return basicPromptWithReentry(`Teams ${teams} won the ${year} ${eventName}`);
+          const screenContent = createMultiTeamCard(winners.map((winner) => winner.team));
+          const response = basicPromptWithReentry(`Teams ${teams} won the ${year} ${eventName}`);
+          response.screenContent = screenContent;
+
+          return response;
         });
 }
 
@@ -64,13 +72,20 @@ const getEventAwardWinner = (conv, params) => {
             return basicPromptWithReentry("I couldn't find that information.");
           }
 
+          let screenContent;
           if (winners.length === 1) {
-            conv.contexts.set("team", 5, { "team": winners[0].team_number });
+            conv.contexts.set("team", 5, { "team": winners[0].team.team_number });
+            screenContent = createTeamCard(winners[0].team);
+          } else {
+            screenContent = createMultiTeamCard(winners.map((winner) => winner.team));
           }
           conv.contexts.set("award", 5, { "award": 0 });
 
-          const response = getAwardWinnerText(winners, awardType, year, eventName, isCmp);
-          return basicPromptWithReentry(response);
+          const winnerText = getAwardWinnerText(winners, awardType, year, eventName, isCmp);
+          const response = basicPromptWithReentry(winnerText);
+          response.screenContent = screenContent;
+
+          return response;
         });
 }
 
@@ -108,7 +123,7 @@ const getEventAwardWinnersData = (eventKey, awardType) => {
 const getTeamAwardWinner = (teamKey) => {
   return tba.getTeamByKey(teamKey)
       .then((team) => {
-        return new AwardWinner(`${team.team_number} (${team.nickname})`, team.team_number);
+        return new AwardWinner(`${team.team_number} (${team.nickname})`, team);
       });
 }
 

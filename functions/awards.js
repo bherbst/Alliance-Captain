@@ -44,9 +44,9 @@ const awardsByType = {
 };
 
 exports.AwardWinner = class AwardWinner {
-    constructor(text, team_number) {
+    constructor(text, team) {
       this.text = text;
-      this.team_number = team_number;
+      this.team = team;
     }
   };
 
