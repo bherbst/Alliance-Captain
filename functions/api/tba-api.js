@@ -68,9 +68,9 @@ module.exports.TbaApi = class TbaApi {
     
     getTeamEvents(team, year) {
         if (year) {
-            return this._get(`/api/v3/team/frc${team}/events/${year}/simple`);
+            return this._get(`/api/v3/team/frc${team}/events/${year}`);
         } else {
-            return this._get(`/api/v3/team/frc${team}/events/simple`);
+            return this._get(`/api/v3/team/frc${team}/events`);
         }
     }
     

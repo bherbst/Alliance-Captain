@@ -21,6 +21,7 @@ const frcUtil = require('../frc-util');
 const {prompt, fallback} = require('./common/actions')
 const {basicPromptWithReentry} = require('./prompt-util')
 const {createTeamCard} = require('../cards/team-card')
+const eventCards = require('../cards/event-card')
 const tba = require('../api/tba-client').tbaClient;
 
 const getRookieYear = (conv, params) => {
@@ -201,7 +202,13 @@ const getTeamEvents = (conv, params) => {
           conv.contexts.set("event", 5, { "event": data[0].key });
         }
 
-        return basicPromptWithReentry(response);
+        const prompt = basicPromptWithReentry(response);
+        if (data.length > 1) {
+          prompt.screenContent = eventCards.createMultiEventCard(data);
+        } else if (data.length === 1) {
+          resppromptnse.screenContent = eventCards.createEventCard(data[0]);
+        }
+        return prompt;
       })
 }
 
