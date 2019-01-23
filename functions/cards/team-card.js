@@ -22,6 +22,8 @@ const {
     BrowseCarouselItem
 } = require('actions-on-google');
 
+const {currentYear} = require('../util')
+
 exports.createTeamCard = function(team) {
     return new BasicCard({
         title: `Team ${team.team_number} - ${team.nickname}`,
@@ -29,7 +31,7 @@ exports.createTeamCard = function(team) {
         text: `See event results and more on firstinspires.org`,
         buttons: new Button({
             title: `View Team Details`,
-            url: `https://frc-events.firstinspires.org/2018/team/${team.team_number}`
+            url: `https://frc-events.firstinspires.org/${currentYear}/team/${team.team_number}`
         })
     });
 }
@@ -39,7 +41,7 @@ exports.createMultiTeamCard = function(teams) {
         items: teams.map((team) => 
             new BrowseCarouselItem({
                 title: `Team ${team.team_number} - ${team.nickname}`,
-                url: `https://frc-events.firstinspires.org/2018/team/${team.team_number}`,
+                url: `https://frc-events.firstinspires.org/${currentYear}/team/${team.team_number}`,
                 description: `From ` + frcUtil.getLocationString(team),
             })
         )
