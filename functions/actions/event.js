@@ -20,15 +20,15 @@ const frcUtil = require('../frc-util');
 const {AwardWinner, getAwardWinnerText} = require('../awards');
 const events = require('../events');
 const tba = require('../api/tba-client').tbaClient;
-const {
-  createTeamCard, 
-  createMultiTeamCard
-} = require('../cards/team-card');
+const teamCard = require('../cards/team-card');
+const eventCard = require('../cards/event-card');
 
 const getEventWinner = (conv, params) => {
   const eventCode = params["event"];
   const year = frcUtil.getYearOrThisYear(params);
   const eventKey = events.getEventKey(eventCode, year);
+
+  conv.contexts.set("season", 5, { "season": year });
 
   const eventName = getEventName(eventKey);
   const eventWinners = getEventAwardWinnersData(eventKey, 1);
@@ -42,9 +42,9 @@ const getEventWinner = (conv, params) => {
           if (winners.length < 1) {
             return basicPromptWithReentry("I couldn't find a winner for that event.");
           }
-
+        
           const teams = frcUtil.joinToOxfordList(winners, (winner) => winner.text);
-          const screenContent = createMultiTeamCard(winners.map((winner) => winner.team));
+          const screenContent = teamCard.createMultiTeamCard(winners.map((winner) => winner.team));
           const response = basicPromptWithReentry(`Teams ${teams} won the ${year} ${eventName}`);
           response.screenContent = screenContent;
 
@@ -58,6 +58,8 @@ const getEventAwardWinner = (conv, params) => {
   const year = frcUtil.getYearOrThisYear(params);
   const eventKey = events.getEventKey(eventCode, year);
   const isCmp = events.isChampionship(eventCode);
+
+  conv.contexts.set("season", 5, { "season": year });   
 
   const eventName = getEventName(eventKey);
   const eventWinners = getEventAwardWinnersData(eventKey, awardType);
@@ -76,14 +78,14 @@ const getEventAwardWinner = (conv, params) => {
           if (winners.length === 1) {
             if (winners[0].isTeam) {
               conv.contexts.set("team", 5, { "team": winners[0].team.team_number });
-              screenContent = createTeamCard(winners[0].team);
+              screenContent = teamCard.createTeamCard(winners[0].team);
             }
           } else {
             if (winners[0].isTeam) {
-              screenContent = createMultiTeamCard(winners.map((winner) => winner.team));
+              screenContent = teamCard.createMultiTeamCard(winners.map((winner) => winner.team));
             }
           }
-          conv.contexts.set("award", 5, { "award": 0 });
+          conv.contexts.set("award", 5, { "award": 0 });     
 
           const winnerText = getAwardWinnerText(winners, awardType, year, eventName, isCmp);
           const response = basicPromptWithReentry(winnerText);
@@ -124,6 +126,30 @@ const getEventAwardWinnersData = (eventKey, awardType) => {
       });
 }
 
+const getEventLocation = (conv, params) => {
+  const eventCode = params["event"];
+  const year = frcUtil.getYearOrThisYear(params);
+  const eventKey = events.getEventKey(eventCode, year);
+
+  conv.contexts.set("season", 5, { "season": year });
+
+  return tba.getEvent(eventKey)
+      .catch((err) => {
+        console.warn(err);
+        return basicPromptWithReentry("I couldn't find information on that event.");
+      })
+      .then((event) => {
+        const eventLocation = frcUtil.getEventLocation(event);
+        let responseText = `The ${event.year} ${event.name} was at the ${event.location_name} in ${eventLocation}.`;
+
+        const screenContent = eventCard.createEventCard(event);
+        const response = basicPromptWithReentry(responseText);
+        response.screenContent = screenContent;
+
+        return response;
+      });
+}
+
 const getTeamAwardWinner = (teamKey, isTeamWinner) => {
   return tba.getTeamByKey(teamKey)
       .then((team) => {
@@ -140,7 +166,8 @@ const getEventName = (eventKey) => {
 
 const intents = {
   'event-award-winner': getEventAwardWinner,
-  'event-winner': getEventWinner
+  'event-winner': getEventWinner,
+  'event-location': getEventLocation
 }
 
 module.exports.event = (conv, params) => {

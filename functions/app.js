@@ -33,7 +33,8 @@ const app = dialogflow({
 
 app.intent([
   'event-award-winner',
-  'event-winner'
+  'event-winner',
+  'event-location'
 ], event)
 
 app.intent([
