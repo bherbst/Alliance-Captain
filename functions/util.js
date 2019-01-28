@@ -17,3 +17,14 @@
 const now = new Date();
 
 exports.currentYear = now.getFullYear();
+
+exports.dateToSsml = (date) => {
+  const moment = require('moment');
+  const dateString = moment(date).format("MM-DD");
+  return `<say-as interpret-as="date" format="mmdd" detail="2">${dateString}</say-as>`
+}
+
+exports.monthDayString = (date) => {
+  const moment = require('moment');
+  return moment(date).format("MMMM Do")
+}

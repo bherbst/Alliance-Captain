@@ -17,6 +17,7 @@
 const {prompt, fallback} = require('./common/actions');
 const {basicPromptWithReentry} = require('./prompt-util');
 const frcUtil = require('../frc-util');
+const util = require('../util');
 const {AwardWinner, getAwardWinnerText} = require('../awards');
 const events = require('../events');
 const tba = require('../api/tba-client').tbaClient;
@@ -140,10 +141,56 @@ const getEventLocation = (conv, params) => {
       })
       .then((event) => {
         const eventLocation = frcUtil.getEventLocation(event);
+        // TODO future vs past
         let responseText = `The ${event.year} ${event.name} was at the ${event.location_name} in ${eventLocation}.`;
 
         const screenContent = eventCard.createEventCard(event);
         const response = basicPromptWithReentry(responseText);
+        response.screenContent = screenContent;
+
+        return response;
+      });
+}
+
+const getEventDate = (conv, params) => {
+  const eventCode = params["event"];
+  const year = frcUtil.getYearOrThisYear(params);
+  const eventKey = events.getEventKey(eventCode, year);
+
+  conv.contexts.set("season", 5, { "season": year });
+
+  return tba.getEvent(eventKey)
+      .catch((err) => {
+        console.warn(err);
+        return basicPromptWithReentry("I couldn't find information on that event.");
+      })
+      .then((event) => {
+        const startDate = new Date(event.start_date);
+        const endDate = new Date(event.end_date)
+
+        let responseText = `The ${event.year} ${event.name}`;
+        let responseSpeech = `<speak>The ${event.year} ${event.name}`;
+
+        if (util.now < endDate) {
+          responseText += ` is ${util.monthDayString(startDate)}`;
+          responseSpeech += ` is ${util.dateToSsml(startDate)}`;
+        } else {
+          responseText += ` was ${util.monthDayString(startDate)}`;
+          responseSpeech += ` was ${util.dateToSsml(startDate)}`;
+        }
+
+        if (startDate.getTime() === endDate.getTime()) {
+          responseText += `.`;
+          responseSpeech += `.`;
+        } else {
+          responseText += ` to ${util.monthDayString(endDate)}.`;
+          responseSpeech += ` to ${util.dateToSsml(endDate)}.`;
+        }
+
+        responseSpeech += `</speak>`
+
+        const screenContent = eventCard.createEventCard(event);
+        const response = basicPromptWithReentry(responseSpeech, responseText);
         response.screenContent = screenContent;
 
         return response;
@@ -167,7 +214,8 @@ const getEventName = (eventKey) => {
 const intents = {
   'event-award-winner': getEventAwardWinner,
   'event-winner': getEventWinner,
-  'event-location': getEventLocation
+  'event-location': getEventLocation,
+  'event-date': getEventDate,
 }
 
 module.exports.event = (conv, params) => {
