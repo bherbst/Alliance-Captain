@@ -39,6 +39,8 @@
           "dataType": "@season",
           "name": "season",
           "value": "$season",
+          "prompts": [],
+          "defaultValue": "#season.season",
           "isList": false
         }
       ],
@@ -56,7 +58,7 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1548342226,
+  "lastUpdate": 1548699543,
   "fallbackIntent": false,
   "events": []
 }

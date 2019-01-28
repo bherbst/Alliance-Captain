@@ -16,12 +16,13 @@
       "parameters": [
         {
           "id": "64290b47-50df-479e-a962-c09f1e89d29a",
+          "required": false,
           "dataType": "@season",
           "name": "season",
           "value": "$season",
           "prompts": [],
           "defaultValue": "#season.season",
-          "isList": true
+          "isList": false
         },
         {
           "id": "a6377ace-907e-4507-ab6e-8ae3b3444972",
@@ -40,7 +41,7 @@
             }
           ],
           "defaultValue": "#event.event",
-          "isList": true
+          "isList": false
         }
       ],
       "messages": [
@@ -57,7 +58,7 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1548695573,
+  "lastUpdate": 1548700320,
   "fallbackIntent": false,
   "events": []
 }
