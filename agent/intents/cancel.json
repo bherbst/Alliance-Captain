@@ -1,0 +1,28 @@
+{
+  "id": "da5a38f6-2d2c-417f-becf-1153bf621829",
+  "name": "cancel",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": "Okay, I\u0027ll see you out on the field!"
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1548778068,
+  "fallbackIntent": false,
+  "events": []
+}
