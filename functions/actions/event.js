@@ -141,8 +141,17 @@ const getEventLocation = (conv, params) => {
       })
       .then((event) => {
         const eventLocation = frcUtil.getEventLocation(event);
-        // TODO future vs past
-        let responseText = `The ${event.year} ${event.name} was at the ${event.location_name} in ${eventLocation}.`;
+        const endDate = new Date(event.end_date)
+
+        let responseText = `The ${event.year} ${event.name}`;
+
+        if (new Date() < endDate) {
+          responseText += ` will be`;
+        } else {
+          responseText += ` was`;
+        }
+
+        responseText += ` at the ${event.location_name} in ${eventLocation}.`;
 
         const screenContent = eventCard.createEventCard(event);
         const response = basicPromptWithReentry(responseText);
@@ -171,7 +180,7 @@ const getEventDate = (conv, params) => {
         let responseText = `The ${event.year} ${event.name}`;
         let responseSpeech = `<speak>The ${event.year} ${event.name}`;
 
-        if (util.now < endDate) {
+        if (new Date() < endDate) {
           responseText += ` is ${util.monthDayString(startDate)}`;
           responseSpeech += ` is ${util.dateToSsml(startDate)}`;
         } else {
