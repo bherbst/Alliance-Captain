@@ -99,6 +99,12 @@ const getTeamAge = (conv, params) => {
 const getTeamInfo = (conv, params) => {
   const team_number = params["team"];
 
+  const seasonContext = conv.contexts.get("season")
+  let year;
+  if (seasonContext) {
+    year = seasonContext.season
+  }
+
   return tba.getTeam(team_number)
       .catch((err) => {
         console.warn(err);
@@ -111,7 +117,7 @@ const getTeamInfo = (conv, params) => {
         const location = frcUtil.getLocationString(data);
 
         const response = basicPromptWithReentry(`${name} is a ${age}  year old team from ${location}.`);
-        response.screenContent = createTeamCard(data)
+        response.screenContent = createTeamCard(data, year)
         return response;
       });
 }

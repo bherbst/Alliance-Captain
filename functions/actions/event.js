@@ -45,7 +45,7 @@ const getEventWinner = (conv, params) => {
           }
         
           const teams = frcUtil.joinToOxfordList(winners, (winner) => winner.text);
-          const screenContent = teamCard.createMultiTeamCard(winners.map((winner) => winner.team));
+          const screenContent = teamCard.createMultiTeamCard(winners.map((winner) => winner.team), year);
           const response = basicPromptWithReentry(`Teams ${teams} won the ${year} ${eventName}`);
           response.screenContent = screenContent;
 
@@ -79,11 +79,11 @@ const getEventAwardWinner = (conv, params) => {
           if (winners.length === 1) {
             if (winners[0].isTeam) {
               conv.contexts.set("team", 5, { "team": winners[0].team.team_number });
-              screenContent = teamCard.createTeamCard(winners[0].team);
+              screenContent = teamCard.createTeamCard(winners[0].team, year);
             }
           } else {
             if (winners[0].isTeam) {
-              screenContent = teamCard.createMultiTeamCard(winners.map((winner) => winner.team));
+              screenContent = teamCard.createMultiTeamCard(winners.map((winner) => winner.team), year);
             }
           }
           conv.contexts.set("award", 5, { "award": 0 });     
