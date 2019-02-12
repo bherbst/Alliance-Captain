@@ -86,7 +86,9 @@
       }
     ],
     "systemIntents": [],
-    "endIntentIds": [],
+    "endIntentIds": [
+      "da5a38f6-2d2c-417f-becf-1153bf621829"
+    ],
     "oAuthLinking": {
       "required": false,
       "grantType": "AUTH_CODE_GRANT"
