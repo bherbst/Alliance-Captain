@@ -14,17 +14,22 @@
  */
 'use strict';
 
-const {prompt} = require('./common/actions')
-const {basicPromptWithReentry} = require('./prompt-util')
+const {prompt, fallback} = require('./common/actions');
+const {basicPromptWithReentry} = require('./prompt-util');
 const frcUtil = require('../frc-util');
-const awards = require('../awards');
+const util = require('../util');
+const {AwardWinner, getAwardWinnerText} = require('../awards');
 const events = require('../events');
 const tba = require('../api/tba-client').tbaClient;
+const teamCard = require('../cards/team-card');
+const eventCard = require('../cards/event-card');
 
 const getEventWinner = (conv, params) => {
   const eventCode = params["event"];
   const year = frcUtil.getYearOrThisYear(params);
   const eventKey = events.getEventKey(eventCode, year);
+
+  conv.contexts.set("season", 5, { "season": year });
 
   const eventName = getEventName(eventKey);
   const eventWinners = getEventAwardWinnersData(eventKey, 1);
@@ -38,9 +43,13 @@ const getEventWinner = (conv, params) => {
           if (winners.length < 1) {
             return basicPromptWithReentry("I couldn't find a winner for that event.");
           }
+        
+          const teams = frcUtil.joinToOxfordList(winners, (winner) => winner.text);
+          const screenContent = teamCard.createMultiTeamCard(winners.map((winner) => winner.team));
+          const response = basicPromptWithReentry(`Teams ${teams} won the ${year} ${eventName}`);
+          response.screenContent = screenContent;
 
-          const teams = frcUtil.joinToOxfordList(winners);
-          return basicPromptWithReentry(`Teams ${teams} won the ${year} ${eventName}`);
+          return response;
         });
 }
 
@@ -50,6 +59,8 @@ const getEventAwardWinner = (conv, params) => {
   const year = frcUtil.getYearOrThisYear(params);
   const eventKey = events.getEventKey(eventCode, year);
   const isCmp = events.isChampionship(eventCode);
+
+  conv.contexts.set("season", 5, { "season": year });   
 
   const eventName = getEventName(eventKey);
   const eventWinners = getEventAwardWinnersData(eventKey, awardType);
@@ -64,13 +75,24 @@ const getEventAwardWinner = (conv, params) => {
             return basicPromptWithReentry("I couldn't find that information.");
           }
 
+          let screenContent;
           if (winners.length === 1) {
-            conv.contexts.set("team", 5, { "team": winners[0].team_number });
+            if (winners[0].isTeam) {
+              conv.contexts.set("team", 5, { "team": winners[0].team.team_number });
+              screenContent = teamCard.createTeamCard(winners[0].team);
+            }
+          } else {
+            if (winners[0].isTeam) {
+              screenContent = teamCard.createMultiTeamCard(winners.map((winner) => winner.team));
+            }
           }
-          conv.contexts.set("award", 5, { "award": 0 });
+          conv.contexts.set("award", 5, { "award": 0 });     
 
-          const response = awards.getAwardWinnerText(winners, awardType, year, eventName, isCmp);
-          return basicPromptWithReentry(response);
+          const winnerText = getAwardWinnerText(winners, awardType, year, eventName, isCmp);
+          const response = basicPromptWithReentry(winnerText);
+          response.screenContent = screenContent;
+
+          return response;
         });
 }
 
@@ -88,13 +110,15 @@ const getEventAwardWinnersData = (eventKey, awardType) => {
       .then((winners) => {
         const winnerNamePromises = winners.map((winner) => {
           if (winner.awardee === null) { // No awardee, should have a team
-            return getTeamDescriptor(winner.team_key);
+            return getTeamAwardWinner(winner.team_key, true)
           } else if (winner.team_key === null) { // Awardee, no team
-            return Promise.resolve(winner.awardee);
+            return Promise.resolve(new AwardWinner(false, winner.awardee));
           } else { // Awardee with team
-            return getTeamDescriptor(winner.team_key)
-                .then((teamName) => {
-                  return `${winner.awardee} from team ${teamName}`;
+            return getTeamAwardWinner(winner.team_key, false)
+                .then((awardWinner) => {
+                  const teamName = awardWinner.text
+                  awardWinner.text = `${winner.awardee} from team ${teamName}`
+                  return awardWinner;
                 });
           }
         })
@@ -103,10 +127,89 @@ const getEventAwardWinnersData = (eventKey, awardType) => {
       });
 }
 
-const getTeamDescriptor = (teamKey) => {
+const getEventLocation = (conv, params) => {
+  const eventCode = params["event"];
+  const year = frcUtil.getYearOrThisYear(params);
+  const eventKey = events.getEventKey(eventCode, year);
+
+  conv.contexts.set("season", 5, { "season": year });
+
+  return tba.getEvent(eventKey)
+      .catch((err) => {
+        console.warn(err);
+        return basicPromptWithReentry("I couldn't find information on that event.");
+      })
+      .then((event) => {
+        const eventLocation = frcUtil.getEventLocation(event);
+        const endDate = new Date(event.end_date)
+
+        let responseText = `The ${event.year} ${event.name}`;
+
+        if (new Date() < endDate) {
+          responseText += ` will be`;
+        } else {
+          responseText += ` was`;
+        }
+
+        responseText += ` at the ${event.location_name} in ${eventLocation}.`;
+
+        const screenContent = eventCard.createEventCard(event);
+        const response = basicPromptWithReentry(responseText);
+        response.screenContent = screenContent;
+
+        return response;
+      });
+}
+
+const getEventDate = (conv, params) => {
+  const eventCode = params["event"];
+  const year = frcUtil.getYearOrThisYear(params);
+  const eventKey = events.getEventKey(eventCode, year);
+
+  conv.contexts.set("season", 5, { "season": year });
+
+  return tba.getEvent(eventKey)
+      .catch((err) => {
+        console.warn(err);
+        return basicPromptWithReentry("I couldn't find information on that event.");
+      })
+      .then((event) => {
+        const startDate = new Date(event.start_date);
+        const endDate = new Date(event.end_date)
+
+        let responseText = `The ${event.year} ${event.name}`;
+        let responseSpeech = `<speak>The ${event.year} ${event.name}`;
+
+        if (new Date() < endDate) {
+          responseText += ` is ${util.monthDayString(startDate)}`;
+          responseSpeech += ` is ${util.dateToSsml(startDate)}`;
+        } else {
+          responseText += ` was ${util.monthDayString(startDate)}`;
+          responseSpeech += ` was ${util.dateToSsml(startDate)}`;
+        }
+
+        if (startDate.getTime() === endDate.getTime()) {
+          responseText += `.`;
+          responseSpeech += `.`;
+        } else {
+          responseText += ` to ${util.monthDayString(endDate)}.`;
+          responseSpeech += ` to ${util.dateToSsml(endDate)}.`;
+        }
+
+        responseSpeech += `</speak>`
+
+        const screenContent = eventCard.createEventCard(event);
+        const response = basicPromptWithReentry(responseSpeech, responseText);
+        response.screenContent = screenContent;
+
+        return response;
+      });
+}
+
+const getTeamAwardWinner = (teamKey, isTeamWinner) => {
   return tba.getTeamByKey(teamKey)
       .then((team) => {
-        return `${team.team_number} (${team.nickname})`;
+        return new AwardWinner(isTeamWinner, `${team.team_number} (${team.nickname})`, team);
       });
 }
 
@@ -119,7 +222,9 @@ const getEventName = (eventKey) => {
 
 const intents = {
   'event-award-winner': getEventAwardWinner,
-  'event-winner': getEventWinner
+  'event-winner': getEventWinner,
+  'event-location': getEventLocation,
+  'event-date': getEventDate,
 }
 
 module.exports.event = (conv, params) => {

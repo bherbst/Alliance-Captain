@@ -17,19 +17,11 @@
 
 const groupBy = require('lodash.groupby');
 
-const {
-  SimpleResponse,
-  BasicCard,
-  Button
-} = require('actions-on-google');
-
 const frcUtil = require('../frc-util');
 const {prompt, fallback} = require('./common/actions')
-const {
-  basicPromptWithReentry, 
-  reentryPool,
-  Prompt
-} = require('./prompt-util')
+const {basicPromptWithReentry} = require('./prompt-util')
+const {createTeamCard} = require('../cards/team-card')
+const eventCards = require('../cards/event-card')
 const tba = require('../api/tba-client').tbaClient;
 
 const getRookieYear = (conv, params) => {
@@ -119,15 +111,7 @@ const getTeamInfo = (conv, params) => {
         const location = frcUtil.getLocationString(data);
 
         const response = basicPromptWithReentry(`${name} is a ${age}  year old team from ${location}.`);
-        response.screenContent = new BasicCard({
-            text: `See event results and more on firstinspires.org`,
-            buttons: [
-                new Button({
-                  title: `View ${team_number}`,
-                  url: `https://frc-events.firstinspires.org/${thisYear}/team/${team_number}`
-                })
-            ]
-          });
+        response.screenContent = createTeamCard(data)
         return response;
       });
 }
@@ -218,7 +202,13 @@ const getTeamEvents = (conv, params) => {
           conv.contexts.set("event", 5, { "event": data[0].key });
         }
 
-        return basicPromptWithReentry(response);
+        const prompt = basicPromptWithReentry(response);
+        if (data.length > 1) {
+          prompt.screenContent = eventCards.createMultiEventCard(data);
+        } else if (data.length === 1) {
+          resppromptnse.screenContent = eventCards.createEventCard(data[0]);
+        }
+        return prompt;
       })
 }
 

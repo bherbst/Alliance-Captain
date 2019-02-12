@@ -14,7 +14,6 @@
  */
 'use strict';
 
-const frcUtil = require('../frc-util.js');
 const {
     BasicCard,
     Button,
@@ -22,27 +21,29 @@ const {
     BrowseCarouselItem
 } = require('actions-on-google');
 
-const {currentYear} = require('../util')
+const frcUtil = require('../frc-util.js');
 
-exports.createTeamCard = function(team) {
+exports.createEventCard = function(event) {
     return new BasicCard({
-        title: `Team ${team.team_number} - ${team.nickname}`,
-        subtitle: frcUtil.getLocationString(team),
+        title: event.name,
+        subtitle: frcUtil.getEventLocationWithDistrict(event),
         text: `See event results and more on firstinspires.org`,
         buttons: new Button({
-            title: `View Team Details`,
-            url: `https://frc-events.firstinspires.org/${currentYear}/team/${team.team_number}`
+            title: `View event details and results`,
+            url: `https://frc-events.firstinspires.org/${event.year}/${event.first_event_code}`
         })
     });
 }
 
-exports.createMultiTeamCard = function(teams) {
+exports.createMultiEventCard = function(events) {
+    // Browse carousels can only have up to 10 cards
+    events = events.slice(0, 10)
     return new BrowseCarousel({
-        items: teams.map((team) => 
+        items: events.map((event) => 
             new BrowseCarouselItem({
-                title: `Team ${team.team_number} - ${team.nickname}`,
-                url: `https://frc-events.firstinspires.org/${currentYear}/team/${team.team_number}`,
-                description: `From ` + frcUtil.getLocationString(team),
+                title: event.name,
+                url: `https://frc-events.firstinspires.org/${event.year}/${event.first_event_code}`,
+                description: frcUtil.getEventLocationWithDistrict(event),
             })
         )
     });

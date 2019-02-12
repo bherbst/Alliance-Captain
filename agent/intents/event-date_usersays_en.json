@@ -1,0 +1,407 @@
+[
+  {
+    "id": "9e66e7a7-81fc-478d-bd7c-f35e8003de48",
+    "data": [
+      {
+        "text": "When will it ",
+        "userDefined": false
+      },
+      {
+        "text": "be",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548695573
+  },
+  {
+    "id": "dd828f4d-0ad9-43b0-a2a7-16580d54f33a",
+    "data": [
+      {
+        "text": "When will it happen?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548695573
+  },
+  {
+    "id": "3e65b0a5-f5b7-49c1-82ae-1a47585af429",
+    "data": [
+      {
+        "text": "When did it happen?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548695573
+  },
+  {
+    "id": "5fb8b319-95cf-44a4-84fc-3f6d653b50c0",
+    "data": [
+      {
+        "text": "When is it?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548695573
+  },
+  {
+    "id": "57185222-95f7-448d-b0dd-9eaf63c997a3",
+    "data": [
+      {
+        "text": "When ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " it?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548695573
+  },
+  {
+    "id": "1acc1c64-f6c4-4618-a343-392f49151c4f",
+    "data": [
+      {
+        "text": "When is the ",
+        "userDefined": false
+      },
+      {
+        "text": "Northern Lights Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548695573
+  },
+  {
+    "id": "1e2bbd07-8979-4985-a472-611769f1a641",
+    "data": [
+      {
+        "text": "When ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " the ",
+        "userDefined": false
+      },
+      {
+        "text": "Northern Lights Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548695573
+  },
+  {
+    "id": "6f7f6823-49e1-4d93-b681-cf7a6206dce0",
+    "data": [
+      {
+        "text": "When ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " the ",
+        "userDefined": false
+      },
+      {
+        "text": "2017",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Northern Lights Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548695573
+  },
+  {
+    "id": "5f5a6fa1-b2b3-4b6e-ae7b-a1dd31951cac",
+    "data": [
+      {
+        "text": "When did the ",
+        "userDefined": false
+      },
+      {
+        "text": "2017",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Northern Lights Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": " occur?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548695573
+  },
+  {
+    "id": "dc1964d1-a81f-41bb-a939-21026f428a7f",
+    "data": [
+      {
+        "text": "When did the ",
+        "userDefined": false
+      },
+      {
+        "text": "2017",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Northern Lights Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": " happen?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548695573
+  },
+  {
+    "id": "db1373cc-ad44-4995-a914-0c6289b5ab20",
+    "data": [
+      {
+        "text": "When does the ",
+        "userDefined": false
+      },
+      {
+        "text": "2018",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Northern Lights Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": " happen?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548695573
+  },
+  {
+    "id": "7e5cb36d-9d2e-4e91-ad47-00a13b78bdb4",
+    "data": [
+      {
+        "text": "When will the ",
+        "userDefined": false
+      },
+      {
+        "text": "2018",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Northern Lights Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": true
+      },
+      {
+        "text": " occur?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548695573
+  },
+  {
+    "id": "c784a3a2-0705-4f95-9ca5-58ed881d362e",
+    "data": [
+      {
+        "text": "When will the ",
+        "userDefined": false
+      },
+      {
+        "text": "2018",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Northern Lights Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": " take place?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548695573
+  },
+  {
+    "id": "d3c74c38-6537-4c02-86f5-8fb8303feb58",
+    "data": [
+      {
+        "text": "When will the ",
+        "userDefined": false
+      },
+      {
+        "text": "2018",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Northern Lights Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "be",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548695573
+  },
+  {
+    "id": "ea736491-74fd-4ad3-badc-c7c9d8cd7259",
+    "data": [
+      {
+        "text": "When is the ",
+        "userDefined": false
+      },
+      {
+        "text": "2018",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Lake Superior Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548695573
+  }
+]

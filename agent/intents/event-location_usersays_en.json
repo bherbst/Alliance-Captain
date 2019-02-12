@@ -1,0 +1,323 @@
+[
+  {
+    "id": "f471f95a-d5fa-4d46-81d9-8123c8ea0a45",
+    "data": [
+      {
+        "text": "Where will it take place?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548279724
+  },
+  {
+    "id": "c410d13e-7a2b-425b-8c76-e94380cf2e8b",
+    "data": [
+      {
+        "text": "Where is it?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548279724
+  },
+  {
+    "id": "06d30ea0-7c9b-4c93-97d5-f7c8d720d753",
+    "data": [
+      {
+        "text": "Where ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " it?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548279724
+  },
+  {
+    "id": "2f1f68f9-c82a-4364-899c-abe3c0cda6e1",
+    "data": [
+      {
+        "text": "Where did it happen?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548279724
+  },
+  {
+    "id": "09cbfc7b-a2b9-438d-813b-9c9ab542f05a",
+    "data": [
+      {
+        "text": "Where did the ",
+        "userDefined": false
+      },
+      {
+        "text": "Lake Superior Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": " happen?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548279724
+  },
+  {
+    "id": "6aaf2f7b-dfa4-417b-a4eb-ee6c4bfec365",
+    "data": [
+      {
+        "text": "Where will the ",
+        "userDefined": false
+      },
+      {
+        "text": "Lake Superior Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": " take place?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548279724
+  },
+  {
+    "id": "a9068e60-0f78-461a-8e38-fc72a555ac39",
+    "data": [
+      {
+        "text": "Where does the ",
+        "userDefined": false
+      },
+      {
+        "text": "Lake Superior Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": " take place?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548279724
+  },
+  {
+    "id": "555eb489-744e-4b13-b11b-114347af196d",
+    "data": [
+      {
+        "text": "Where will the ",
+        "userDefined": false
+      },
+      {
+        "text": "Lake Superior Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "be",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548279724
+  },
+  {
+    "id": "a7194190-ebce-4eae-ae29-c64017dc0995",
+    "data": [
+      {
+        "text": "Where is the ",
+        "userDefined": false
+      },
+      {
+        "text": "2019",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Lake Superior Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548279724
+  },
+  {
+    "id": "b62c7823-ee9a-4b9d-a3b6-73ccd02957fb",
+    "data": [
+      {
+        "text": "Where is the ",
+        "userDefined": false
+      },
+      {
+        "text": "Lake Superior Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548279724
+  },
+  {
+    "id": "1c9fa613-dec6-430e-8da5-a8cab77d7664",
+    "data": [
+      {
+        "text": "Where ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " the ",
+        "userDefined": false
+      },
+      {
+        "text": "Lake Superior Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": " during ",
+        "userDefined": false
+      },
+      {
+        "text": "Power Up",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548279724
+  },
+  {
+    "id": "d54782d3-05c1-4330-86ef-b8e4b3cee0b9",
+    "data": [
+      {
+        "text": "Where ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " the ",
+        "userDefined": false
+      },
+      {
+        "text": "2019",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Lake Superior Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548279724
+  },
+  {
+    "id": "c651753d-f1cb-4e7d-bf51-f5ddb1417d84",
+    "data": [
+      {
+        "text": "Where ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " the ",
+        "userDefined": false
+      },
+      {
+        "text": "Lake Superior Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548279724
+  }
+]

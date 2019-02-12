@@ -1,0 +1,98 @@
+[
+  {
+    "id": "dbf08b4d-0dc0-44f5-8b22-d2e30d1503be",
+    "data": [
+      {
+        "text": "stop",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548778068
+  },
+  {
+    "id": "8becf6ab-0e7a-40c9-9fa7-900e6c8917fb",
+    "data": [
+      {
+        "text": "Nothing else",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548778068
+  },
+  {
+    "id": "840e7880-3086-4af6-a3d4-7738f9cfe288",
+    "data": [
+      {
+        "text": "That\u0027s it",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548778068
+  },
+  {
+    "id": "0477aa22-d304-4070-bcf1-717a936c3f5a",
+    "data": [
+      {
+        "text": "see ya",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548778068
+  },
+  {
+    "id": "896775bb-6909-4222-ad62-128634e9bdfb",
+    "data": [
+      {
+        "text": "Good bye",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548778068
+  },
+  {
+    "id": "d3304011-0233-42e1-906a-6e80ed3e172a",
+    "data": [
+      {
+        "text": "No",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548778068
+  },
+  {
+    "id": "45617134-9305-4f34-9227-f9f616cb690d",
+    "data": [
+      {
+        "text": "No thanks",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548778068
+  },
+  {
+    "id": "1301bbdd-8865-49eb-952a-2dff5a17abca",
+    "data": [
+      {
+        "text": "Cancel",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1548778068
+  }
+]

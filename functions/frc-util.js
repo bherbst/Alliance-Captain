@@ -29,6 +29,20 @@ exports.getLocationString = function(team) {
         : team.city + ", " + team.country;
 }
 
+exports.getEventLocation = function(event) {
+    return event.country === "USA"
+        ? event.city + ", " + event.state_prov
+        : event.city + ", " + event.country;
+}
+
+exports.getEventLocationWithDistrict = function(event) {
+  let result = exports.getEventLocation(event);
+  if (event.district) {
+    result += " — " + event.district.display_name + " district";
+  }
+  return result;
+}
+
 exports.getYearOrThisYear = function(params) {
   const season = params["season"];
   const now = new Date();

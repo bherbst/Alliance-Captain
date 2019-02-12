@@ -43,8 +43,16 @@ const awardsByType = {
     31: "Website",
 };
 
+exports.AwardWinner = class AwardWinner {
+    constructor(isTeam, text, team) {
+      this.isTeam = isTeam;
+      this.text = text;
+      this.team = team;
+    }
+  };
+
 exports.getAwardWinnerText = function(winners, awardType, year, eventName, isChampionship) {
-    const awardees = frcUtil.joinToOxfordList(winners);
+    const awardees = frcUtil.joinToOxfordList(winners, (winner) => winner.text);
 
     switch(awardType) {
         case 1: { // Event winner
