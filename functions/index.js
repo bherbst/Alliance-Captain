@@ -18,19 +18,26 @@ const functions = require('firebase-functions');
 const {app} = require('./app')
 
 const tba = require('./api/tba-client').tbaClient;
-const {DataUpdates} = require('./data-updates');
-const dataUpdates = new DataUpdates(tba);
+const {TbaDataUpdates} = require('./updates/tba-updates');
+const tbaUpdates = new TbaDataUpdates(tba);
+const {updateAvatars} = require('./updates/update-avatars')
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest(app)
 
 exports.updateTeams = functions.pubsub
   .topic('update-teams')
   .onPublish((_) => {
-    return dataUpdates.updateTeams();
+    return tbaUpdates.updateTeams();
   });
 
 exports.updateEvents = functions.pubsub
   .topic('update-events')
   .onPublish((_) => {
-    return dataUpdates.updateEvents();
+    return tbaUpdates.updateEvents();
+  });
+
+exports.updateAvatars = functions.pubsub
+  .topic('update-avatars')
+  .onPublish((_) => {
+    return updateAvatars();
   });

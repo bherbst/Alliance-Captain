@@ -26,7 +26,7 @@ const extraEventNames = {
   mnmi2: ["North Star Regional"]
 };
 
-module.exports.DataUpdates = class DataUpdates {
+module.exports.TbaDataUpdates = class TbaDataUpdates {
 
   constructor (tbaClient) {
     this.tba = tbaClient;
