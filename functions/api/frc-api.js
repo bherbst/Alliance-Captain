@@ -15,6 +15,7 @@
 'use strict';
 
 const https = require('https');
+const Promise = require('bluebird');
 const base_url = 'frc-api.firstinspires.org';
 
 module.exports.FrcApi = class FrcApi {
@@ -49,7 +50,10 @@ module.exports.FrcApi = class FrcApi {
                 });
 
                 res.on('end', (d) => {
-                    if (!err) resolve(JSON.parse(data));
+                    if (!err) resolve({
+                        headers: res.headers,
+                        body: JSON.parse(data)
+                    });
                 });
             });
         });

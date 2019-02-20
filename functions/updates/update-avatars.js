@@ -14,112 +14,222 @@
  */
 'use strict';
 
-const {frcClient} = require('../api/frc-client')
-
+const Promise = require('bluebird')
 const admin = require('firebase-admin')
 
-var Promise = require("bluebird");
+const {frcClient} = require('../api/frc-client')
+
+const avatarsCollection = admin.firestore().collection("avatars");
+const syncInfo = avatarsCollection.doc("sync-info");
+const teamAvatars = avatarsCollection.doc("teamAvatars");
 
 exports.updateAvatars = function() {
     const avatarBucket = admin.storage().bucket()
     const thisYear = new Date().getFullYear();
 
-    // 2018 was the first year of avatars
-    return getAvatarsRecursive(thisYear, 2018, [], avatarBucket);
-}
-
-function getAvatarsRecursive(startYear, endYear, savedTeams, avatarBucket) {
-    console.log(`getAvatarsRecursive: ${startYear}, ${endYear}, ${JSON.stringify(savedTeams)}`)
-    return getAvatarsForYear(startYear, savedTeams, avatarBucket)
-        .then(teamsSaved => {
-            console.log(`${teamsSaved.length} avatars saved`);
-            savedTeams.concat(teamsSaved);
-            if (startYear === endYear) {
-                return Promise.resolve(savedTeams);
-            } else {
-                return getAvatarsRecursive(startYear - 1, endYear, savedTeams, avatarBucket);
-            }
-        });
-}
-
-function getAvatarsForYear(year, savedTeams, bucket) {
-    return frcClient.getAvatars(year).then(data => {
-        if (data.length < 0) {
-            console.warn(`No avatars found for ${year}`)
-            return Promise.resolve(undefined);
-        }
-
-        const firstPageAvatars = saveAllAvatars(data.teams, savedTeams, bucket);
-        let pagePromises = [];
-
-        if (data.pageTotal > data.pageCurrent) {
-            let page;
-            for (page = data.pageCurrent + 1; page <= data.pageTotal; page++) {
-                pagePromises.push(getAvatarPage(year, page, savedTeams, bucket));
-            }
-        }
-
-        return Promise.all(pagePromises).then(pageAvatarPromises => {
-            return Promise.all([firstPageAvatars] + pageAvatarPromises)
+    return syncInfo.get().then(metadataDoc => {
+        return teamAvatars.get().then(avatarsDoc => {
+            // 2018 was the first year of avatars, no need to try for years before that
+            const updater = new AvatarUpdater(thisYear, 2018, avatarBucket, metadataDoc.data(), avatarsDoc.data());
+            return updater.syncAvatars();
         });
     });
 }
 
-function getAvatarPage(year, page, savedTeams, bucket) {
-    return frcClient.getAvatars(year, page).then(data => {
-        if (data.length < 0) {
-            console.warn(`No avatars found for ${year} page ${page}`);
-            return Promise.resolve(undefined);
+const AvatarUpdater = class {
+    constructor(startYear, endYear, avatarBucket, syncMetadata, avatars) {
+        this.startYear = startYear;
+        this.endYear = endYear;
+        this.avatarBucket = avatarBucket;
+        this.syncMetadata = syncMetadata;
+
+        if (avatars) {
+            this.avatars = avatars;
+        } else {
+            this.avatars = {};
         }
+    }
 
-        const avatarPromises = saveAllAvatars(data.teams, savedTeams, bucket);
-        
-        return avatarPromises;
-    });
-}
+    /**
+     * Sync all team avatars
+     */
+    syncAvatars() {
+        let syncPromise = this._syncAvatarsForYear(this.startYear).catch(error => {
+            console.log(`Failed to sync avatars for ${this.startYear}.`);
+            console.error(error);
+        });
 
-function saveAllAvatars(teams, savedTeams, bucket) {
-    let teamAvatarPromises = [];
-    teams.forEach((team) => {
-        if (savedTeams.includes(team) || team.encodedAvatar === null) {
-            return;
-        }
-
-        teamAvatarPromises += saveAvatar(bucket, team.teamNumber, team.encodedAvatar)
-            .then(metadata => {
-                console.log("metadata: " + JSON.stringify(metadata))
-                return Promise.resolve(team.teamNumber);
-            })
-            .catch(error => {
-                console.warn(`Failed to save team ${team.teamNumber}'s ${year} avatar`);
-                console.warn(error);
-                return Promise.resolve(undefined);
+        for (let year = this.startYear - 1; year >= this.endYear; year--) {
+            syncPromise = syncPromise.then(_ => {
+                return this._syncAvatarsForYear(year);
+            }).catch(error => {
+                console.log(`Failed to sync avatars for ${year}.`);
+                console.error(error);
             });
-    });
-    
-    return Promise.all(teamAvatarPromises);
-}
+        }
 
-function saveAvatar(bucket, teamNumber, imageData) {
-    return new Promise((resolve, reject) => {
-        const fileUpload = bucket.file(`avatars/${teamNumber}.png`);
-        const blobStream = fileUpload.createWriteStream({
-            metadata: {
-                contentType: "image/png"
+        return syncPromise;
+    }
+
+    /**
+     * Persist data about teams' avatars to firestore for later reference
+     */
+    _saveAvatarDataToFirestore(avatarData) {
+        if (avatarData.length == 0) {
+            return Promise.resolve(null);
+        }
+
+        const pendingAvatarMap = this._getAvatarMap(avatarData);
+        this.avatars = Object.assign(this.avatars, pendingAvatarMap);
+
+        return teamAvatars.update(pendingAvatarMap);
+    }
+
+    _getAvatarMap(avatarData) {
+        let avatarMap = {};
+        avatarData.forEach(avatar => {
+            if (avatar !== null) {
+                avatarMap[avatar.teamNumber] = {
+                    year: avatar.year,
+                    path: avatar.path
+                }
             }
         });
+        return avatarMap;
+    }
+    
+    /**
+     * Sync all avatars for a given year.
+     * This will get all team avatar data for that year, save any new avatars to Google Cloud,
+     * and persist the metadata for that team's avatar (team number, path, and year) to Firestore.
+     * 
+     * @param year
+     */
+    _syncAvatarsForYear(year) {
+        // We need the first page to know how many pages there are, then we'll make more calls
+        return frcClient.getAvatars(year).then(result => {
+            const data = result.data;
+            if (data.length < 0) {
+                console.warn(`No avatars found for ${year}`)
+                return Promise.resolve(undefined);
+            }
+    
+            let pagePromises = [Promise.resolve(this._saveTeamAvatars(year, data.teams))];
+    
+            // Build up a list of all subsequent pages so we can fetch them simulataneously
+            if (data.pageTotal > data.pageCurrent) {
+                let page;
+                for (page = data.pageCurrent + 1; page <= data.pageTotal; page++) {
+                    pagePromises.push(this._syncAvatarPage(year, page));
+                }
+            }
 
-        blobStream.on("error", error => {
-            console.error(`Error saving avatar for team ${teamNumber}: ${error}`)
-            reject(error)
+            return Promise.all(pagePromises)
+        }).then((pageAvatarPromises) => {
+            return Promise.all(pageAvatarPromises);
+        }).catch(error => {
+            console.log(`Failed to get avatars for ${year}, page 0.`);
+            console.error(error);
+        });
+    }
+    
+    /**
+     * Sync a specific page of avatar data for a year
+     * 
+     * @param year 
+     * @param page 
+     */
+    _syncAvatarPage(year, page) {
+        return frcClient.getAvatars(year, page).then(result => {
+            const data = result.data;
+            if (data.length < 0) {
+                console.warn(`No avatars found for ${year} page ${page}`);
+                return Promise.resolve([]);
+            }
+
+            return this._saveTeamAvatars(year, data.teams);
+        }).then(avatarData => {
+            return this._saveAvatarDataToFirestore(avatarData)
+        }).catch(error => {
+            console.log(`Failed to get avatars for ${year}, page ${page}. ${error}`);
+        });
+    }
+    
+    /**
+     * Save teams' encoded avatars to disk (in Google Cloud)
+     * 
+     * @param year 
+     * @param teams A list of team avatar data to save
+     */
+    _saveTeamAvatars(year, teams) {
+        let teamAvatarPromises = [];
+        teams.forEach((team) => {
+            if (team.encodedAvatar === null) {
+                return;
+            }
+
+            // Skip the team if we already have a newer avatar
+            const alreadyHasAvatar = team.teamNumber in this.avatars;
+            if (alreadyHasAvatar) {
+                const existingAvatar = this.avatars[team.teamNumber];
+                if (existingAvatar.year > year) {
+                    return;
+                }
+            }
+    
+            console.log(`Saving team ${team.teamNumber}'s ${year} avatar.`)
+
+            const avatarPromise = this._saveAvatarImage(team.teamNumber, team.encodedAvatar)
+                .then(metadata => {
+                    const result = {
+                        teamNumber: team.teamNumber,
+                        year: year,
+                        path: metadata[0].name
+                    };
+                    return result
+                })
+                .catch(error => {
+                    console.warn(`Failed to save team ${team.teamNumber}'s ${year} avatar`);
+                    console.warn(error);
+                    return null;
+                });
+
+            teamAvatarPromises.push(avatarPromise);
         });
 
-        blobStream.on("finish", () => {
-            fileUpload.getMetadata()
-            .then(metadata => resolve(metadata))
-            .catch(error => reject(error));
-        });
-
-        blobStream.end(new Buffer(imageData, 'base64'));
-  });
+        if (teamAvatarPromises.length > 0) {
+            return Promise.all(teamAvatarPromises);
+        } else {
+            return Promise.resolve([])
+        }
+    }
+    
+    /**
+     * Create a PNG image file version of a single team's avatar on Google Cloud
+     * @param teamNumber 
+     * @param imageData base64 encoded PNG image of the team's avatar
+     */
+    _saveAvatarImage(teamNumber, imageData) {
+        return new Promise((resolve, reject) => {
+            const fileUpload = this.avatarBucket.file(`avatars/${teamNumber}.png`);
+            const blobStream = fileUpload.createWriteStream({
+                metadata: {
+                    contentType: "image/png"
+                }
+            });
+    
+            blobStream.on("error", error => {
+                console.error(`Error saving avatar for team ${teamNumber}: ${error}`)
+                reject(error)
+            });
+    
+            blobStream.on("finish", () => {
+                fileUpload.getMetadata()
+                .then(metadata => resolve(metadata))
+                .catch(error => reject(error));
+            });
+    
+            blobStream.end(new Buffer(imageData, 'base64'));
+      });
+    }
 }
