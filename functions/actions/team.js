@@ -21,6 +21,7 @@ const frcUtil = require('../frc-util');
 const {prompt, fallback} = require('./common/actions')
 const {basicPromptWithReentry} = require('./prompt-util')
 const {createTeamCard} = require('../cards/team-card')
+const {getTeamWithActiveStatus} = require('../interactors/teamInteractor')
 const eventCards = require('../cards/event-card')
 const tba = require('../api/tba-client').tbaClient;
 
@@ -35,7 +36,11 @@ const getRookieYear = (conv, params) => {
       .then((data) => {
         const name = frcUtil.nicknameOrNumber(data);
         conv.contexts.set("season", 5, { "season": data.rookie_year });
-        return basicPromptWithReentry(`${name}'s rookie year was ${data.rookie_year}.`);
+        if (data.rookie_year >= new Date().getFullYear()) {
+          return basicPromptWithReentry(`${data.rookie_year} is ${name}'s rookie year.`);
+        } else {
+          return basicPromptWithReentry(`${name}'s rookie year was ${data.rookie_year}.`);
+        }
       });
 }
 
@@ -68,31 +73,46 @@ const getTeamNickName = (conv, params) => {
 const getTeamLocation = (conv, params) => {
   const team_number = params["team"];
 
-  return tba.getTeam(team_number)
+  return getTeamWithActiveStatus(team_number)
       .catch((err) => {
         console.warn(err);
         return basicPromptWithReentry(`I couldn't find ${team_number}'s location.`);
       })
-      .then((data) => {
-        const name = frcUtil.nicknameOrNumber(data);
-        const location = frcUtil.getLocationString(data);
-        return basicPromptWithReentry(`${name} is from ${location}.`);
+      .then((team) => {
+        const name = frcUtil.nicknameOrNumber(team);
+        const location = frcUtil.getLocationString(team);
+        
+        if (team.isActive) {
+          return basicPromptWithReentry(`${name} is from ${location}.`);
+        } else {
+          return basicPromptWithReentry(`${name} was from ${location}. They last competed in ${team.mostRecentEventYear}`);
+        }
       });
 }
 
 const getTeamAge = (conv, params) => {
   const team_number = params["team"];
 
-  return tba.getTeam(team_number)
+  return getTeamWithActiveStatus(team_number)
       .catch((err) => {
         console.warn(err);
         return basicPromptWithReentry(`I couldn't find ${team_number}'s age.`);
       })
-      .then((data) => {
-        const name = frcUtil.nicknameOrNumber(data);
-        const thisYear = new Date().getFullYear();
-        const age = thisYear - data.rookie_year;
-        return basicPromptWithReentry(`${name} is ${age} years old.`);
+      .then((team) => {
+        const name = frcUtil.nicknameOrNumber(team);
+        
+        if (team.isActive) {
+          if (team.isRookie) {
+            return basicPromptWithReentry(`${name} is a rookie team.`);
+          } else {
+            const thisYear = new Date().getFullYear();
+            const age = thisYear - team.rookie_year;
+            return basicPromptWithReentry(`${name} is ${age} years old.`);
+          }
+        } else {
+          const age = team.mostRecentEventYear - team.rookie_year;
+          return basicPromptWithReentry(`${name} competed for ${age} years. They last competed in ${team.mostRecentEventYear}.`);
+        }
       });
 }
 
@@ -105,19 +125,35 @@ const getTeamInfo = (conv, params) => {
     year = seasonContext.season
   }
 
-  return tba.getTeam(team_number)
+  return getTeamWithActiveStatus(team_number)
       .catch((err) => {
         console.warn(err);
         return basicPromptWithReentry(`I couldn't find information on ${team_number}.`);
       })
-      .then((data) => {
-        const name = `${data.nickname} (FRC team ${team_number})`;
+      .then((team) => {
+        const name = `${team.nickname} (FRC team ${team_number})`;
         const thisYear = new Date().getFullYear();
-        const age = thisYear - data.rookie_year;
-        const location = frcUtil.getLocationString(data);
+        const location = frcUtil.getLocationString(team);
 
-        const response = basicPromptWithReentry(`${name} is a ${age}  year old team from ${location}.`);
-        response.screenContent = createTeamCard(data, year)
+        let response;
+        if (team.isActive) {
+          const age = thisYear - team.rookie_year;
+
+          let ageString;
+          if (team.isRookie) {
+            ageString = "rookie"
+          } else {
+            ageString = `${age} year old`
+          }
+
+          response = basicPromptWithReentry(`${name} is a ${ageString} team from ${location}.`);
+          response.screenContent = createTeamCard(team, year)
+        } else {
+          const age = team.mostRecentEventYear - team.rookie_year;
+          response = basicPromptWithReentry(`${name} from ${location} competed for ${age} years. They last competed in ${team.mostRecentEventYear}.`);
+          response.screenContent = createTeamCard(team, team.mostRecentEventYear)
+        }
+
         return response;
       });
 }
