@@ -27,12 +27,29 @@ exports.updateAvatars = function() {
     const avatarBucket = admin.storage().bucket()
     const thisYear = new Date().getFullYear();
 
-    return syncInfo.get().then(metadataDoc => {
-        return teamAvatars.get().then(avatarsDoc => {
-            // 2018 was the first year of avatars, no need to try for years before that
-            const updater = new AvatarUpdater(thisYear, 2018, avatarBucket, metadataDoc.data(), avatarsDoc.data());
-            return updater.syncAvatars();
-        });
+    let metadataDoc;
+    let avatarsDoc;
+    return syncInfo.get().then(metadataDocRef => {
+        metadataDoc = metadataDocRef;
+
+        if (metadataDoc.exists) {
+            return Promise.resolve(metadataDoc);
+        } else {
+            return syncInfo.create({});
+        }
+    }).then(_ => {
+        return teamAvatars.get();
+    }).then(avatarsDocRef => {
+        avatarsDoc = avatarsDocRef;
+        if (avatarsDoc.exists) {
+            return Promise.resolve(avatarsDoc);
+        } else {
+            return teamAvatars.create({});
+        }
+    }).then(_ => {
+        // 2018 was the first year of avatars, no need to try for years before that
+        const updater = new AvatarUpdater(thisYear, 2018, avatarBucket, metadataDoc.data(), avatarsDoc.data());
+        return updater.syncAvatars();
     });
 }
 
@@ -41,7 +58,12 @@ const AvatarUpdater = class {
         this.startYear = startYear;
         this.endYear = endYear;
         this.avatarBucket = avatarBucket;
-        this.syncMetadata = syncMetadata;
+
+        if (syncMetadata) {
+            this.syncMetadata = syncMetadata;
+        } else {
+            this.syncMetadata = {};
+        }
 
         if (avatars) {
             this.avatars = avatars;
@@ -75,7 +97,7 @@ const AvatarUpdater = class {
      * Persist data about teams' avatars to firestore for later reference
      */
     _saveAvatarDataToFirestore(avatarData) {
-        if (avatarData.length == 0) {
+        if (avatarData.length === 0) {
             return Promise.resolve(null);
         }
 
@@ -107,13 +129,16 @@ const AvatarUpdater = class {
      */
     _syncAvatarsForYear(year) {
         // We need the first page to know how many pages there are, then we'll make more calls
-        return frcClient.getAvatars(year).then(result => {
-            const data = result.data;
+        let avatarData;
+        let pageZeroLastModified;
+        return this._getAvatarsWithLastModified(year, 0).then(result => {
+            const data = result.body;
             if (data.length < 0) {
                 console.warn(`No avatars found for ${year}`)
                 return Promise.resolve(undefined);
             }
     
+            pageZeroLastModified = result.headers['last-modified'];
             let pagePromises = [Promise.resolve(this._saveTeamAvatars(year, data.teams))];
     
             // Build up a list of all subsequent pages so we can fetch them simulataneously
@@ -127,7 +152,15 @@ const AvatarUpdater = class {
             return Promise.all(pagePromises)
         }).then((pageAvatarPromises) => {
             return Promise.all(pageAvatarPromises);
-        }).catch(error => {
+        }).then(tmpAvatarData => {
+            avatarData = tmpAvatarData;
+
+            // Update our last modified date for future header use
+            this.syncMetadata[year] = pageZeroLastModified;
+            return syncInfo.update(this.syncMetadata);
+        }).then(_ => 
+            avatarData
+        ).catch(error => {
             console.log(`Failed to get avatars for ${year}, page 0.`);
             console.error(error);
         });
@@ -140,8 +173,8 @@ const AvatarUpdater = class {
      * @param page 
      */
     _syncAvatarPage(year, page) {
-        return frcClient.getAvatars(year, page).then(result => {
-            const data = result.data;
+        return this._getAvatarsWithLastModified(year, page).then(result => {
+            const data = result.body;
             if (data.length < 0) {
                 console.warn(`No avatars found for ${year} page ${page}`);
                 return Promise.resolve([]);

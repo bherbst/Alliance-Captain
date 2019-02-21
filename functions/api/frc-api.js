@@ -25,7 +25,7 @@ module.exports.FrcApi = class FrcApi {
         this.apiKey = apiKey;
     }
 
-    _get(endpoint) {
+    _get(endpoint, onlyModifiedSince) {
         let data = ''
         const options = {
             hostname: base_url,
@@ -35,11 +35,16 @@ module.exports.FrcApi = class FrcApi {
              } 
         };
 
+        if (onlyModifiedSince) {
+            options.headers['FMS-OnlyModifiedSince'] = onlyModifiedSince;
+        }
+
         return new Promise((resolve, reject) => {
             const optsString = JSON.stringify(options);
             console.log(`Sending HTTP get ${optsString}`);
             https.get(options, (res) => {
                 let err;
+                console.log(`HTTP returned ${res.statusCode} ${optsString}`);
                 if (res.statusCode !== 200) {
                     err = `${res.statusCode} (${res.statusMessage}): ${optsString}`;
                     reject(err);
@@ -59,12 +64,12 @@ module.exports.FrcApi = class FrcApi {
         });
     }
 
-    getAvatars(year, page) {
+    getAvatars(year, page, onlyModifiedSince) {
         let pageParam = '';
         if (page) {
             pageParam = `?page=${page}`
         }
-        return this._get(`/v2.0/${year}/avatars${pageParam}`)
+        return this._get(`/v2.0/${year}/avatars${pageParam}`, onlyModifiedSince)
     }
 
 }
