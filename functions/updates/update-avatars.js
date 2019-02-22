@@ -16,12 +16,12 @@
 
 const Promise = require('bluebird')
 const admin = require('firebase-admin')
+const {
+    syncInfo,
+    teamAvatars
+} = require('../firestore/avatars')
 
 const {frcClient} = require('../api/frc-client')
-
-const avatarsCollection = admin.firestore().collection("avatars");
-const syncInfo = avatarsCollection.doc("sync-info");
-const teamAvatars = avatarsCollection.doc("teamAvatars");
 
 exports.updateAvatars = function() {
     const avatarBucket = admin.storage().bucket()
@@ -118,6 +118,11 @@ const AvatarUpdater = class {
             }
         });
         return avatarMap;
+    }
+
+    _getAvatarsWithLastModified(year, page) {
+        const lastModified = this.syncMetadata[year];
+        return frcClient.getAvatars(year, page, lastModified);
     }
     
     /**
