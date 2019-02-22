@@ -15,29 +15,35 @@
 'use strict';
 
 const functions = require('firebase-functions');
-const {app} = require('./app')
 
-const tba = require('./api/tba-client').tbaClient;
-const {TbaDataUpdates} = require('./updates/tba-updates');
-const tbaUpdates = new TbaDataUpdates(tba);
-const {updateAvatars} = require('./updates/update-avatars')
-
-exports.dialogflowFirebaseFulfillment = functions.https.onRequest(app)
+exports.dialogflowFirebaseFulfillment = functions.https.onRequest(require('./app'))
 
 exports.updateTeams = functions.pubsub
   .topic('update-teams')
   .onPublish((_) => {
-    return tbaUpdates.updateTeams();
+    return getTbaUpdates().updateTeams();
   });
 
 exports.updateEvents = functions.pubsub
   .topic('update-events')
   .onPublish((_) => {
-    return tbaUpdates.updateEvents();
+    return getTbaUpdates().updateEvents();
   });
 
-exports.updateAvatars = functions.pubsub
+exports.updateAvatars = functions
+  .runWith({
+    timeoutSeconds: 360,
+    memory: '512MB'
+  })
+  .pubsub
   .topic('update-avatars')
   .onPublish((_) => {
+    const {updateAvatars} = require('./updates/update-avatars')
     return updateAvatars();
   });
+
+function getTbaUpdates() {
+  const tba = require('./api/tba-client').tbaClient;
+  const {TbaDataUpdates} = require('./updates/tba-updates');
+  return new TbaDataUpdates(tba);
+}
