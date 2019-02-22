@@ -1,0 +1,60 @@
+{
+  "id": "2b8ddca1-4f7b-4e69-be10-78336aa47399",
+  "name": "team-championship",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [
+        {
+          "name": "team",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "c31031df-c1ee-48ab-b3f4-23d0399a70d4",
+          "required": true,
+          "dataType": "@team",
+          "name": "team",
+          "value": "$team",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Which team?"
+            }
+          ],
+          "defaultValue": "#team.team",
+          "isList": false
+        },
+        {
+          "id": "63fd6c6d-88fa-433d-92f9-8a869809eec4",
+          "required": false,
+          "dataType": "@season",
+          "name": "season",
+          "value": "$season",
+          "prompts": [],
+          "defaultValue": "#season.season",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1550871605,
+  "fallbackIntent": false,
+  "events": []
+}

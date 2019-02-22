@@ -37,6 +37,9 @@ const ST_LOUIS = ["mo", "mosl"];
 
 const CMPS = ["cmp", "cmpmi", "cmptx", "cmpmo"];
 
+exports.EVENT_TYPE_CMP_FINALS = 4;
+exports.EVENT_TYPE_CMP_DIVISION = 3;
+
 exports.getEventKey = function (eventCode, year) {
     if (MN_DULUTH1.includes(eventCode)) {
         if (year >= 2013) {

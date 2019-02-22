@@ -248,7 +248,7 @@ const getTeamEvents = (conv, params) => {
         if (data.length > 1) {
           prompt.screenContent = eventCards.createMultiEventCard(data);
         } else if (data.length === 1) {
-          resppromptnse.screenContent = eventCards.createEventCard(data[0]);
+          prompt.screenContent = eventCards.createEventCard(data[0]);
         }
         return prompt;
       })
@@ -365,6 +365,104 @@ const getTeamAwards = (conv, params) => {
       })
 }
 
+const getTeamChampionship = (conv, params) => {
+  const eventUtil = require('../events');
+  const team_number = params["team"];
+  const year = frcUtil.getYearOrThisYear(params);
+
+  conv.contexts.set("season", 5, { "season": year });
+
+  let team;
+  return tba.getTeam(team_number)
+      .then(teamInfo => {
+        team = teamInfo;
+        return tba.getTeamEvents(team_number, year)
+      }).catch((err) => {
+        console.warn(err);
+        return basicPromptWithReentry(`I couldn't find event information for ${team_number} during ${year}.`);
+      }).then((events) => {
+        
+        let cmpEvents;
+        if (events.length === 0) {
+          cmpEvents = [];
+        } else {
+          cmpEvents = events.filter(event => event.event_type === eventUtil.EVENT_TYPE_CMP_FINALS
+            || event.event_type === eventUtil.EVENT_TYPE_CMP_DIVISION);
+        }
+
+        const teamName = frcUtil.nicknameOrNumber(team);
+        const now = new Date();
+        const thisYear = now.getFullYear();
+        
+        let cmpCity;
+        if (year === 2017) {
+          cmpCity = team.home_championship["2017"];
+        } else {    
+          cmpCity = team.home_championship["2018"];
+        }
+      
+        // If the team is/was not registered for a championship event, only return the championship assignment
+        if (cmpEvents.length === 0) {
+          if (year < 2017) {
+            return basicPromptWithReentry(`In ${year} there was only one championship event.`);
+          }
+
+          if (year < thisYear) {
+            return basicPromptWithReentry(`${teamName} was assigned to the ${cmpCity} championship in ${year}.`);
+          } else {
+            return basicPromptWithReentry(`${teamName} is assigned to the ${cmpCity} championship.`);
+          }
+        }
+
+        // If the team actually competed at a championship event, return information on where they competed
+        const divisions = cmpEvents.filter(event => event.event_type === eventUtil.EVENT_TYPE_CMP_DIVISION);
+        if (divisions.length === 0) {
+          // One championship event, no division. Must be an old event!
+          const cmpEvent = cmpEvents[0];
+          const prompt = basicPromptWithReentry(`${teamName} competed at the ${year} ${cmpEvent.name} in ${cmpEvent.city}.`);
+          prompt.screenContent = eventCards.createEventCard(cmpEvent);
+          return prompt;
+        }
+
+        let response;
+        if (year < 2017) {
+          // One champ, should only be one division to worry about.
+          const divisionName = divisions[0].name;
+          response = `${teamName} competed in the ${divisionName} in ${year}.`;
+        } else {
+          if (year < thisYear) {
+            response = `${teamName} was assigned to the ${cmpCity} championship in ${year}.`;
+          } else {
+            response = `${teamName} is assigned to the ${cmpCity} championship in ${year}.`;
+          }
+
+          if (divisions.length === 1) {
+            if (new Date(divisions[0].end_date) < now) {
+              response += ` They competed in the ${divisions[0].name}.`
+            } else {
+              response += ` They will be competing in the ${divisions[0].name}.`
+            }
+          } else {
+            divisions.forEach(division => {
+              if (new Date(division.end_date) < now) {
+                reponse += ` They competed in the ${division.name} in ${division.city}.`
+              } else {
+                response += ` They will be competing in the ${division.name} in ${division.city}.`
+              }
+            });
+          }
+        }
+
+        const prompt = basicPromptWithReentry(response);
+        if (cmpEvents.length > 1) {
+          prompt.screenContent = eventCards.createMultiEventCard(cmpEvents);
+        } else if (cmpEvents.length === 1) {
+          prompt.screenContent = eventCards.createEventCard(cmpEvents[0]);
+        }
+        return prompt;
+      })
+}
+
 const intents = {
   'team-rookie-year': getRookieYear,
   'team-info': getTeamInfo,
@@ -374,7 +472,8 @@ const intents = {
   'team-robot-name': getRobotName,
   'team-name': getTeamName,
   'team-events': getTeamEvents,
-  'team-awards': getTeamAwards
+  'team-awards': getTeamAwards,
+  'team-championship': getTeamChampionship
 }
 
 module.exports.team = (conv, params) => {
