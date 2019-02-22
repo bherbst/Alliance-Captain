@@ -47,7 +47,8 @@ app.intent([
   'team-robot-name',
   'team-name',
   'team-events',
-  'team-awards'
+  'team-awards',
+  'team-championship'
 ], team)
 
 app.intent([
