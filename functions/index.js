@@ -16,7 +16,7 @@
 
 const functions = require('firebase-functions');
 
-exports.dialogflowFirebaseFulfillment = functions.https.onRequest(require('./app'))
+exports.dialogflowFirebaseFulfillment = functions.https.onRequest(require('./app').app)
 
 exports.updateTeams = functions.pubsub
   .topic('update-teams')
