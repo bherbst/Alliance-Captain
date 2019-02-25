@@ -28,7 +28,6 @@ exports.updateAvatars = function() {
     const thisYear = new Date().getFullYear();
 
     let metadataDoc;
-    let avatarsDoc;
     return syncInfo.get().then(metadataDocRef => {
         metadataDoc = metadataDocRef;
 
@@ -39,18 +38,27 @@ exports.updateAvatars = function() {
         }
     }).then(_ => {
         return teamAvatars.get();
-    }).then(avatarsDocRef => {
-        avatarsDoc = avatarsDocRef;
-        if (avatarsDoc.exists) {
-            return Promise.resolve(avatarsDoc);
-        } else {
-            return teamAvatars.create({});
-        }
-    }).then(_ => {
+    }).then(avatarsSnapshot => {
+        const avatars = avatarsSnapshotToAvatarMap(avatarsSnapshot);
+        return Promise.resolve(avatars);
+    }).then(avatars => {
         // 2018 was the first year of avatars, no need to try for years before that
-        const updater = new AvatarUpdater(thisYear, 2018, avatarBucket, metadataDoc.data(), avatarsDoc.data());
+        const updater = new AvatarUpdater(thisYear, 2018, avatarBucket, metadataDoc.data(), avatars);
         return updater.syncAvatars();
     });
+}
+
+const avatarsSnapshotToAvatarMap = function(avatarsSnapshot) {
+    const avatars = {};
+    avatarsSnapshot.docs
+            .filter(doc => doc.id !== 'sync-info')
+            .forEach(doc => {
+                const team = parseInt(doc.id);
+                if (isNaN(team)) {
+                    avatars[team] = doc.data()
+                }
+            });
+    return avatars;
 }
 
 const AvatarUpdater = class {
@@ -101,23 +109,34 @@ const AvatarUpdater = class {
             return Promise.resolve(null);
         }
 
-        const pendingAvatarMap = this._getAvatarMap(avatarData);
-        this.avatars = Object.assign(this.avatars, pendingAvatarMap);
-
-        return teamAvatars.update(pendingAvatarMap);
-    }
-
-    _getAvatarMap(avatarData) {
-        let avatarMap = {};
+        const updatePromises = [];
         avatarData.forEach(avatar => {
             if (avatar !== null) {
-                avatarMap[avatar.teamNumber] = {
+                const avatarDocValue = {
                     year: avatar.year,
                     path: avatar.path
-                }
+                };
+
+                const teamRef = teamAvatars.doc(avatar.teamNumber.toString());
+                const update = teamRef.get()
+                    .then(docSnapshot => {
+                        if (!docSnapshot.exists) {
+                            return teamRef.create(avatarDocValue);
+                        } else {
+                            return teamRef.update(avatarDocValue);
+                        }
+                    })
+
+                updatePromises.push(update);
+                this.avatars[avatar.teamNumber] = avatarDocValue;
             }
         });
-        return avatarMap;
+    
+        if (updatePromises.length === 0) {
+            return Promise.resolve(null);
+        } else {
+            return Promise.all(updatePromises);
+        }
     }
 
     _getAvatarsWithLastModified(year, page) {
@@ -144,7 +163,11 @@ const AvatarUpdater = class {
             }
     
             pageZeroLastModified = result.headers['last-modified'];
-            let pagePromises = [Promise.resolve(this._saveTeamAvatars(year, data.teams))];
+
+            const pageOne = this._saveTeamAvatars(year, data.teams).then(avatarData => {
+                return this._saveAvatarDataToFirestore(avatarData);
+            })
+            let pagePromises = [Promise.resolve(pageOne)];
     
             // Build up a list of all subsequent pages so we can fetch them simulataneously
             if (data.pageTotal > data.pageCurrent) {
@@ -187,7 +210,7 @@ const AvatarUpdater = class {
 
             return this._saveTeamAvatars(year, data.teams);
         }).then(avatarData => {
-            return this._saveAvatarDataToFirestore(avatarData)
+            return this._saveAvatarDataToFirestore(avatarData);
         }).catch(error => {
             console.log(`Failed to get avatars for ${year}, page ${page}. ${error}`);
         });

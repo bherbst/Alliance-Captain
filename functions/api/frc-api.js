@@ -36,7 +36,8 @@ module.exports.FrcApi = class FrcApi {
         };
 
         if (onlyModifiedSince) {
-            options.headers['FMS-OnlyModifiedSince'] = onlyModifiedSince;
+            // Temp disable due to https://usfirst.collab.net/sf/discussion/do/listPosts/projects.first_community_developers/discussion.frc_event_api.topc1987
+            // options.headers['FMS-OnlyModifiedSince'] = onlyModifiedSince;
         }
 
         return new Promise((resolve, reject) => {
@@ -44,7 +45,6 @@ module.exports.FrcApi = class FrcApi {
             console.log(`Sending HTTP get ${optsString}`);
             https.get(options, (res) => {
                 let err;
-                console.log(`HTTP returned ${res.statusCode} ${optsString}`);
                 if (res.statusCode !== 200) {
                     err = `${res.statusCode} (${res.statusMessage}): ${optsString}`;
                     reject(err);
