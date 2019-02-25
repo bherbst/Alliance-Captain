@@ -19,13 +19,15 @@ const {
     BasicCard,
     Button,
     BrowseCarousel,
-    BrowseCarouselItem
+    BrowseCarouselItem,
+    Image
 } = require('actions-on-google');
 
 const {currentYear} = require('../util')
+const {projectId} = require('../globals')
 
 exports.createTeamCard = function(team, year = currentYear) {
-    return new BasicCard({
+    const card = new BasicCard({
         title: `Team ${team.team_number} - ${team.nickname}`,
         subtitle: frcUtil.getLocationString(team),
         text: `See event results and more on firstinspires.org`,
@@ -34,16 +36,37 @@ exports.createTeamCard = function(team, year = currentYear) {
             url: `https://frc-events.firstinspires.org/${year}/team/${team.team_number}`
         })
     });
+
+    if (team.avatarUrl) {
+        card.image = new Image({
+            url: team.avatarUrl
+        });
+    }
+
+    return card;
 }
 
 exports.createMultiTeamCard = function(teams, year = currentYear) {
     return new BrowseCarousel({
-        items: teams.map((team) => 
-            new BrowseCarouselItem({
+        items: teams.map((team) => {
+            const item = new BrowseCarouselItem({
                 title: `Team ${team.team_number} - ${team.nickname}`,
                 url: `https://frc-events.firstinspires.org/${year}/team/${team.team_number}`,
-                description: `From ` + frcUtil.getLocationString(team),
-            })
-        )
+                description: `From ` + frcUtil.getLocationString(team)
+            });
+
+            if (team.avatarUrl) {
+                item.image = new Image({
+                    url: team.avatarUrl
+                });
+            } else {
+                // A carousel requires the same properties on all items, so we need a default avatar png.
+                item.image = new Image({
+                    url: `https://${projectId}.firebaseapp.com/images/empty_avatar.png`
+                });
+            }
+
+            return item;
+        })
     });
 }

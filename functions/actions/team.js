@@ -73,7 +73,7 @@ const getTeamNickName = (conv, params) => {
 const getTeamLocation = (conv, params) => {
   const team_number = params["team"];
 
-  return getTeamWithActiveStatus(team_number)
+  return getTeamWithActiveStatus(team_number, false)
       .catch((err) => {
         console.warn(err);
         return basicPromptWithReentry(`I couldn't find ${team_number}'s location.`);
@@ -93,7 +93,7 @@ const getTeamLocation = (conv, params) => {
 const getTeamAge = (conv, params) => {
   const team_number = params["team"];
 
-  return getTeamWithActiveStatus(team_number)
+  return getTeamWithActiveStatus(team_number, false)
       .catch((err) => {
         console.warn(err);
         return basicPromptWithReentry(`I couldn't find ${team_number}'s age.`);

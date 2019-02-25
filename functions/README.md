@@ -30,5 +30,7 @@ $ firebase deploy --only functions
 ```
 4. Configure environment variables
     * The Blue Alliance API key: `firebase functions:config:set tba.key="KEY_HERE"`
+    * FMS (FRC Events) API username: `firebase functions:config:set frc.username="USERNAME_HERE"`
+    * FMS (FRC Events) API key: `firebase functions:config:set frc.key="KEY_HERE"`
     * DialogFlow entity ID for teams: `firebase functions:config:set entities.teams="ID_HERE"
     * DialogFlow entity ID for events: `firebase functions:config:set entities.events="ID_HERE"

@@ -14,7 +14,7 @@
  */
 `use strict`
 
-const projectId = process.env.GCLOUD_PROJECT
+const {projectId} = require('../globals')
 
 const startMatch = (conv) => {
   return playAudio(conv, "start_auto.wav", "match start sound");
