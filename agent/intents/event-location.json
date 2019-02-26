@@ -40,7 +40,14 @@
           "name": "season",
           "value": "$season",
           "prompts": [],
-          "defaultValue": "#season.season",
+          "defaultValue": "",
+          "isList": false
+        },
+        {
+          "id": "e62f159f-3e6d-4174-9a2f-2866020be390",
+          "dataType": "@sys.date-period",
+          "name": "date-period",
+          "value": "$date-period",
           "isList": false
         }
       ],
@@ -58,7 +65,7 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1548699543,
+  "lastUpdate": 1551207013,
   "fallbackIntent": false,
   "events": []
 }

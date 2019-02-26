@@ -160,18 +160,7 @@ const getTeamInfo = (conv, params) => {
 
 const getRobotName = (conv, params) => {
   const team_number = params["team"];
-  const date = params["date"];
-  const season = params["season"];
-  let year;
-
-  const currentYear = new Date().getFullYear();
-  if (date) {
-    year = new Date(date).getFullYear();
-  } else if (season) {
-    year = season;
-  } else {
-    year = currentYear;
-  }
+  const year = frcUtil.getYearOrThisYear(params, conv.contexts);
 
   conv.contexts.set("season", 5, { "season": year });
 

@@ -1,5 +1,108 @@
 [
   {
+    "id": "b68f6d4a-e957-47ed-aa48-d5e990ffbff2",
+    "data": [
+      {
+        "text": "What ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " the name of ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": "\u0027s\u0027s robot ",
+        "userDefined": false
+      },
+      {
+        "text": "last year",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551206826
+  },
+  {
+    "id": "5f2eea95-efc3-4bc3-9e4a-d0b8c5edad54",
+    "data": [
+      {
+        "text": "What ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " their robot\u0027s name ",
+        "userDefined": false
+      },
+      {
+        "text": "three years ago",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551206826
+  },
+  {
+    "id": "a0e495cb-5d11-4cf1-9adf-756edaa03a44",
+    "data": [
+      {
+        "text": "What ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " the name of their robot ",
+        "userDefined": false
+      },
+      {
+        "text": "last year",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551206826
+  },
+  {
     "id": "dc6e2d15-fde1-4b60-a84e-1c1984441500",
     "data": [
       {
@@ -40,8 +143,8 @@
       },
       {
         "text": "2017",
-        "alias": "date",
-        "meta": "@sys.date",
+        "alias": "season",
+        "meta": "@season",
         "userDefined": false
       },
       {
@@ -128,8 +231,8 @@
       },
       {
         "text": "2017",
-        "alias": "date",
-        "meta": "@sys.date",
+        "alias": "season",
+        "meta": "@season",
         "userDefined": false
       },
       {
@@ -226,8 +329,8 @@
       },
       {
         "text": "2017",
-        "alias": "date",
-        "meta": "@sys.date",
+        "alias": "season",
+        "meta": "@season",
         "userDefined": false
       },
       {
@@ -258,8 +361,8 @@
       },
       {
         "text": "2017",
-        "alias": "date",
-        "meta": "@sys.date",
+        "alias": "season",
+        "meta": "@season",
         "userDefined": true
       },
       {

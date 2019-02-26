@@ -17,11 +17,6 @@
           "name": "award",
           "parameters": {},
           "lifespan": 5
-        },
-        {
-          "name": "season",
-          "parameters": {},
-          "lifespan": 5
         }
       ],
       "parameters": [
@@ -85,7 +80,7 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1545254737,
+  "lastUpdate": 1551207353,
   "fallbackIntent": false,
   "events": []
 }
