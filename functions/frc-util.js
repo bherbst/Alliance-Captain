@@ -46,7 +46,10 @@ exports.getEventLocationWithDistrict = function(event) {
 exports.getYearOrThisYear = function(params, contexts) {
   const season = params["season"];
   const datePeriod = params["date-period"];
-  const seasonContext = contexts.get("season")
+  let seasonContext;
+  if (contexts) {
+    seasonContext = contexts.get("season");
+  }
 
   let year;
   if (season) {
