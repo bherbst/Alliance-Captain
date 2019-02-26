@@ -42,7 +42,15 @@
               "value": "What year?"
             }
           ],
-          "defaultValue": "#season.year",
+          "defaultValue": "",
+          "isList": false
+        },
+        {
+          "id": "dcc572e4-bc2f-4f51-a087-33fed3061798",
+          "required": false,
+          "dataType": "@sys.date-period",
+          "name": "date-period",
+          "value": "$date-period",
           "isList": false
         }
       ],
@@ -60,7 +68,7 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1545419688,
+  "lastUpdate": 1551207396,
   "fallbackIntent": false,
   "events": []
 }

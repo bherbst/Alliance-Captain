@@ -12,11 +12,6 @@
           "name": "team",
           "parameters": {},
           "lifespan": 5
-        },
-        {
-          "name": "year",
-          "parameters": {},
-          "lifespan": 5
         }
       ],
       "parameters": [
@@ -36,6 +31,15 @@
           "dataType": "@season",
           "name": "season",
           "value": "$season",
+          "prompts": [],
+          "isList": false
+        },
+        {
+          "id": "99eaeef0-9481-42fd-9012-190f56d1cfa6",
+          "required": false,
+          "dataType": "@sys.date-period",
+          "name": "date-period",
+          "value": "$date-period",
           "isList": false
         }
       ],
@@ -53,7 +57,7 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1545419706,
+  "lastUpdate": 1551213614,
   "fallbackIntent": false,
   "events": []
 }

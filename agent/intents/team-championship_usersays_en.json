@@ -1,5 +1,59 @@
 [
   {
+    "id": "79e58dff-c2ab-464a-9325-13757f0f8e47",
+    "data": [
+      {
+        "text": "Which champs did ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " go to ",
+        "userDefined": false
+      },
+      {
+        "text": "two years ago",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551207432
+  },
+  {
+    "id": "2d01290b-b5dd-4157-a15e-070702280d01",
+    "data": [
+      {
+        "text": "Which championship did they attend ",
+        "userDefined": false
+      },
+      {
+        "text": "last year",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551207432
+  },
+  {
     "id": "29de07bf-14cf-46fa-a6f4-62b804b962b5",
     "data": [
       {

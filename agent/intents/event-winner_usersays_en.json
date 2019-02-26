@@ -1,6 +1,111 @@
 [
   {
-    "id": "6691451e-d3c4-4f5d-b0a6-2a053b5421b9",
+    "id": "fab60576-10d9-46de-a849-8927e35a8641",
+    "data": [
+      {
+        "text": "Which ",
+        "userDefined": false
+      },
+      {
+        "text": "team",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " won the ",
+        "userDefined": false
+      },
+      {
+        "text": "Lake Superior Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "two years ago",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551207099
+  },
+  {
+    "id": "a515befd-25dd-4cc1-b7ca-9b1ef269c60c",
+    "data": [
+      {
+        "text": "Who",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " won ",
+        "userDefined": false
+      },
+      {
+        "text": "last year",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551207099
+  },
+  {
+    "id": "bb0bcea9-5481-4a29-98b7-9544893bbd46",
+    "data": [
+      {
+        "text": "Who",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " won the ",
+        "userDefined": false
+      },
+      {
+        "text": "Lake Superior regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "last year",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551207099
+  },
+  {
+    "id": "630aad18-4aa3-44be-bb0e-6040de958474",
     "data": [
       {
         "text": "Who",
@@ -34,10 +139,10 @@
     ],
     "isTemplate": false,
     "count": 0,
-    "updated": 1550005707
+    "updated": 1550005623
   },
   {
-    "id": "718a0e37-4a5b-4e22-bd15-d6fb69048fbb",
+    "id": "597da6ab-a3ad-4d94-995b-d31326fa54b3",
     "data": [
       {
         "text": "which ",
@@ -75,7 +180,7 @@
     ],
     "isTemplate": false,
     "count": 0,
-    "updated": 1550005707
+    "updated": 1550005623
   },
   {
     "id": "0324bf3a-3556-4c8a-92b1-60ac9a3512b4",
@@ -106,7 +211,7 @@
     ],
     "isTemplate": false,
     "count": 0,
-    "updated": 1543414452
+    "updated": 1550005623
   },
   {
     "id": "766dbe5f-d60b-4e73-9f1f-80cfb83585fa",
@@ -133,7 +238,7 @@
     ],
     "isTemplate": false,
     "count": 0,
-    "updated": 1543414452
+    "updated": 1550005623
   },
   {
     "id": "7c7b7d51-a0f3-4753-9b38-faf62786bd85",
@@ -170,7 +275,7 @@
     ],
     "isTemplate": false,
     "count": 0,
-    "updated": 1540997920
+    "updated": 1550005623
   },
   {
     "id": "5d3490e0-9449-414d-909a-1566c71b922d",
@@ -191,7 +296,7 @@
     ],
     "isTemplate": false,
     "count": 0,
-    "updated": 1540994453
+    "updated": 1550005623
   },
   {
     "id": "6d10cc62-4495-4412-9665-20646ad071f3",
@@ -212,7 +317,7 @@
     ],
     "isTemplate": false,
     "count": 0,
-    "updated": 1543414452
+    "updated": 1550005623
   },
   {
     "id": "331b25c5-ab2a-4820-8a18-a16f776a2ce1",
@@ -229,7 +334,7 @@
     ],
     "isTemplate": false,
     "count": 0,
-    "updated": 1543414452
+    "updated": 1550005623
   },
   {
     "id": "79ec0101-2157-4d98-8273-66e11db80eb4",
@@ -246,7 +351,7 @@
     ],
     "isTemplate": false,
     "count": 0,
-    "updated": 1540994453
+    "updated": 1550005623
   },
   {
     "id": "8e16d656-79e7-4943-b75b-0f8a5bce6ee9",
@@ -277,7 +382,7 @@
     ],
     "isTemplate": false,
     "count": 0,
-    "updated": 1540994453
+    "updated": 1550005623
   },
   {
     "id": "2c7a415e-8438-44cc-ad91-6eed8fc5605c",
