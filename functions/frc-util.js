@@ -43,15 +43,20 @@ exports.getEventLocationWithDistrict = function(event) {
   return result;
 }
 
-exports.getYearOrThisYear = function(params) {
+exports.getYearOrThisYear = function(params, contexts) {
   const season = params["season"];
-  const now = new Date();
+  const datePeriod = params["date-period"];
+  const seasonContext = contexts.get("season")
 
   let year;
   if (season) {
     year = season;
+  } else if (datePeriod) {
+    year = new Date(datePeriod.startDate).getFullYear()
+  } else if (seasonContext) {
+    year = seasonContext.season
   } else {
-    year = now.getFullYear();
+    year = new Date().getFullYear();
   }
 
   return year;

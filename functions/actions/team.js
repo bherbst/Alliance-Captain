@@ -194,7 +194,7 @@ const getRobotName = (conv, params) => {
 
 const getTeamEvents = (conv, params) => {
   const team_number = params["team"];
-  const year = frcUtil.getYearOrThisYear(params);
+  const year = frcUtil.getYearOrThisYear(params, conv.contexts);
 
   conv.contexts.set("season", 5, { "season": year });
 
@@ -257,7 +257,7 @@ const getTeamEvents = (conv, params) => {
 // TODO use awards.js
 const getTeamAwards = (conv, params) => {
   const team_number = params["team"];
-  const season = params["season"];
+  const season = frcUtil.getYearOrThisYear(params, conv.contexts);
 
   if (season) {
     conv.contexts.set("season", 5, { "year": season });
