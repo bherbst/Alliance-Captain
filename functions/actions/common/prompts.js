@@ -30,8 +30,8 @@ exports.defaultFallbackPrompts = new Prompt([
 ])
 exports.fallbackFinal = basicPrompt(`Looks like this robot needs help from the programming team. Come back later!`)
 
-exports.noInputPrompts = [
+exports.noInputPrompts = new Prompt([
     new SimpleResponse({speech: `I can give you information on FRC teams and events. What would you like to know?`}),
     new SimpleResponse({speech: `What can I tell you about FRC teams and events?`})
-]
+])
 exports.noInputFinal = basicPrompt(`I'll have to respectfully decline your alliance invitation. Talk to you later!`)
