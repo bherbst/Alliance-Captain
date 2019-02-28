@@ -1,0 +1,51 @@
+{
+  "id": "07fb85d4-154c-48be-bbe0-cdffe9a6a62b",
+  "name": "team-events-contextual",
+  "auto": true,
+  "contexts": [
+    "team"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [
+        {
+          "name": "team",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "ad8a87e4-9380-4f80-a2fc-d93e7f59bef5",
+          "required": true,
+          "dataType": "@team",
+          "name": "team",
+          "value": "#team.team",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Which team?"
+            }
+          ],
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1551373611,
+  "fallbackIntent": false,
+  "events": []
+}

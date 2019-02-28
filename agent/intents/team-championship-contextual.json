@@ -1,0 +1,50 @@
+{
+  "id": "f1429ae7-4c01-48c4-b884-0356b3e8dd49",
+  "name": "team-championship-contextual",
+  "auto": true,
+  "contexts": [
+    "team"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [
+        {
+          "name": "team",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "feb2362f-a13a-48bf-b2f3-f1789afc3cf4",
+          "required": true,
+          "dataType": "@team",
+          "name": "team",
+          "value": "#team.team",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Which team?"
+            }
+          ]
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1551373600,
+  "fallbackIntent": false,
+  "events": []
+}

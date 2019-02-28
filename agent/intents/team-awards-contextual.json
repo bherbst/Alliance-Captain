@@ -1,0 +1,50 @@
+{
+  "id": "1fa68eb8-263d-4ff0-9bf4-24770fd034fb",
+  "name": "team-awards-contextual",
+  "auto": true,
+  "contexts": [
+    "team"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [
+        {
+          "name": "team",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "41d0a620-360b-457a-be9f-a67e2ce16028",
+          "required": true,
+          "dataType": "@team",
+          "name": "team",
+          "value": "#team.team",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Which team?"
+            }
+          ]
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1551373406,
+  "fallbackIntent": false,
+  "events": []
+}

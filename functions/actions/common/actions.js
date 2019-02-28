@@ -14,6 +14,8 @@
  */
 'use strict';
 
+const {Suggestions} = require('actions-on-google');
+
 /**
  * Get a random element from an array
  */
@@ -54,6 +56,11 @@ exports.prompt = (conv, prompt) => {
     if (prompt.followUpResponsePool) {
       conv.ask(getRandomElement(prompt.followUpResponsePool));
     }
+
+    if (prompt.suggestions) {
+      conv.ask(new Suggestions(prompt.suggestions));
+    }
+
   } catch (error) {
     console.error(`Error parsing prompt: ${error}`);
     exports.fallback(conv);

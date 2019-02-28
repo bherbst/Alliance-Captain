@@ -41,14 +41,18 @@ app.intent([
 app.intent([
   'team-rookie-year',
   'team-info',
+  'team-info-contextual',
   'team-location',
   'team-age',
   'team-nickname',
   'team-robot-name',
   'team-name',
   'team-events',
+  'team-events-contextual',
   'team-awards',
-  'team-championship'
+  'team-awards-contextual',
+  'team-championship',
+  'team-championship-contextual'
 ], team)
 
 app.intent([
