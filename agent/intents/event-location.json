@@ -45,6 +45,7 @@
         },
         {
           "id": "e62f159f-3e6d-4174-9a2f-2866020be390",
+          "required": false,
           "dataType": "@sys.date-period",
           "name": "date-period",
           "value": "$date-period",
@@ -65,7 +66,7 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1551207013,
+  "lastUpdate": 1551386701,
   "fallbackIntent": false,
   "events": []
 }

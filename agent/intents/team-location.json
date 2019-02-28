@@ -24,6 +24,13 @@
           "prompts": [],
           "defaultValue": "#team.team",
           "isList": false
+        },
+        {
+          "id": "f54518d9-0e5a-4bab-ba40-8da6f5f6cb13",
+          "dataType": "@event",
+          "name": "event",
+          "value": "$event",
+          "isList": false
         }
       ],
       "messages": [
@@ -40,7 +47,7 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1545419764,
+  "lastUpdate": 1551387066,
   "fallbackIntent": false,
   "events": []
 }

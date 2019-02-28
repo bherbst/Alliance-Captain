@@ -1,5 +1,145 @@
 [
   {
+    "id": "c321d2bd-27ee-4d16-804a-d5966994e532",
+    "data": [
+      {
+        "text": "how ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " did ",
+        "userDefined": false
+      },
+      {
+        "text": "last year",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551386848
+  },
+  {
+    "id": "31893181-3402-404b-b760-348ab56fb323",
+    "data": [
+      {
+        "text": "if ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " won any awards ",
+        "userDefined": false
+      },
+      {
+        "text": "in 2019",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551386848
+  },
+  {
+    "id": "049a9a1c-b173-4ca5-9f86-797318daa45f",
+    "data": [
+      {
+        "text": "if ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " won any awards ",
+        "userDefined": false
+      },
+      {
+        "text": "last year",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551386848
+  },
+  {
+    "id": "49423348-f264-4851-b71c-d0713d5be7bb",
+    "data": [
+      {
+        "text": "What awards ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " won in ",
+        "userDefined": false
+      },
+      {
+        "text": "2019",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551386848
+  },
+  {
+    "id": "c92a4ce6-19a1-40f2-a6c1-89d5a2a578c8",
+    "data": [
+      {
+        "text": "What awards ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " won ",
+        "userDefined": false
+      },
+      {
+        "text": "last year",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551386848
+  },
+  {
     "id": "5859cf5a-2fb1-4a94-994d-4156b3d1034f",
     "data": [
       {
