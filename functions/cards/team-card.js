@@ -39,7 +39,8 @@ exports.createTeamCard = function(team, year = currentYear) {
 
     if (team.avatarUrl) {
         card.image = new Image({
-            url: team.avatarUrl
+            url: team.avatarUrl,
+            alt: `Team ${team.team_number}'s avatar`
         });
     }
 
@@ -57,12 +58,14 @@ exports.createMultiTeamCard = function(teams, year = currentYear) {
 
             if (team.avatarUrl) {
                 item.image = new Image({
-                    url: team.avatarUrl
+                    url: team.avatarUrl,
+                    alt: `No avatar found for team ${team.team_number}`,
                 });
             } else {
                 // A carousel requires the same properties on all items, so we need a default avatar png.
                 item.image = new Image({
-                    url: `https://${projectId}.firebaseapp.com/images/empty_avatar.png`
+                    url: `https://${projectId}.firebaseapp.com/images/empty_avatar.png`,
+                    alt: `Team ${team.team_number}'s avatar`,
                 });
             }
 
