@@ -36,11 +36,17 @@ const getRookieYear = (conv, params) => {
       .then((data) => {
         const name = frcUtil.nicknameOrNumber(data);
         conv.contexts.set("season", 5, { "season": data.rookie_year });
+
+        let prompt;
         if (data.rookie_year >= new Date().getFullYear()) {
-          return basicPromptWithReentry(`${data.rookie_year} is ${name}'s rookie year.`);
+          prompt = basicPromptWithReentry(`${data.rookie_year} is ${name}'s rookie year.`);
         } else {
-          return basicPromptWithReentry(`${name}'s rookie year was ${data.rookie_year}.`);
+          prompt = basicPromptWithReentry(`${name}'s rookie year was ${data.rookie_year}.`);
         }
+
+        prompt.suggestions = ["Awards", "Events", "Team info", "Championship info"];
+
+        return prompt;
       });
 }
 
@@ -53,7 +59,9 @@ const getTeamName = (conv, params) => {
         return basicPromptWithReentry(`I couldn't find ${team_number}'s name.`);
       })
       .then((data) => {
-        return basicPromptWithReentry(`FRC team ${team_number}'s name is ${data.name}.`);
+        const prompt = basicPromptWithReentry(`FRC team ${team_number}'s name is ${data.name}.`);
+        prompt.suggestions = ["Awards", "Events", "Team info", "Championship info"];
+        return prompt;
       });
 }
 
@@ -66,7 +74,9 @@ const getTeamNickName = (conv, params) => {
         return basicPromptWithReentry(`I couldn't find ${team_number}'s nickname.`);
       })
       .then((data) => {
-        return basicPromptWithReentry(`FRC team ${team_number}'s nickname is ${data.nickname}.`);
+        const prompt = basicPromptWithReentry(`FRC team ${team_number}'s nickname is ${data.nickname}.`);
+        prompt.suggestions = ["Awards", "Events", "Team info", "Championship info"];
+        return prompt;
       });
 }
 
@@ -82,11 +92,16 @@ const getTeamLocation = (conv, params) => {
         const name = frcUtil.nicknameOrNumber(team);
         const location = frcUtil.getLocationString(team);
         
+        let prompt;
         if (team.isActive) {
-          return basicPromptWithReentry(`${name} is from ${location}.`);
+          prompt = basicPromptWithReentry(`${name} is from ${location}.`);
         } else {
-          return basicPromptWithReentry(`${name} was from ${location}. They last competed in ${team.mostRecentEventYear}`);
+          prompt = basicPromptWithReentry(`${name} was from ${location}. They last competed in ${team.mostRecentEventYear}`);
         }
+        
+        prompt.suggestions = ["Awards", "Events", "Team info", "Championship info"];
+
+        return prompt;
       });
 }
 
@@ -101,18 +116,23 @@ const getTeamAge = (conv, params) => {
       .then((team) => {
         const name = frcUtil.nicknameOrNumber(team);
         
+        let prompt;
         if (team.isActive) {
           if (team.isRookie) {
-            return basicPromptWithReentry(`${name} is a rookie team.`);
+            prompt = basicPromptWithReentry(`${name} is a rookie team.`);
           } else {
             const thisYear = new Date().getFullYear();
             const age = thisYear - team.rookie_year;
-            return basicPromptWithReentry(`${name} is ${age} years old.`);
+            prompt = basicPromptWithReentry(`${name} is ${age} years old.`);
           }
         } else {
           const age = team.mostRecentEventYear - team.rookie_year;
-          return basicPromptWithReentry(`${name} competed for ${age} years. They last competed in ${team.mostRecentEventYear}.`);
+          prompt = basicPromptWithReentry(`${name} competed for ${age} years. They last competed in ${team.mostRecentEventYear}.`);
         }
+
+        prompt.suggestions = ["Awards", "Events", "Team info", "Championship info"];
+
+        return prompt;
       });
 }
 
@@ -153,6 +173,8 @@ const getTeamInfo = (conv, params) => {
           response = basicPromptWithReentry(`${name} from ${location} competed for ${age} years. They last competed in ${team.mostRecentEventYear}.`);
           response.screenContent = createTeamCard(team, team.mostRecentEventYear)
         }
+        
+        response.suggestions = ["Awards", "Events", "Championship info"];
 
         return response;
       });
@@ -170,14 +192,19 @@ const getRobotName = (conv, params) => {
         basicPromptWithReentry(`I couldn't find ${team_number}'s robot name for ${year}.`);
       })
       .then((data) => {
+        let prompt;
         if (data[year] === undefined) {
           console.warn(`No data for ${year}`);
-          return basicPromptWithReentry(`I couldn't find ${team_number}'s robot name for ${year}.`);
+          prompt = basicPromptWithReentry(`I couldn't find ${team_number}'s robot name for ${year}.`);
         } else {
           const join = year === currentYear ? "is" : "was";
           const robotName = data[year].name;
-          return basicPromptWithReentry(`FRC team ${team_number}'s ${year} robot ${join} ${robotName}`);
+          prompt = basicPromptWithReentry(`FRC team ${team_number}'s ${year} robot ${join} ${robotName}`);
         }
+        
+        prompt.suggestions = ["Awards", "Events", "Team info", "Championship info"];
+
+        return prompt;
       })
 }
 
@@ -239,6 +266,9 @@ const getTeamEvents = (conv, params) => {
         } else if (data.length === 1) {
           prompt.screenContent = eventCards.createEventCard(data[0]);
         }
+
+        prompt.suggestions = ["Awards", "Team info", "Championship info"];
+
         return prompt;
       })
 }
@@ -271,7 +301,9 @@ const getTeamAwards = (conv, params) => {
           } else {
             response = `${team_number} has not won an award yet.`;
           }
-          return basicPromptWithReentry(response);
+          const prompt = basicPromptWithReentry(response);
+          prompt.suggestions = ["Events", "Team info", "Championship info"];
+          return prompt;
         }
 
         const allAwards = groupBy(data, 'year');
@@ -350,7 +382,9 @@ const getTeamAwards = (conv, params) => {
         response += frcUtil.joinToOxfordList(awardStrings);
         response += ".";
 
-        return basicPromptWithReentry(response);
+        let prompt = basicPromptWithReentry(response);
+        prompt.suggestions = ["Events", "Team info", "Championship info"];
+        return prompt;
       })
 }
 
@@ -448,6 +482,9 @@ const getTeamChampionship = (conv, params) => {
         } else if (cmpEvents.length === 1) {
           prompt.screenContent = eventCards.createEventCard(cmpEvents[0]);
         }
+
+        prompt.suggestions = ["Awards", "Events", "Team info"];
+
         return prompt;
       })
 }
@@ -455,14 +492,18 @@ const getTeamChampionship = (conv, params) => {
 const intents = {
   'team-rookie-year': getRookieYear,
   'team-info': getTeamInfo,
+  'team-info-contextual': getTeamInfo,
   'team-location': getTeamLocation,
   'team-age': getTeamAge,
   'team-nickname': getTeamNickName,
   'team-robot-name': getRobotName,
   'team-name': getTeamName,
   'team-events': getTeamEvents,
+  'team-events-contextual': getTeamEvents,
   'team-awards': getTeamAwards,
-  'team-championship': getTeamChampionship
+  'team-awards-contextual': getTeamAwards,
+  'team-championship': getTeamChampionship,
+  'team-championship-contextual': getTeamChampionship
 }
 
 module.exports.team = (conv, params) => {

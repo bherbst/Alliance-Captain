@@ -17,12 +17,12 @@
 const {SimpleResponse} = require('actions-on-google');
 
 exports.basicPrompt = (speech, text) => {
-    return new exports.Prompt([
+    return new exports.Prompt({responsePool: [
             new SimpleResponse({
                 speech: speech,
                 text: text ? text : speech
             })
-        ])
+        ]})
 };
 
 exports.reentryPool = [
@@ -32,20 +32,31 @@ exports.reentryPool = [
 ];
 
 exports.basicPromptWithReentry = (speech, text) => {
-    return new exports.Prompt(
-        [
+    return new exports.Prompt({
+        responsePool: [
             new SimpleResponse({
                 speech: speech,
                 text: text ? text : speech
             })
-        ], exports.reentryPool
-    )
+        ],
+        followUpResponsePool: exports.reentryPool
+    })
 };
 
 exports.Prompt = class Prompt {
-    constructor(responsePool, followUpResponsePool, screenContent) {
-        this.responsePool = responsePool
-        this.followUpResponsePool = followUpResponsePool
-        this.screenContent = screenContent
+    /**
+     * Prompt constructor
+     * 
+     * @param {Object} options A configuration object for this Prompt
+     * @param {Array} options.responsePool An array of possible responses. A single random response will be presented to the user
+     * @param {Array} options.followUpResponsePool An array of follow up responses. A single random response will be presented to the user
+     * @param {Object} options.screenContent Screen content (such as a BasicCard) to display to the user if on a surface with a display
+     * @param {Array} options.suggestions An array of suggestion chips to display to the user if on a surface with a display.
+     */
+    constructor(options = {}) {
+        this.responsePool = options.responsePool
+        this.followUpResponsePool = options.followUpResponsePool
+        this.screenContent = options.screenContent
+        this.suggestions = options.suggestions;
     }
 };
