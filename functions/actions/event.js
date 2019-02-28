@@ -50,6 +50,8 @@ const getEventWinner = (conv, params) => {
           const response = basicPromptWithReentry(`Teams ${teams} won the ${year} ${eventName}`);
           response.screenContent = screenContent;
 
+          response.suggestions = getSuggestions(1); // 1 = event winner
+
           return response;
         });
 }
@@ -92,6 +94,8 @@ const getEventAwardWinner = (conv, params) => {
           const winnerText = getAwardWinnerText(winners, awardType, year, eventName, isCmp);
           const response = basicPromptWithReentry(winnerText);
           response.screenContent = screenContent;
+
+          response.suggestions = getSuggestions(awardType);
 
           return response;
         });
@@ -158,6 +162,8 @@ const getEventLocation = (conv, params) => {
         const response = basicPromptWithReentry(responseText);
         response.screenContent = screenContent;
 
+        response.suggestions = getSuggestions();
+
         return response;
       });
 }
@@ -203,6 +209,8 @@ const getEventDate = (conv, params) => {
         const response = basicPromptWithReentry(responseSpeech, responseText);
         response.screenContent = screenContent;
 
+        response.suggestions = getSuggestions();
+
         return response;
       });
 }
@@ -222,11 +230,29 @@ const getEventName = (eventKey) => {
       });
 }
 
+const getSuggestions = (excludeType) => {
+  const suggestions = ["Winners", "Chairman's", "Finalists", "Engineering Inspiration", "Woodie Flowers"]
+  switch(excludeType) {
+    case 1: suggestions.splice(0, 1); break;
+    case 0: suggestions.splice(1, 1); break;
+    case 2: suggestions.splice(2, 1); break;
+    case 9: suggestions.splice(3, 1); break;
+    case 3: suggestions.splice(4, 1); break;
+    default: break; // Default keep all suggestions
+  }
+  return suggestions;
+}
+
 const intents = {
   'event-award-winner': getEventAwardWinner,
   'event-winner': getEventWinner,
   'event-location': getEventLocation,
   'event-date': getEventDate,
+  'event-winner-contextual': getEventAwardWinner,
+  'event-chairmans-contextual': getEventAwardWinner,
+  'event-finalist-contextual': getEventAwardWinner,
+  'event-engineering-inspiration-contextual': getEventAwardWinner,
+  'event-woodie-flowers-contextual': getEventAwardWinner
 }
 
 module.exports.event = (conv, params) => {

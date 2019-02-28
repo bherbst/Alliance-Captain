@@ -1,0 +1,72 @@
+{
+  "id": "905b3f2c-dafd-4226-926d-4bfb2ccac412",
+  "name": "event-engineering-inspiration-contextual",
+  "auto": true,
+  "contexts": [
+    "event",
+    "season"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [
+        {
+          "name": "event",
+          "parameters": {},
+          "lifespan": 5
+        },
+        {
+          "name": "season",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "68cf13ae-aeed-4a2a-8384-5af8937a1d69",
+          "required": true,
+          "dataType": "@event",
+          "name": "event",
+          "value": "#event.event",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Which event?"
+            }
+          ],
+          "isList": false
+        },
+        {
+          "id": "185224d4-ee0b-4247-ba7b-920f12c2dcc4",
+          "required": true,
+          "dataType": "@award",
+          "name": "award",
+          "value": "9",
+          "isList": false
+        },
+        {
+          "id": "9a419543-6d10-4fdd-bfe3-53b52202b2de",
+          "required": true,
+          "dataType": "@season",
+          "name": "season",
+          "value": "#season.season"
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1551386128,
+  "fallbackIntent": false,
+  "events": []
+}
