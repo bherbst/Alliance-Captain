@@ -37,7 +37,7 @@
         },
         {
           "id": "3d57fcc8-4c28-48f0-9fad-18bf55249d28",
-          "required": true,
+          "required": false,
           "dataType": "@season",
           "name": "season",
           "value": "$season",
@@ -80,7 +80,7 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1551207353,
+  "lastUpdate": 1551389391,
   "fallbackIntent": false,
   "events": []
 }
