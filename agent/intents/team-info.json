@@ -33,6 +33,13 @@
           ],
           "defaultValue": "#team.team",
           "isList": false
+        },
+        {
+          "id": "2cf7b335-f725-4e0b-adde-5f3fd59599f1",
+          "dataType": "@team",
+          "name": "team1",
+          "value": "$team1",
+          "isList": false
         }
       ],
       "messages": [
@@ -49,7 +56,7 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1545419722,
+  "lastUpdate": 1551387020,
   "fallbackIntent": false,
   "events": []
 }

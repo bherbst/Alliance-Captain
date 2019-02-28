@@ -1,5 +1,117 @@
 [
   {
+    "id": "04a3538b-6707-4148-9241-03597940e7a9",
+    "data": [
+      {
+        "text": "Which championship ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " went ",
+        "userDefined": false
+      },
+      {
+        "text": "to last year",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551386925
+  },
+  {
+    "id": "a7575979-79f9-4a08-ba2a-bc6e08ddabdb",
+    "data": [
+      {
+        "text": "which championship ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " went to ",
+        "userDefined": false
+      },
+      {
+        "text": "in 2019",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551386925
+  },
+  {
+    "id": "6ba64525-a95e-432e-8388-3dac5a998d29",
+    "data": [
+      {
+        "text": "if ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " attended championships ",
+        "userDefined": false
+      },
+      {
+        "text": "in 2019",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551386925
+  },
+  {
+    "id": "a2707697-7958-412e-9c04-d76e00cd8b19",
+    "data": [
+      {
+        "text": "if ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " when to champs ",
+        "userDefined": false
+      },
+      {
+        "text": "last year",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551386925
+  },
+  {
     "id": "79e58dff-c2ab-464a-9325-13757f0f8e47",
     "data": [
       {

@@ -33,6 +33,13 @@
           ],
           "defaultValue": "#team.team",
           "isList": false
+        },
+        {
+          "id": "dbbc2346-aab0-4a76-93be-062712c0c926",
+          "dataType": "@event",
+          "name": "event",
+          "value": "$event",
+          "isList": false
         }
       ],
       "messages": [
@@ -49,7 +56,7 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1545419839,
+  "lastUpdate": 1551387397,
   "fallbackIntent": false,
   "events": []
 }

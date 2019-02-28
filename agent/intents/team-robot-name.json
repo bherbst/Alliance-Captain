@@ -12,11 +12,6 @@
           "name": "team",
           "parameters": {},
           "lifespan": 5
-        },
-        {
-          "name": "year",
-          "parameters": {},
-          "lifespan": 5
         }
       ],
       "parameters": [
@@ -42,6 +37,7 @@
         },
         {
           "id": "99d99ff3-202c-4f11-8f04-c94481053fa5",
+          "required": false,
           "dataType": "@sys.date-period",
           "name": "date-period",
           "value": "$date-period",
@@ -62,7 +58,7 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1551206826,
+  "lastUpdate": 1551387326,
   "fallbackIntent": false,
   "events": []
 }

@@ -1,5 +1,83 @@
 [
   {
+    "id": "7cf9c388-9408-4585-83fd-c2e39e2e11e1",
+    "data": [
+      {
+        "text": "which events ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " played at ",
+        "userDefined": false
+      },
+      {
+        "text": "last year",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551386975
+  },
+  {
+    "id": "12fbb543-597a-4ce5-ad66-fdf41e9be612",
+    "data": [
+      {
+        "text": "Which events ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " attended ",
+        "userDefined": false
+      },
+      {
+        "text": "in 2019",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551386975
+  },
+  {
+    "id": "40c8325e-e7f2-4e09-8dd7-f191ed9fb045",
+    "data": [
+      {
+        "text": "which events ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " went to",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551386975
+  },
+  {
     "id": "46f8feed-912a-428e-bd26-181ea6bc1d60",
     "data": [
       {
