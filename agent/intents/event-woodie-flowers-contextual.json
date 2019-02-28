@@ -1,0 +1,72 @@
+{
+  "id": "6564ff6f-d77a-4232-9882-70527d60fdbe",
+  "name": "event-woodie-flowers-contextual",
+  "auto": true,
+  "contexts": [
+    "event",
+    "season"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [
+        {
+          "name": "event",
+          "parameters": {},
+          "lifespan": 5
+        },
+        {
+          "name": "season",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "007214ae-82fe-4800-a860-0f9f0c425f6f",
+          "required": true,
+          "dataType": "@event",
+          "name": "event",
+          "value": "#event.event",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Which event?"
+            }
+          ],
+          "isList": false
+        },
+        {
+          "id": "2fe3198b-73f7-4ffc-9974-45875dafdab3",
+          "required": true,
+          "dataType": "@award",
+          "name": "award",
+          "value": "3",
+          "isList": false
+        },
+        {
+          "id": "06a404f6-6e84-4fbf-98bb-69872626bd15",
+          "required": true,
+          "dataType": "@season",
+          "name": "season",
+          "value": "#season.season"
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1551386198,
+  "fallbackIntent": false,
+  "events": []
+}

@@ -35,7 +35,12 @@ app.intent([
   'event-award-winner',
   'event-winner',
   'event-location',
-  'event-date'
+  'event-date',
+  'event-winner-contextual',
+  'event-chairmans-contextual',
+  'event-finalist-contextual',
+  'event-engineering-inspiration-contextual',
+  'event-woodie-flowers-contextual'
 ], event)
 
 app.intent([

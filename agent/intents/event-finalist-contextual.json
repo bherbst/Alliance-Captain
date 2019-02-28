@@ -1,0 +1,72 @@
+{
+  "id": "fba0094f-bb82-4f60-91bb-639b153de61d",
+  "name": "event-finalist-contextual",
+  "auto": true,
+  "contexts": [
+    "event",
+    "season"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [
+        {
+          "name": "event",
+          "parameters": {},
+          "lifespan": 5
+        },
+        {
+          "name": "season",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "c3cbe090-20e4-465e-96bd-530d9f3f18bc",
+          "required": true,
+          "dataType": "@event",
+          "name": "event",
+          "value": "#event.event",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Which event?"
+            }
+          ],
+          "isList": false
+        },
+        {
+          "id": "82c5721c-de65-40d0-98d3-e079e9ac1691",
+          "required": true,
+          "dataType": "@award",
+          "name": "award",
+          "value": "2",
+          "isList": false
+        },
+        {
+          "id": "4f6f3a70-e2a5-49bd-a099-65d767ceacde",
+          "required": true,
+          "dataType": "@season",
+          "name": "season",
+          "value": "#season.season"
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1551386149,
+  "fallbackIntent": false,
+  "events": []
+}
