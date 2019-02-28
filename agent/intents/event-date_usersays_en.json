@@ -1,5 +1,46 @@
 [
   {
+    "id": "9cf90b20-3a65-46d0-8f16-5c541f11b5d9",
+    "data": [
+      {
+        "text": "When ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " the ",
+        "userDefined": false
+      },
+      {
+        "text": "Lake Superior Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "last year",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551207336
+  },
+  {
     "id": "9e66e7a7-81fc-478d-bd7c-f35e8003de48",
     "data": [
       {

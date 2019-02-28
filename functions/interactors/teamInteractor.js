@@ -19,19 +19,54 @@ const tba = require('../api/tba-client').tbaClient;
 const now = new Date();
 const currentYear = now.getFullYear();
 
-exports.getTeamWithActiveStatus = function(teamNumber) {
+const {teamAvatars} = require('../firestore/avatars')
+
+const {projectId} = require('../globals')
+
+exports.getTeamWithActiveStatus = function(teamNumber, getAvatar = true) {
+    let avatarPromise;
+    if (getAvatar) {
+        avatarPromise = teamAvatars.doc(teamNumber.toString()).get();
+    } else {
+        avatarPromise = Promise.resolve(null);
+    }
+
     return Promise.all([
         tba.getTeam(teamNumber),
-        tba.getTeamEventsSimple(teamNumber)
-    ]).then(([team, events]) => {
+        tba.getTeamEventsSimple(teamNumber),
+        avatarPromise
+    ]).then(([team, events, avatar]) => {
         // This assumes that the events list is ordered chronologically.
         const mostRecentEvent = events.slice(-1)[0];
 
         team.isActive = mostRecentEvent !== undefined && mostRecentEvent.year >= currentYear;
         team.mostRecentEventYear = mostRecentEvent.year
         team.isRookie = isTeamRookie(team);
+
+        if (avatar && avatar.exists) {
+            team.avatarUrl = getAvatarUrl(avatar);
+        }
+
         return team;
     });
+}
+
+exports.getTeamWithAvatar = function(teamNumber) {
+    return Promise.all([
+        tba.getTeam(teamNumber),
+        teamAvatars.doc(teamNumber.toString()).get()
+    ]).then(([team, avatar]) => {
+        if (avatar.exists) {
+            team.avatarUrl = getAvatarUrl(avatar);
+        }
+
+        return team;
+    });
+}
+
+function getAvatarUrl(avatarDoc) {
+    const avatarPath = encodeURIComponent(avatarDoc.data().path);
+    return `https://firebasestorage.googleapis.com/v0/b/${projectId}.appspot.com/o/${avatarPath}?alt=media`;
 }
 
 function isTeamRookie(team) {

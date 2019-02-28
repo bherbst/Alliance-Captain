@@ -5,4 +5,8 @@ cron:
 
 - description: Weekly events update
   url: /publish/update-events
+  schedule: every sunday 03:30
+
+- description: Weekly avatar supdate
+  url: /publish/update-avatars
   schedule: every sunday 04:00

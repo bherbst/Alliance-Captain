@@ -19,6 +19,7 @@ const {basicPromptWithReentry} = require('./prompt-util');
 const frcUtil = require('../frc-util');
 const util = require('../util');
 const {AwardWinner, getAwardWinnerText} = require('../awards');
+const {getTeamWithAvatar} = require('../interactors/teamInteractor')
 const events = require('../events');
 const tba = require('../api/tba-client').tbaClient;
 const teamCard = require('../cards/team-card');
@@ -207,7 +208,8 @@ const getEventDate = (conv, params) => {
 }
 
 const getTeamAwardWinner = (teamKey, isTeamWinner) => {
-  return tba.getTeamByKey(teamKey)
+  const teamNumber = teamKey.substring(3);
+  return getTeamWithAvatar(teamNumber)
       .then((team) => {
         return new AwardWinner(isTeamWinner, `${team.team_number} (${team.nickname})`, team);
       });

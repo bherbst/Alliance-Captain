@@ -46,3 +46,5 @@ You can run the functions manually via the CLI by sending a message (any message
 Update teams: `gcloud pubsub topics publish update-teams --message "cli run"`
 
 Update events: `gcloud pubsub topics publish update-events --message "cli run"`
+
+Update avatars: `gcloud pubsub topics publish update-avatars --message "cli run"`

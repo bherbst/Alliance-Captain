@@ -42,6 +42,13 @@
           ],
           "defaultValue": "#event.event",
           "isList": false
+        },
+        {
+          "id": "bfdcee4a-41de-46ef-9645-19f81f397ec8",
+          "dataType": "@sys.date-period",
+          "name": "date-period",
+          "value": "$date-period",
+          "isList": false
         }
       ],
       "messages": [
@@ -58,7 +65,7 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1548700320,
+  "lastUpdate": 1551207336,
   "fallbackIntent": false,
   "events": []
 }

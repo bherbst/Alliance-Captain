@@ -9,11 +9,6 @@
       "action": "get_event_winner",
       "affectedContexts": [
         {
-          "name": "season",
-          "parameters": {},
-          "lifespan": 5
-        },
-        {
           "name": "event",
           "parameters": {},
           "lifespan": 5
@@ -37,7 +32,14 @@
           "name": "season",
           "value": "$season",
           "prompts": [],
-          "defaultValue": "#season.season",
+          "defaultValue": "",
+          "isList": false
+        },
+        {
+          "id": "b35f153b-46ef-41ed-a696-820324cc8640",
+          "dataType": "@sys.date-period",
+          "name": "date-period",
+          "value": "$date-period",
           "isList": false
         }
       ],
@@ -55,7 +57,7 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1550005707,
+  "lastUpdate": 1551207099,
   "fallbackIntent": false,
   "events": []
 }

@@ -1,0 +1,652 @@
+[
+  {
+    "id": "79e58dff-c2ab-464a-9325-13757f0f8e47",
+    "data": [
+      {
+        "text": "Which champs did ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " go to ",
+        "userDefined": false
+      },
+      {
+        "text": "two years ago",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551207432
+  },
+  {
+    "id": "2d01290b-b5dd-4157-a15e-070702280d01",
+    "data": [
+      {
+        "text": "Which championship did they attend ",
+        "userDefined": false
+      },
+      {
+        "text": "last year",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551207432
+  },
+  {
+    "id": "29de07bf-14cf-46fa-a6f4-62b804b962b5",
+    "data": [
+      {
+        "text": "Which championship ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " assigned to in ",
+        "userDefined": false
+      },
+      {
+        "text": "2017",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1550865529
+  },
+  {
+    "id": "9ee5ca3d-7da1-46c2-9f28-6902a9561c49",
+    "data": [
+      {
+        "text": "Which champs ",
+        "userDefined": false
+      },
+      {
+        "text": "were",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " they at in ",
+        "userDefined": false
+      },
+      {
+        "text": "2017",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1550865529
+  },
+  {
+    "id": "13eeb2dd-bc1a-4d8d-a8a0-a5640962b872",
+    "data": [
+      {
+        "text": "Which championship did they attend in ",
+        "userDefined": false
+      },
+      {
+        "text": "2017",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1550865529
+  },
+  {
+    "id": "8fd60474-6d1c-441b-9aaa-d547d661b561",
+    "data": [
+      {
+        "text": "Did ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " attend the ",
+        "userDefined": false
+      },
+      {
+        "text": "Detroit",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "or",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Houston",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " championship in ",
+        "userDefined": false
+      },
+      {
+        "text": "2017",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1550865529
+  },
+  {
+    "id": "70678838-4a25-4514-b467-750ab2e1abeb",
+    "data": [
+      {
+        "text": "Were",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " they ",
+        "userDefined": false
+      },
+      {
+        "text": "in",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Detroit",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "or",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Houston",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " in ",
+        "userDefined": false
+      },
+      {
+        "text": "2017",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1550865529
+  },
+  {
+    "id": "2392acb6-182a-44b8-a007-cbc873a96723",
+    "data": [
+      {
+        "text": "Were",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " they ",
+        "userDefined": false
+      },
+      {
+        "text": "in",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "St. Louis or Houston",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " in ",
+        "userDefined": false
+      },
+      {
+        "text": "2017",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1550865529
+  },
+  {
+    "id": "fb06ab2c-906d-443c-9129-47c7b3e06b27",
+    "data": [
+      {
+        "text": "Will they ",
+        "userDefined": false
+      },
+      {
+        "text": "be",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "in",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Detroit",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "or",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Houston",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1550865529
+  },
+  {
+    "id": "6bda5653-a266-463e-b573-fde91c98dd97",
+    "data": [
+      {
+        "text": "Will they ",
+        "userDefined": false
+      },
+      {
+        "text": "be",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "in",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Houston",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "or",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Detroit",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1550865529
+  },
+  {
+    "id": "afbf1018-b1d4-4d73-8202-8c1467a94c62",
+    "data": [
+      {
+        "text": "What championship event will ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "be",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " at?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1550865529
+  },
+  {
+    "id": "31d65b27-6431-4f61-ab68-70afc1ae510b",
+    "data": [
+      {
+        "text": "What championship are they assigned to?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1550865529
+  },
+  {
+    "id": "0137736b-35d4-4cc1-9a0f-4d52b1392aa6",
+    "data": [
+      {
+        "text": "Which champs are they assigned to?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1550865529
+  },
+  {
+    "id": "a38945c6-ca8f-4abc-ac0b-7c73cfc7975b",
+    "data": [
+      {
+        "text": "Which champs ",
+        "userDefined": false
+      },
+      {
+        "text": "is",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " assigned to?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1550865529
+  },
+  {
+    "id": "65508e7b-f89b-4fe1-926f-9c98ad80c20a",
+    "data": [
+      {
+        "text": "Which champs will ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "be",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " at?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1550865529
+  },
+  {
+    "id": "3f82cdc1-1cf5-426a-969b-e89f749c9a30",
+    "data": [
+      {
+        "text": "Which championship ",
+        "userDefined": false
+      },
+      {
+        "text": "is",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " assigned to?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1550865529
+  },
+  {
+    "id": "bb7c0751-cfd4-4be1-b7e6-fc06e04b50fd",
+    "data": [
+      {
+        "text": "Which championship will ",
+        "userDefined": false
+      },
+      {
+        "text": "KnightKrawler",
+        "alias": "team",
+        "meta": "@team",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "be",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " at?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1550865529
+  },
+  {
+    "id": "ca908721-bbd1-4bf6-a636-01d1de44d212",
+    "data": [
+      {
+        "text": "Which championship will they ",
+        "userDefined": false
+      },
+      {
+        "text": "be",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " at?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1550865529
+  },
+  {
+    "id": "73292c22-149f-4d9a-bb6b-9a4b01baa283",
+    "data": [
+      {
+        "text": "Which champs will they ",
+        "userDefined": false
+      },
+      {
+        "text": "be",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " at?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1550865529
+  }
+]
