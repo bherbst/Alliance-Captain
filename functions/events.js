@@ -34,6 +34,7 @@ const QUEEN_CITY = ["ohc", "ohic"];
 const SACRAMENTO = ["sac", "casa", "cada"];
 const MN_MSHSL = ["mnsc", "mshsl", "mncmp"];
 const ST_LOUIS = ["mo", "mosl"];
+const SILICON_VALLEY = ["ca2", "casj"];
 
 const CMPS = ["cmp", "cmpmi", "cmptx", "cmpmo"];
 
@@ -164,6 +165,12 @@ exports.getEventKey = function (eventCode, year) {
             return `${year}mosl`;
         } else {
             return `${year}mo`;
+        }
+    } else if (SILICON_VALLEY.includes(eventCode)) {
+        if (year === 2001) {
+            return `${year}ca2`;
+        } else {
+            return `${year}casj`;
         }
     } else {
         return `${year}${eventCode}`;
