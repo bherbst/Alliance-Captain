@@ -32,22 +32,26 @@ const getEventWinner = (conv, params) => {
 
   conv.contexts.set("season", 5, { "season": year });
 
-  const eventName = getEventName(eventKey);
+  const eventData = tba.getEvent(eventKey);
   const eventWinners = getEventAwardWinnersData(eventKey, 1);
 
-  return Promise.all([eventName, eventWinners])
+  return Promise.all([eventData, eventWinners])
         .catch((err) => {
           console.warn(err);
           return basicPromptWithReentry("I couldn't find information on that event.");
         })
-        .then(([eventName, winners]) => {
+        .then(([eventData, winners]) => {
           if (winners.length < 1) {
-            return basicPromptWithReentry("I couldn't find a winner for that event.");
+            if (!isEventOver(eventData)) {
+              return basicPromptWithReentry(`The ${year} ${eventData.name} is not over yet.`);
+            } else {
+              return basicPromptWithReentry(`I couldn't find a winner for the ${year} ${eventData.name}.`);
+            }
           }
         
           const teams = frcUtil.joinToOxfordList(winners, (winner) => winner.text);
           const screenContent = teamCard.createMultiTeamCard(winners.map((winner) => winner.team), year);
-          const response = basicPromptWithReentry(`Teams ${teams} won the ${year} ${eventName}`);
+          const response = basicPromptWithReentry(`Teams ${teams} won the ${year} ${eventData.name}`);
           response.screenContent = screenContent;
 
           response.suggestions = getSuggestions(1); // 1 = event winner
@@ -65,17 +69,21 @@ const getEventAwardWinner = (conv, params) => {
 
   conv.contexts.set("season", 5, { "season": year });   
 
-  const eventName = getEventName(eventKey);
+  const eventData = tba.getEvent(eventKey);
   const eventWinners = getEventAwardWinnersData(eventKey, awardType);
 
-  return Promise.all([eventName, eventWinners])
+  return Promise.all([eventData, eventWinners])
         .catch((err) => {
           console.warn(err);
           return basicPromptWithReentry("I couldn't find information on that event.");
         })
-        .then(([eventName, winners]) => {
+        .then(([eventData, winners]) => {
           if (winners.length < 1) {
-            return basicPromptWithReentry("I couldn't find that information.");
+            if (!isEventOver(eventData)) {
+              return basicPromptWithReentry(`The ${year} ${eventData.name} is not over yet.`);
+            } else {
+              return basicPromptWithReentry(`I couldn't find a winner for that award at the ${year} ${eventData.name}.`);
+            }
           }
 
           let screenContent;
@@ -91,7 +99,7 @@ const getEventAwardWinner = (conv, params) => {
           }
           conv.contexts.set("award", 5, { "award": 0 });     
 
-          const winnerText = getAwardWinnerText(winners, awardType, year, eventName, isCmp);
+          const winnerText = getAwardWinnerText(winners, awardType, year, eventData.name, isCmp);
           const response = basicPromptWithReentry(winnerText);
           response.screenContent = screenContent;
 
@@ -108,9 +116,11 @@ const getEventAwardWinnersData = (eventKey, awardType) => {
           return award.award_type === awardType;
         })
 
-        const winners = winnerAwards[0].recipient_list;
-
-        return winners;
+        if (winnerAwards.length === 0) {
+          return [];
+        } else {
+          return winnerAwards[0].recipient_list;
+        }
       })
       .then((winners) => {
         const winnerNamePromises = winners.map((winner) => {
@@ -128,7 +138,11 @@ const getEventAwardWinnersData = (eventKey, awardType) => {
           }
         })
 
-        return Promise.all(winnerNamePromises);
+        if (winnerNamePromises.lenght === 0) {
+          return Promise.resolve([]);
+        } else {
+          return Promise.all(winnerNamePromises);
+        }
       });
 }
 
@@ -223,11 +237,10 @@ const getTeamAwardWinner = (teamKey, isTeamWinner) => {
       });
 }
 
-const getEventName = (eventKey) => {
-  return tba.getEvent(eventKey)
-      .then((data) => {
-        return data.name;
-      });
+const isEventOver = (event) => {
+  const eventEnd = new Date(event.end_date);
+  eventEnd.setHours(23,59,59,999)
+  return eventEnd < new Date();
 }
 
 const getSuggestions = (excludeType) => {
