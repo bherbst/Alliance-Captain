@@ -1,8 +1,11 @@
 {
-  "id": "76ec60f4-ca06-4a4e-9198-a6ce8cf1a930",
-  "name": "event-date",
+  "id": "905b3f2c-dafd-4226-926d-4bfb2ccac412",
+  "name": "event-engineering-inspiration-contextual",
   "auto": true,
-  "contexts": [],
+  "contexts": [
+    "event",
+    "season"
+  ],
   "responses": [
     {
       "resetContexts": false,
@@ -11,45 +14,42 @@
           "name": "event",
           "parameters": {},
           "lifespan": 5
+        },
+        {
+          "name": "season",
+          "parameters": {},
+          "lifespan": 5
         }
       ],
       "parameters": [
         {
-          "id": "64290b47-50df-479e-a962-c09f1e89d29a",
-          "required": false,
-          "dataType": "@season",
-          "name": "season",
-          "value": "$season",
-          "prompts": [],
-          "defaultValue": "#season.season",
-          "isList": false
-        },
-        {
-          "id": "a6377ace-907e-4507-ab6e-8ae3b3444972",
+          "id": "68cf13ae-aeed-4a2a-8384-5af8937a1d69",
           "required": true,
           "dataType": "@event",
           "name": "event",
-          "value": "$event",
+          "value": "#event.event",
           "prompts": [
             {
               "lang": "en",
               "value": "Which event?"
-            },
-            {
-              "lang": "en",
-              "value": "What event?"
             }
           ],
-          "defaultValue": "#event.event",
           "isList": false
         },
         {
-          "id": "bfdcee4a-41de-46ef-9645-19f81f397ec8",
-          "required": false,
-          "dataType": "@sys.date-period",
-          "name": "date-period",
-          "value": "$date-period",
+          "id": "185224d4-ee0b-4247-ba7b-920f12c2dcc4",
+          "required": true,
+          "dataType": "@award",
+          "name": "award",
+          "value": "9",
           "isList": false
+        },
+        {
+          "id": "9a419543-6d10-4fdd-bfe3-53b52202b2de",
+          "required": true,
+          "dataType": "@season",
+          "name": "season",
+          "value": "#season.season"
         }
       ],
       "messages": [
@@ -66,7 +66,7 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1551386638,
+  "lastUpdate": 1551386128,
   "fallbackIntent": false,
   "events": []
 }

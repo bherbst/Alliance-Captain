@@ -1,12 +1,13 @@
 {
-  "id": "0b6356a6-ba72-489a-8ef3-4c8d730d285e",
-  "name": "team-age",
+  "id": "f934c2f7-a350-4894-85b0-70b304ffc14b",
+  "name": "team-info-contextual",
   "auto": true,
-  "contexts": [],
+  "contexts": [
+    "team"
+  ],
   "responses": [
     {
       "resetContexts": false,
-      "action": "get_team_age",
       "affectedContexts": [
         {
           "name": "team",
@@ -16,13 +17,17 @@
       ],
       "parameters": [
         {
-          "id": "f699f482-d524-45b0-b9e4-669ceac60e66",
+          "id": "44b19dbb-7019-46c0-9b53-c230b8070aa2",
           "required": true,
           "dataType": "@team",
           "name": "team",
-          "value": "$team",
-          "prompts": [],
-          "defaultValue": "#team.team",
+          "value": "#team.team",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Which team?"
+            }
+          ],
           "isList": false
         }
       ],
@@ -40,7 +45,7 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1551386772,
+  "lastUpdate": 1551373619,
   "fallbackIntent": false,
   "events": []
 }

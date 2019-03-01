@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1331f450-41d2-4228-915d-f467fe396715",
+    "data": [
+      {
+        "text": "championship info",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551373600
+  },
+  {
+    "id": "72e0c97d-f903-4a02-be1b-4e8616e099b8",
+    "data": [
+      {
+        "text": "championship",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551373600
+  }
+]

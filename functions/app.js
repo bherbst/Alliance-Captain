@@ -35,20 +35,29 @@ app.intent([
   'event-award-winner',
   'event-winner',
   'event-location',
-  'event-date'
+  'event-date',
+  'event-winner-contextual',
+  'event-chairmans-contextual',
+  'event-finalist-contextual',
+  'event-engineering-inspiration-contextual',
+  'event-woodie-flowers-contextual'
 ], event)
 
 app.intent([
   'team-rookie-year',
   'team-info',
+  'team-info-contextual',
   'team-location',
   'team-age',
   'team-nickname',
   'team-robot-name',
   'team-name',
   'team-events',
+  'team-events-contextual',
   'team-awards',
-  'team-championship'
+  'team-awards-contextual',
+  'team-championship',
+  'team-championship-contextual'
 ], team)
 
 app.intent([

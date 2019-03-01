@@ -1,8 +1,11 @@
 {
-  "id": "76ec60f4-ca06-4a4e-9198-a6ce8cf1a930",
-  "name": "event-date",
+  "id": "6564ff6f-d77a-4232-9882-70527d60fdbe",
+  "name": "event-woodie-flowers-contextual",
   "auto": true,
-  "contexts": [],
+  "contexts": [
+    "event",
+    "season"
+  ],
   "responses": [
     {
       "resetContexts": false,
@@ -11,45 +14,42 @@
           "name": "event",
           "parameters": {},
           "lifespan": 5
+        },
+        {
+          "name": "season",
+          "parameters": {},
+          "lifespan": 5
         }
       ],
       "parameters": [
         {
-          "id": "64290b47-50df-479e-a962-c09f1e89d29a",
-          "required": false,
-          "dataType": "@season",
-          "name": "season",
-          "value": "$season",
-          "prompts": [],
-          "defaultValue": "#season.season",
-          "isList": false
-        },
-        {
-          "id": "a6377ace-907e-4507-ab6e-8ae3b3444972",
+          "id": "007214ae-82fe-4800-a860-0f9f0c425f6f",
           "required": true,
           "dataType": "@event",
           "name": "event",
-          "value": "$event",
+          "value": "#event.event",
           "prompts": [
             {
               "lang": "en",
               "value": "Which event?"
-            },
-            {
-              "lang": "en",
-              "value": "What event?"
             }
           ],
-          "defaultValue": "#event.event",
           "isList": false
         },
         {
-          "id": "bfdcee4a-41de-46ef-9645-19f81f397ec8",
-          "required": false,
-          "dataType": "@sys.date-period",
-          "name": "date-period",
-          "value": "$date-period",
+          "id": "2fe3198b-73f7-4ffc-9974-45875dafdab3",
+          "required": true,
+          "dataType": "@award",
+          "name": "award",
+          "value": "3",
           "isList": false
+        },
+        {
+          "id": "06a404f6-6e84-4fbf-98bb-69872626bd15",
+          "required": true,
+          "dataType": "@season",
+          "name": "season",
+          "value": "#season.season"
         }
       ],
       "messages": [
@@ -66,7 +66,7 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1551386638,
+  "lastUpdate": 1551386198,
   "fallbackIntent": false,
   "events": []
 }

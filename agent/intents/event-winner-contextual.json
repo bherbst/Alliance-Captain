@@ -1,8 +1,11 @@
 {
-  "id": "082df1ed-e310-4cc2-8a3a-4ba5cbf6addf",
-  "name": "event-location",
+  "id": "6dfd1fee-2720-447b-b416-4a2a5a39823b",
+  "name": "event-winner-contextual",
   "auto": true,
-  "contexts": [],
+  "contexts": [
+    "event",
+    "season"
+  ],
   "responses": [
     {
       "resetContexts": false,
@@ -11,45 +14,41 @@
           "name": "event",
           "parameters": {},
           "lifespan": 5
+        },
+        {
+          "name": "season",
+          "parameters": {},
+          "lifespan": 5
         }
       ],
       "parameters": [
         {
-          "id": "0b36b918-c28f-4c94-8f0e-0a6aebb6780d",
+          "id": "11de88c7-15f4-4842-80f8-2080abdd880a",
           "required": true,
           "dataType": "@event",
           "name": "event",
-          "value": "$event",
+          "value": "#event.event",
           "prompts": [
             {
               "lang": "en",
               "value": "Which event?"
-            },
-            {
-              "lang": "en",
-              "value": "What event?"
             }
           ],
-          "defaultValue": "#event.event",
           "isList": false
         },
         {
-          "id": "508d3f2d-1cb5-4e46-ac10-cd2c901dbb77",
-          "required": false,
+          "id": "976e60b1-3c0b-43c2-9dc9-0c166c193865",
+          "required": true,
+          "dataType": "@award",
+          "name": "award",
+          "value": "1"
+        },
+        {
+          "id": "3d069f1a-6d41-46bb-a006-4762aa202b61",
+          "required": true,
           "dataType": "@season",
           "name": "season",
-          "value": "$season",
-          "prompts": [],
-          "defaultValue": "",
-          "isList": false
-        },
-        {
-          "id": "e62f159f-3e6d-4174-9a2f-2866020be390",
-          "required": false,
-          "dataType": "@sys.date-period",
-          "name": "date-period",
-          "value": "$date-period",
-          "isList": false
+          "value": "#season.season"
         }
       ],
       "messages": [
@@ -66,7 +65,7 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1551386701,
+  "lastUpdate": 1551386024,
   "fallbackIntent": false,
   "events": []
 }

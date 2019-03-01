@@ -1,0 +1,28 @@
+[
+  {
+    "id": "51b68005-1795-40f0-9a7d-7d4be76d9189",
+    "data": [
+      {
+        "text": "winner",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551384764
+  },
+  {
+    "id": "06af4e62-d453-46fe-a39b-89f6f80e2e16",
+    "data": [
+      {
+        "text": "winners",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551384764
+  }
+]

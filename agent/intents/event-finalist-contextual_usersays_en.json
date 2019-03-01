@@ -1,0 +1,28 @@
+[
+  {
+    "id": "f5837e1e-fa6b-47d5-aa05-e83e8150ad72",
+    "data": [
+      {
+        "text": "finalists",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551384812
+  },
+  {
+    "id": "c6bc6005-9216-4a63-936b-871ff8e59bd8",
+    "data": [
+      {
+        "text": "finalist",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551384812
+  }
+]

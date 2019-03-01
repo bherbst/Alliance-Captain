@@ -1,5 +1,119 @@
 [
   {
+    "id": "023ffc8a-1ef1-49e3-82e9-55bcc99f5faf",
+    "data": [
+      {
+        "text": "When the ",
+        "userDefined": false
+      },
+      {
+        "text": "Lake Superior Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "last year",
+        "alias": "date-period",
+        "meta": "@sys.date-period",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551386638
+  },
+  {
+    "id": "579641a1-8c2c-499f-aff4-d2c9ec318a7d",
+    "data": [
+      {
+        "text": "When the ",
+        "userDefined": false
+      },
+      {
+        "text": "Lake Superior Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": " happened in ",
+        "userDefined": false
+      },
+      {
+        "text": "2018",
+        "alias": "season",
+        "meta": "@season",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551386610
+  },
+  {
+    "id": "d8d714c2-2107-4175-a0b8-e269e9a95495",
+    "data": [
+      {
+        "text": "When the ",
+        "userDefined": false
+      },
+      {
+        "text": "Lake Superior Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": " occurred",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551386610
+  },
+  {
+    "id": "4dfe18a7-0ca7-4d2b-9ec1-2f75a6105513",
+    "data": [
+      {
+        "text": "when the ",
+        "userDefined": false
+      },
+      {
+        "text": "Lake Superior Regional",
+        "alias": "event",
+        "meta": "@event",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "was",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1551386610
+  },
+  {
     "id": "9cf90b20-3a65-46d0-8f16-5c541f11b5d9",
     "data": [
       {
