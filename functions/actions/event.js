@@ -20,10 +20,11 @@ const frcUtil = require('../frc-util');
 const util = require('../util');
 const {AwardWinner, getAwardWinnerText} = require('../awards');
 const {getTeamWithAvatar} = require('../interactors/teamInteractor')
-const events = require('../events');
+const events = require('../eventKeys');
 const tba = require('../api/tba-client').tbaClient;
 const teamCard = require('../cards/team-card');
 const eventCard = require('../cards/event-card');
+const eventUtil = require('../eventUtil');
 
 const getEventWinner = (conv, params) => {
   const eventCode = params["event"];
@@ -42,7 +43,7 @@ const getEventWinner = (conv, params) => {
         })
         .then(([eventData, winners]) => {
           if (winners.length < 1) {
-            if (!isEventOver(eventData)) {
+            if (!eventUtil.isEventOver(eventData)) {
               return basicPromptWithReentry(`The ${year} ${eventData.name} is not over yet.`);
             } else {
               return basicPromptWithReentry(`I couldn't find a winner for the ${year} ${eventData.name}.`);
@@ -79,7 +80,7 @@ const getEventAwardWinner = (conv, params) => {
         })
         .then(([eventData, winners]) => {
           if (winners.length < 1) {
-            if (!isEventOver(eventData)) {
+            if (!eventUtil.isEventOver(eventData)) {
               return basicPromptWithReentry(`The ${year} ${eventData.name} is not over yet.`);
             } else {
               return basicPromptWithReentry(`I couldn't find a winner for that award at the ${year} ${eventData.name}.`);
@@ -235,12 +236,6 @@ const getTeamAwardWinner = (teamKey, isTeamWinner) => {
       .then((team) => {
         return new AwardWinner(isTeamWinner, `${team.team_number} (${team.nickname})`, team);
       });
-}
-
-const isEventOver = (event) => {
-  const eventEnd = new Date(event.end_date);
-  eventEnd.setHours(23,59,59,999)
-  return eventEnd < new Date();
 }
 
 const getSuggestions = (excludeType) => {

@@ -389,7 +389,7 @@ const getTeamAwards = (conv, params) => {
 }
 
 const getTeamChampionship = (conv, params) => {
-  const eventUtil = require('../events');
+  const eventUtil = require('../eventKeys');
   const team_number = params["team"];
   const year = frcUtil.getYearOrThisYear(params);
 
@@ -489,6 +489,108 @@ const getTeamChampionship = (conv, params) => {
       })
 }
 
+const getTeamEventStatus = (conv, params) => {
+  const eventsUtil = require('../eventKeys');
+  const teamNumber = params["team"];
+  const eventCode = params["event"];
+  const year = frcUtil.getYearOrThisYear(params, conv.contexts);
+
+  conv.contexts.set("season", 5, { "season": year });
+
+  let eventName;
+  let teamEventStatusPromise;
+  if (eventCode) {
+    const eventKey = eventsUtil.getEventKey(eventCode, year);
+    teamEventStatusPromise = tba.getEvent(eventCode).then(event => {
+      eventName = event.name;
+      conv.contexts.set("event", 5, { "event": eventKey });
+      return tba.getTeamEventStatus(teamNumber, eventKey);
+    });
+  } else {
+    // Find active event, or most recent event
+    teamEventStatusPromise = tba.getTeamEvents(teamNumber, year).then(events => {
+      if (events.length === 0) {
+        return Promise.reject(Error(`Team ${team_number} is not registered for any ${year} events.`));
+      }
+
+      let mostRecentEvent;
+      events.forEach(event => {
+        const isEventOver = eventsUtil.isEventOver(event);
+        if (isEventOver) {
+          if (mostRecentEvent === undefined) {
+            mostRecentEvent = event;
+          } else if (new Date(event.end_date) < new Date(mostRecentEvent.end_date)) {
+            mostRecentEvent = event;
+          }
+        }
+
+        if (eventsUtil.isEventActive(event)) {
+          return Promise.resolve(event.key);
+        }
+      });
+
+      if (mostRecentEvent) {
+        return Promise.resolve(mostRecentEvent);
+      } else {
+        return Promise.reject(Error(`Team ${team_number} does not have any event data yet.`));
+      }
+    }).then(event => {
+      eventName = event.name;
+      conv.contexts.set("event", 5, { "event": event.key });
+      return tba.getTeamEventStatus(teamNumber, event.key)
+    });
+  }
+
+  return teamEventStatusPromise
+      .catch((err) => {
+        console.warn(err);
+        if (err.message) {
+          return basicPromptWithReentry(err.message);
+        } else {
+          return basicPromptWithReentry(`I couldn't find event status for team ${teamNumber}.`);
+        }
+      })
+      .then(status => {
+        if (status === null) {
+          return basicPromptWithReentry(`Team ${teamNumber} is not registered for the ${year} ${eventName}.`);
+        }
+
+        let response = `Team ${teamNumber} `;
+        if (status.playoff) {
+          if (status.playoff.status === "won") {
+            response += `won the ${year} ${eventName}. `;
+          } else {
+            switch (status.playoff.level) {
+              case "f": response += `was a finalist at the ${year} ${eventName}. `; break;
+              case "sf": response += `was a semi-finalist at the ${year} ${eventName}. `; break;
+              case "q": response += `was a quarter-finalist at the ${year} ${eventName}. `; break;
+            }
+          }
+
+          switch (status.alliance.pick) {
+            case -1: response += `They were a backup team on alliance ${status.alliance.number}. `; break;
+            case 0: response += `They were the captain of alliance ${status.alliance.number}. `; break;
+            case 1: response += `They were the first pick of alliance ${status.alliance.number}. `; break;
+            case 2: response += `They were the second pick of alliance ${status.alliance.number}. `; break;
+            case 3: response += `They were the third pick of alliance ${status.alliance.number}. `; break;
+          }
+
+          response += `They were ranked ${status.qual.ranking.rank} during qualification matches.`;
+
+          return basicPromptWithReentry(response);
+        }
+
+        if (status.qual.status === "completed") {
+          return basicPromptWithReentry(`Team ${teamNumber} was ranked ${status.qual.ranking.rank} at the ${year} ${eventName}.`);
+        } else {
+          return basicPromptWithReentry(`Team ${teamNumber} is currently ranked ${status.qual.ranking.rank} at the ${year} ${eventName}.`);
+        }
+
+        // TODO
+        // prompt.suggestions = ["Awards", "Team info", "Championship info"];
+      })
+}
+
 const intents = {
   'team-rookie-year': getRookieYear,
   'team-info': getTeamInfo,
@@ -503,7 +605,8 @@ const intents = {
   'team-awards': getTeamAwards,
   'team-awards-contextual': getTeamAwards,
   'team-championship': getTeamChampionship,
-  'team-championship-contextual': getTeamChampionship
+  'team-championship-contextual': getTeamChampionship,
+  'team-event-rank': getTeamEventStatus
 }
 
 module.exports.team = (conv, params) => {

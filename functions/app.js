@@ -57,7 +57,8 @@ app.intent([
   'team-awards',
   'team-awards-contextual',
   'team-championship',
-  'team-championship-contextual'
+  'team-championship-contextual',
+  'team-event-rank'
 ], team)
 
 app.intent([

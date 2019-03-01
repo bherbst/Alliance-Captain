@@ -90,6 +90,10 @@ module.exports.TbaApi = class TbaApi {
         return this._get(`/api/v3/team/frc${team}/event/${eventCode}/awards`);
     }
     
+    getTeamEventStatus(team, eventCode) {
+        return this._get(`/api/v3/team/frc${team}/event/${eventCode}/status`);
+    }
+    
     getEventList(year) {
         return this._get(`/api/v3/events/${year}`);
     }
