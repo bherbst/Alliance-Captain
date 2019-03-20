@@ -38,7 +38,9 @@ const getRookieYear = (conv, params) => {
         conv.contexts.set("season", 5, { "season": data.rookie_year });
 
         let prompt;
-        if (data.rookie_year >= new Date().getFullYear()) {
+        if (!data.rookie_year) {
+          prompt = basicPromptWithReentry(`${name} (FRC ${team_number}) was registered, but never competed at an event.`);
+        } else if (data.rookie_year >= new Date().getFullYear()) {
           prompt = basicPromptWithReentry(`${data.rookie_year} is ${name}'s rookie year.`);
         } else {
           prompt = basicPromptWithReentry(`${name}'s rookie year was ${data.rookie_year}.`);
@@ -96,7 +98,11 @@ const getTeamLocation = (conv, params) => {
         if (team.isActive) {
           prompt = basicPromptWithReentry(`${name} is from ${location}.`);
         } else {
-          prompt = basicPromptWithReentry(`${name} was from ${location}. They last competed in ${team.mostRecentEventYear}`);
+          var response = `${name} was from ${location}.`;
+          if (team.mostRecentEventYear) {
+            response += ` They last competed in ${team.mostRecentEventYear}`
+          }
+          prompt = basicPromptWithReentry(response);
         }
         
         prompt.suggestions = ["Awards", "Events", "Team info", "Championship info"];
@@ -126,8 +132,14 @@ const getTeamAge = (conv, params) => {
             prompt = basicPromptWithReentry(`${name} is ${age} years old.`);
           }
         } else {
-          const age = team.mostRecentEventYear - team.rookie_year;
-          prompt = basicPromptWithReentry(`${name} competed for ${age} years. They last competed in ${team.mostRecentEventYear}.`);
+          // Inactive team
+          if (team.mostRecentEventYear) {
+            const age = team.mostRecentEventYear - team.rookie_year;
+            prompt = basicPromptWithReentry(`${name} competed for ${age} years. They last competed in ${team.mostRecentEventYear}.`);
+          } else {
+            // This team appears to have never competed
+            prompt = basicPromptWithReentry(`${name} was a registered team that never competed.`)
+          }
         }
 
         prompt.suggestions = ["Awards", "Events", "Team info", "Championship info"];
@@ -166,11 +178,19 @@ const getTeamInfo = (conv, params) => {
             ageString = `${age} year old`
           }
 
-          response = basicPromptWithReentry(`${name} is a ${ageString} team from ${location}.`);
+          if (age) {
+            response = basicPromptWithReentry(`${name} is a ${ageString} team from ${location}.`);
+          } else {
+            response = basicPromptWithReentry(`${name} is from ${location}.`);
+          }
           response.screenContent = createTeamCard(team, year)
         } else {
           const age = team.mostRecentEventYear - team.rookie_year;
-          response = basicPromptWithReentry(`${name} from ${location} competed for ${age} years. They last competed in ${team.mostRecentEventYear}.`);
+          if (age) {
+            response = basicPromptWithReentry(`${name} from ${location} competed for ${age} years. They last competed in ${team.mostRecentEventYear}.`);
+          } else {
+            response = basicPromptWithReentry(`${name} was an FRC team from ${location}. They did not compete in any events.`);
+          }
           response.screenContent = createTeamCard(team, team.mostRecentEventYear)
         }
         
