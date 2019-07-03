@@ -40,7 +40,9 @@ exports.getTeamWithActiveStatus = function(teamNumber, getAvatar = true) {
         const mostRecentEvent = events.slice(-1)[0];
 
         team.isActive = mostRecentEvent !== undefined && mostRecentEvent.year >= currentYear;
-        team.mostRecentEventYear = mostRecentEvent.year
+        if (mostRecentEvent) {
+            team.mostRecentEventYear = mostRecentEvent.year
+        }
         team.isRookie = isTeamRookie(team);
 
         if (avatar && avatar.exists) {

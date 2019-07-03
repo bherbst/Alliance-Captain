@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 const express = require('express');
-const PubSub = require('@google-cloud/pubsub');
+const {PubSub} = require('@google-cloud/pubsub');
 
 // Create a new PubSub client using the GOOGLE_CLOUD_PROJECT
 // environment variable. This is automatically set to the correct
@@ -31,7 +31,6 @@ app.get('/publish/:topic', async (req, res) => {
 
   try {
     await pubsubClient.topic(topic)
-        .publisher()
         .publish(Buffer.from('run'));
 
     res.status(200).send('Published to ' + topic).end();
